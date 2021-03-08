@@ -1,0 +1,764 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props" Condition="Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props')" />
+  <Import Project="..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.props" Condition="Exists('..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.props')" />
+  <Import Project="..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props" Condition="Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props')" />
+  <Import Project="..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props" Condition="Exists('..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props')" />
+  <Import Project="..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props" Condition="Exists('..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props')" />
+  <Import Project="..\packages\Costura.Fody.5.0.2\build\Costura.Fody.props" Condition="Exists('..\packages\Costura.Fody.5.0.2\build\Costura.Fody.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{30B25149-82EE-4377-AC79-ECF4B70803F5}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Asgard</RootNamespace>
+    <AssemblyName>Asgard</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <CefSharpAnyCpuSupport>true</CefSharpAnyCpuSupport>
+    <LargeAddressAware>true</LargeAddressAware>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationVersion>1.1.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LargeAddressAware>true</LargeAddressAware>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LargeAddressAware>true</LargeAddressAware>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <CodeAnalysisIgnoreGeneratedCode>false</CodeAnalysisIgnoreGeneratedCode>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <LargeAddressAware>true</LargeAddressAware>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <Prefer32Bit>true</Prefer32Bit>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <LargeAddressAware>true</LargeAddressAware>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>favicon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <Optimize>false</Optimize>
+    <LargeAddressAware>true</LargeAddressAware>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>63C9547AAD207EF4354CBE0B9C41E8C86D683AA7</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>Asgard_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bogus, Version=33.0.2.0, Culture=neutral, PublicKeyToken=fa1bb3f3f218129a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Bogus.33.0.2\lib\net40\Bogus.dll</HintPath>
+    </Reference>
+    <Reference Include="CircularProgressBar, Version=2.8.0.16, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\CircularProgressBar.2.8.0.16\lib\net40\CircularProgressBar.dll</HintPath>
+    </Reference>
+    <Reference Include="Costura, Version=5.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Costura.Fody.5.0.2\lib\netstandard1.0\Costura.dll</HintPath>
+    </Reference>
+    <Reference Include="FontAwesome.Sharp, Version=5.15.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\FontAwesome.Sharp.5.15.3\lib\net48\FontAwesome.Sharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.JsonWebTokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.JsonWebTokens.6.8.0\lib\net461\Microsoft.IdentityModel.JsonWebTokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Logging, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Logging.6.8.0\lib\net461\Microsoft.IdentityModel.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.IdentityModel.Tokens, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.IdentityModel.Tokens.6.8.0\lib\net461\Microsoft.IdentityModel.Tokens.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PasswordGenerator, Version=2.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\PasswordGenerator.2.0.5\lib\netstandard2.0\PasswordGenerator.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework">
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.11.7.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.11.7\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.6.8.0\lib\net461\System.IdentityModel.Tokens.Jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="WinFormAnimation, Version=1.6.0.4, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
+      <HintPath>..\packages\WinFormAnimation.1.6.0.4\lib\net40\WinFormAnimation.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Account.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Account.designer.cs">
+      <DependentUpon>Account.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Video1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Video1.Designer.cs">
+      <DependentUpon>Video1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Jotun.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Jotun.Designer.cs">
+      <DependentUpon>Jotun.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Clans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Clans.Designer.cs">
+      <DependentUpon>Clans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Aesir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Aesir.Designer.cs">
+      <DependentUpon>Aesir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Asatru.cs" />
+    <Compile Include="AutoCompleteSource.cs" />
+    <Compile Include="Ymir.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Ymir.designer.cs">
+      <DependentUpon>Ymir.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Odin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Odin.designer.cs">
+      <DependentUpon>Odin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="_Balder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="_Balder.designer.cs">
+      <DependentUpon>_Balder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BinList.cs" />
+    <Compile Include="clsResize.cs" />
+    <Compile Include="CookieMonster.cs" />
+    <Compile Include="Captcha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Captcha.designer.cs">
+      <DependentUpon>Captcha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Frigg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Frigg.designer.cs">
+      <DependentUpon>Frigg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IClans.cs" />
+    <Compile Include="Load.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Load.Designer.cs">
+      <DependentUpon>Load.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Balder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Balder.designer.cs">
+      <DependentUpon>Balder.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MockAutoCompleteSource.cs" />
+    <Compile Include="Shop8.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop8.Designer.cs">
+      <DependentUpon>Shop8.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop7.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop7.Designer.cs">
+      <DependentUpon>Shop7.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop6.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop6.Designer.cs">
+      <DependentUpon>Shop6.cs</DependentUpon>
+    </Compile>
+    <Compile Include="__Thor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="__Thor.designer.cs">
+      <DependentUpon>__Thor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop5.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop5.Designer.cs">
+      <DependentUpon>Shop5.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop4.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop4.Designer.cs">
+      <DependentUpon>Shop4.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop3.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop3.Designer.cs">
+      <DependentUpon>Shop3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Shop2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Shop2.Designer.cs">
+      <DependentUpon>Shop2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Browser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Browser.Designer.cs">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Checker.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Checker.designer.cs">
+      <DependentUpon>Checker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms.cs" />
+    <Compile Include="Hermod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Hermod.designer.cs">
+      <DependentUpon>Hermod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="IForm.cs" />
+    <Compile Include="Password.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Password.designer.cs">
+      <DependentUpon>Password.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RefillBalance.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RefillBalance.Designer.cs">
+      <DependentUpon>RefillBalance.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Register.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Register.designer.cs">
+      <DependentUpon>Register.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings1.cs" />
+    <Compile Include="Bifrost.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Bifrost.Designer.cs">
+      <DependentUpon>Bifrost.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Thor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Thor.designer.cs">
+      <DependentUpon>Thor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Generator.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Generator.designer.cs">
+      <DependentUpon>Generator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Help.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Help.designer.cs">
+      <DependentUpon>Help.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Home.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Home.designer.cs">
+      <DependentUpon>Home.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="__Frigg.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="__Frigg.designer.cs">
+      <DependentUpon>__Frigg.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OdinBrwnlls.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OdinBrwnlls.designer.cs">
+      <DependentUpon>OdinBrwnlls.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Combos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Combos.Designer.cs">
+      <DependentUpon>Combos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Tools.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Tools.Designer.cs">
+      <DependentUpon>Tools.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Validation.cs" />
+    <Compile Include="Yggdrasil.cs" />
+    <EmbeddedResource Include="Account.resx">
+      <DependentUpon>Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Video1.resx">
+      <DependentUpon>Video1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Jotun.resx">
+      <DependentUpon>Jotun.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Clans.resx">
+      <DependentUpon>Clans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Aesir.resx">
+      <DependentUpon>Aesir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Ymir.resx">
+      <DependentUpon>Ymir.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Odin.resx">
+      <DependentUpon>Odin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="_Balder.resx">
+      <DependentUpon>_Balder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Captcha.resx">
+      <DependentUpon>Captcha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Frigg.resx">
+      <DependentUpon>Frigg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Load.resx">
+      <DependentUpon>Load.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Balder.resx">
+      <DependentUpon>Balder.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop8.resx">
+      <DependentUpon>Shop8.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop7.resx">
+      <DependentUpon>Shop7.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop6.resx">
+      <DependentUpon>Shop6.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="__Thor.resx">
+      <DependentUpon>__Thor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop5.resx">
+      <DependentUpon>Shop5.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop4.resx">
+      <DependentUpon>Shop4.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop3.resx">
+      <DependentUpon>Shop3.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shop2.resx">
+      <DependentUpon>Shop2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Browser.resx">
+      <DependentUpon>Browser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Checker.resx">
+      <DependentUpon>Checker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Home.resx">
+      <DependentUpon>Home.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Hermod.resx">
+      <DependentUpon>Hermod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Password.resx">
+      <DependentUpon>Password.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RefillBalance.resx">
+      <DependentUpon>RefillBalance.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Register.resx">
+      <DependentUpon>Register.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Bifrost.resx">
+      <DependentUpon>Bifrost.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Thor.resx">
+      <DependentUpon>Thor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Generator.resx">
+      <DependentUpon>Generator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="__Frigg.resx">
+      <DependentUpon>__Frigg.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OdinBrwnlls.resx">
+      <DependentUpon>OdinBrwnlls.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Combos.resx">
+      <DependentUpon>Combos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Tools.resx">
+      <DependentUpon>Tools.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Asgard_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <None Include="Resources\CaviarDreams.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 y x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="favicon.ico" />
+    <None Include="Resources\youtube-icono.png" />
+    <None Include="Resources\youtube.png" />
+    <None Include="Resources\bitcoin.png" />
+    <None Include="Resources\photo_2021-03-03_14-30-26.jpg" />
+    <None Include="Resources\lokiGrey.jpg" />
+    <None Include="Resources\Jotungrey.jpg" />
+    <None Include="Resources\e66c06c180fef010f6b3a84a0e0c0ae6d006c447_128.jpg" />
+    <None Include="Resources\fa4d9f797787fb5c33310e2e49584fa58651f7e6_128.jpg" />
+    <None Include="Resources\d3615743b66a904b1a2916e22be648dad7f8e542_128.jpg" />
+    <None Include="Resources\Eclipse-1s-24px %2812%29.gif" />
+    <None Include="Resources\Eclipse-1s-24px %2811%29.gif" />
+    <None Include="Resources\Eclipse-1s-24px %2810%291.gif" />
+    <None Include="Resources\Eclipse-1s-24px %2810%29.gif" />
+    <None Include="Resources\Eclipse-1s-24px %289%29.gif" />
+    <None Include="Resources\Eclipse-1s-30px.gif" />
+    <None Include="Resources\checkRecaptcha.png" />
+    <None Include="Resources\Eclipse-1s-24px %286%29.gif" />
+    <None Include="Resources\photo_2020-11-01_08-43-31.jpg" />
+    <None Include="Resources\Eclipse-1s-24px %285%29.gif" />
+    <None Include="Resources\thor.jpg" />
+    <None Include="Resources\odin.jpg" />
+    <None Include="Resources\loki.jpg" />
+    <None Include="Resources\heimdal.jpg" />
+    <None Include="Resources\frigg.jpg" />
+    <None Include="Resources\balder.jpg" />
+    <None Include="Resources\Eclipse-1s-24px %284%29.gif" />
+    <None Include="Resources\Baldr_dead_by_Eckersberg.jpg" />
+    <None Include="Resources\Eclipse-1s-24px.gif" />
+    <None Include="Resources\Eclipse-1.4s-16px.gif" />
+    <None Include="Resources\Eclipse-1s-32px1.gif" />
+    <None Include="Resources\Eclipse-1s-32px.gif" />
+    <None Include="Resources\Pulse-1.4s-24px.gif" />
+    <None Include="Resources\CaviarDreams.bmp" />
+    <None Include="Resources\1339647.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\LargeAddressAware.1.0.5\build\LargeAddressAware.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\LargeAddressAware.1.0.5\build\LargeAddressAware.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+    <Error Condition="!Exists('..\packages\Fody.6.3.0\build\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.6.3.0\build\Fody.targets'))" />
+    <Error Condition="!Exists('..\packages\Costura.Fody.5.0.2\build\Costura.Fody.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Costura.Fody.5.0.2\build\Costura.Fody.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x64.86.0.24\build\cef.redist.x64.props'))" />
+    <Error Condition="!Exists('..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\cef.redist.x86.86.0.24\build\cef.redist.x86.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.targets'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.props'))" />
+    <Error Condition="!Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets'))" />
+  </Target>
+  <Import Project="..\packages\LargeAddressAware.1.0.5\build\LargeAddressAware.targets" Condition="Exists('..\packages\LargeAddressAware.1.0.5\build\LargeAddressAware.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Import Project="..\packages\Fody.6.3.0\build\Fody.targets" Condition="Exists('..\packages\Fody.6.3.0\build\Fody.targets')" />
+  <Import Project="..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets" Condition="Exists('..\packages\CefSharp.Common.86.0.241\build\CefSharp.Common.targets')" />
+  <Import Project="..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.targets" Condition="Exists('..\packages\CefSharp.OffScreen.86.0.241\build\CefSharp.OffScreen.targets')" />
+  <Import Project="..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets" Condition="Exists('..\packages\CefSharp.WinForms.86.0.241\build\CefSharp.WinForms.targets')" />
+</Project>
