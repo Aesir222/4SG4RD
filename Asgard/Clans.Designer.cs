@@ -67,6 +67,15 @@
             this.LabelTextAesir = new System.Windows.Forms.Label();
             this.LabelTitleAesir = new System.Windows.Forms.Label();
             this.IconButtonAesir = new FontAwesome.Sharp.IconButton();
+            this.PanelBlockGate = new System.Windows.Forms.Panel();
+            this.PanelBlockGateClose = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.PanelTitleClans.SuspendLayout();
             this.PanelJotun.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLoadJotun)).BeginInit();
@@ -80,6 +89,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxJotun)).BeginInit();
             this.PanelAesir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAesir)).BeginInit();
+            this.PanelBlockGate.SuspendLayout();
+            this.PanelBlockGateClose.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LabelTitleJotun
@@ -524,6 +537,7 @@
             this.IconButtonVIP.Text = "V.I.P";
             this.IconButtonVIP.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.IconButtonVIP.UseVisualStyleBackColor = false;
+            this.IconButtonVIP.Visible = false;
             this.IconButtonVIP.Click += new System.EventHandler(this.IconButtonVIP_Click);
             // 
             // LabelTextJotun
@@ -560,7 +574,6 @@
             // 
             this.IconButtonJotun.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(116)))), ((int)(((byte)(5)))));
             this.IconButtonJotun.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconButtonJotun.Enabled = false;
             this.IconButtonJotun.FlatAppearance.BorderSize = 0;
             this.IconButtonJotun.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IconButtonJotun.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -650,12 +663,128 @@
             this.IconButtonAesir.UseVisualStyleBackColor = false;
             this.IconButtonAesir.Click += new System.EventHandler(this.IconButtonAesir_Click);
             // 
+            // PanelBlockGate
+            // 
+            this.PanelBlockGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBlockGate.Controls.Add(this.PanelBlockGateClose);
+            this.PanelBlockGate.Location = new System.Drawing.Point(0, 30);
+            this.PanelBlockGate.Name = "PanelBlockGate";
+            this.PanelBlockGate.Size = new System.Drawing.Size(730, 468);
+            this.PanelBlockGate.TabIndex = 132;
+            // 
+            // PanelBlockGateClose
+            // 
+            this.PanelBlockGateClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBlockGateClose.Controls.Add(this.label1);
+            this.PanelBlockGateClose.Controls.Add(this.label2);
+            this.PanelBlockGateClose.Controls.Add(this.iconButton1);
+            this.PanelBlockGateClose.Controls.Add(this.panel2);
+            this.PanelBlockGateClose.Controls.Add(this.panel3);
+            this.PanelBlockGateClose.Location = new System.Drawing.Point(243, 154);
+            this.PanelBlockGateClose.Name = "PanelBlockGateClose";
+            this.PanelBlockGateClose.Size = new System.Drawing.Size(243, 151);
+            this.PanelBlockGateClose.TabIndex = 131;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(20, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 15);
+            this.label1.TabIndex = 131;
+            this.label1.Text = "Un poco desorientado.";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Silver;
+            this.label2.Location = new System.Drawing.Point(20, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(200, 30);
+            this.label2.TabIndex = 129;
+            this.label2.Text = "Primero debes adquirir un plan.";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(116)))), ((int)(((byte)(5)))));
+            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.Color.White;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 24;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(72, 103);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(96, 30);
+            this.iconButton1.TabIndex = 126;
+            this.iconButton1.Text = "ACEPTAR";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 144);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(241, 5);
+            this.panel2.TabIndex = 112;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(242)))), ((int)(((byte)(116)))), ((int)(((byte)(5)))));
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.iconPictureBox1);
+            this.panel3.ForeColor = System.Drawing.Color.White;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(241, 30);
+            this.panel3.TabIndex = 111;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.White;
+            this.label3.Location = new System.Drawing.Point(30, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(105, 21);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Lo Sentimos!";
+            // 
+            // iconPictureBox1
+            // 
+            this.iconPictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconPictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.iconPictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.GalacticSenate;
+            this.iconPictureBox1.IconColor = System.Drawing.Color.White;
+            this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox1.IconSize = 24;
+            this.iconPictureBox1.Location = new System.Drawing.Point(2, 3);
+            this.iconPictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.iconPictureBox1.Name = "iconPictureBox1";
+            this.iconPictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.iconPictureBox1.TabIndex = 21;
+            this.iconPictureBox1.TabStop = false;
+            // 
             // Clans
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.ClientSize = new System.Drawing.Size(730, 499);
+            this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelTitleClans);
             this.Controls.Add(this.PanelJotun);
             this.Controls.Add(this.PanelAesir);
@@ -683,6 +812,11 @@
             this.PanelAesir.ResumeLayout(false);
             this.PanelAesir.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAesir)).EndInit();
+            this.PanelBlockGate.ResumeLayout(false);
+            this.PanelBlockGateClose.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -727,5 +861,14 @@
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
         private System.Windows.Forms.PictureBox PictureBoxLoadJotun;
         private System.Windows.Forms.PictureBox PictureBoxJotun;
+        private System.Windows.Forms.Panel PanelBlockGate;
+        private System.Windows.Forms.Panel PanelBlockGateClose;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

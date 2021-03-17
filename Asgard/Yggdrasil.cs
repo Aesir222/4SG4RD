@@ -134,7 +134,7 @@ namespace Asgard
                     }
                 }
             }
-            //browser.Screenshot(nameException);
+            //await browser.Screenshot(nameException);
             return null;
         }
 
@@ -157,7 +157,7 @@ namespace Asgard
                     await Task.Delay(100);
                 }
             }
-            //browser.Screenshot(nameException);
+            //await browser.Screenshot(nameException);
             return null;
         }
 
@@ -176,7 +176,7 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -201,7 +201,32 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
+            return false;
+        }
+
+        public static async Task<bool> ElementInnerTextNotContent(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionElementInnerTextNotContentDefault", int limit = 20)
+        {
+            string JsScript = @"(function(){" +
+                $"let node = document.querySelector('{selector}');" +
+                @"let textFind = node.innerText.trim();" +
+                $"if(!textFind.includes('{text}'))" +
+                @"{
+                    return true;
+                }else{
+                    return false;
+                } 
+                })();";
+
+            for (int i = 0; i < limit; i++)
+            {
+                if ((bool)await browser.ExecuteScript(JsScript))
+                {
+                    return true;
+                }
+                await Task.Delay(1000);
+            }
+            //await //await browser.Screenshot(nameException);
             return false;
         }
         public static async Task<bool> FElementInnerTextContent(this IFrame frame, string selector, string text, int limit = 20)
@@ -249,13 +274,13 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
             return false;
         }
 
 
 
-        public static async Task<bool> ElementInnerTextEquals(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionExistsDefault", int limit = 20)
+        public static async Task<bool> ElementInnerTextEquals(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionElementInnerTextEqualsDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
                 $"let node = document.querySelector('{selector}');" +
@@ -276,7 +301,7 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -301,7 +326,7 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //browser.Screenshot(nameException);
+            //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -343,7 +368,7 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -364,7 +389,7 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -383,7 +408,7 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            // await browser.ScreenshotnameException);
+            //await //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -406,7 +431,7 @@ namespace Asgard
             return false;
         }
 
-        public static async Task<bool> SendKeys(this ChromiumWebBrowser browser, string selector, string keys,int delay=50)
+        public static async Task<bool> SendKeys(this ChromiumWebBrowser browser, string selector, string keys, int delay = 50)
         {
             try
             {
@@ -604,11 +629,18 @@ namespace Asgard
                         taskJS.Dispose();
                         if (message)
                         {
-                            MessageBox.Show(response.VarDump(0) + "\n\r" + "Script: \n\r __________________________\n\r " + script, response.Success.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
+                            //Clipboard.SetText(script);
+                            MessageBox.Show(response.VarDump(0)
+                                + "\n\r"
+                                + "Script Copy To Clipboard: \n\r __________________________\n\r "
+                                + script, response.Success.ToString(), MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                         }
+
                         if (response.Success)
                         {
-                            if (response.Result == null)
+                            //if (response.Result == null)
+                            if (response.Result == null || response.Result.ToString() == "")
+                            //if (string.IsNullOrEmpty(response.Result.ToString()))
                             {
                                 return true;
                             }

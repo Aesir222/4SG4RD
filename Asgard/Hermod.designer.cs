@@ -60,7 +60,6 @@
             this.IconButtonClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonClose.FlatAppearance.BorderSize = 0;
             this.IconButtonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonClose.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.IconButtonClose.IconColor = System.Drawing.Color.White;
             this.IconButtonClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -68,7 +67,6 @@
             this.IconButtonClose.Location = new System.Drawing.Point(231, 3);
             this.IconButtonClose.Margin = new System.Windows.Forms.Padding(0);
             this.IconButtonClose.Name = "IconButtonClose";
-            this.IconButtonClose.Rotation = 0D;
             this.IconButtonClose.Size = new System.Drawing.Size(24, 24);
             this.IconButtonClose.TabIndex = 19;
             this.IconButtonClose.UseVisualStyleBackColor = true;
@@ -80,9 +78,9 @@
             this.LabelTitle.ForeColor = System.Drawing.Color.White;
             this.LabelTitle.Location = new System.Drawing.Point(36, 5);
             this.LabelTitle.Name = "LabelTitle";
-            this.LabelTitle.Size = new System.Drawing.Size(71, 21);
+            this.LabelTitle.Size = new System.Drawing.Size(16, 21);
             this.LabelTitle.TabIndex = 17;
-            this.LabelTitle.Text = "Ingreso.";
+            this.LabelTitle.Text = "-";
             // 
             // IconPictureBoxAsgard
             // 
@@ -116,7 +114,6 @@
             this.IconButtonAccept.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonAccept.FlatAppearance.BorderSize = 0;
             this.IconButtonAccept.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonAccept.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonAccept.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonAccept.ForeColor = System.Drawing.Color.White;
             this.IconButtonAccept.IconChar = FontAwesome.Sharp.IconChar.SignInAlt;
@@ -126,7 +123,6 @@
             this.IconButtonAccept.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonAccept.Location = new System.Drawing.Point(41, 134);
             this.IconButtonAccept.Name = "IconButtonAccept";
-            this.IconButtonAccept.Rotation = 0D;
             this.IconButtonAccept.Size = new System.Drawing.Size(178, 30);
             this.IconButtonAccept.TabIndex = 106;
             this.IconButtonAccept.Text = "ACEPTAR";

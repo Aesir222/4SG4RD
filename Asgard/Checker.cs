@@ -15,7 +15,7 @@ using System.IO.Compression;
 namespace Asgard
 {
 
-    public partial class Checker : Form
+    public partial class Checker : Form, IChecker
     {
         private IconButton currentButton;
         private IconButton currentHoverButton;
@@ -25,6 +25,7 @@ namespace Asgard
         private IconButton lastButton;
         private Color lastColor;
         private bool leave;
+
         private int Id { set; get; }
         private string Token { set; get; }
         // private static readonly string[] blackList = new[] { "cmd" };//Black List Applications
@@ -51,6 +52,7 @@ namespace Asgard
             //_form_resize = new clsResize(this);
             //this.Load += _Load;
             //this.Resize += _Resize;
+            //This = this;
         }
 
         #region "Form Behaviors"
@@ -167,7 +169,7 @@ namespace Asgard
             catch (Exception) { }
         }
 
-        public async void LoadPlanDetails()
+        public async Task LoadPlanDetails()
         {
             try
             {
@@ -175,14 +177,14 @@ namespace Asgard
                 dynamic planDetails = await Asatru.GetPlanDetails(Id, Token);
                 if (planDetails != null)
                 {
-                    IconButtonClans.Enabled = true;
-                    IconButtonClans.IconColor = Color.White;
+                    // IconButtonClans.Enabled = true;
+                    //IconButtonClans.IconColor = Color.White;
                     LabelGetRunes.Text = planDetails.total_runes.Value;
                 }
                 else
                 {
-                    IconButtonClans.Enabled = false;
-                    IconButtonClans.IconColor = Color.Black;
+                    //IconButtonClans.Enabled = false;
+                    //IconButtonClans.IconColor = Color.Black;
                     LabelGetRunes.Text = "-";
                 }
                 PictureBoxLoadMenu.Hide();
@@ -193,13 +195,13 @@ namespace Asgard
         private void IconButtonHome_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color1);
-            OpenForm<Home>(Id, Token);
+            OpenForm<Home>(Id, Token, this);
         }
 
         private void IconButtonAesir_Click(object sender, EventArgs e)
         {
             ActivateButton(sender, RGBColors.color2);
-            OpenForm<Clans>(Id, Token);
+            OpenForm<Clans>(Id, Token, this);
         }
 
         private void IconButtonBifrost_Click(object sender, EventArgs e)
@@ -238,19 +240,19 @@ namespace Asgard
             Updater();
             PictureBoxLoadMenu.Hide();
             //TimerMonitorAplications.Start();
-            IconButtonClans.Enabled = false;
-            IconButtonClans.IconColor = Color.Black;
+            //IconButtonClans.Enabled = false;
+            //IconButtonClans.IconColor = Color.Black;
             Task.Run(() => LoadUserDetails());
             Task.Run(() => LoadPlanDetails());
             ActivateButton(IconButtonHome, RGBColors.color1);
-            OpenForm<Home>(Id, Token);
+            OpenForm<Home>(Id, Token, this);
             TimerSync.Start();
         }
 
         private void IconPictureBoxLogo_Click(object sender, EventArgs e)
         {
             ActivateButton(IconButtonHome, RGBColors.color1);
-            OpenForm<Home>(Id, Token);
+            OpenForm<Home>(Id, Token, this);
         }
 
         private void Reset()
@@ -273,7 +275,7 @@ namespace Asgard
                         //TimerMonitorAplications.Stop();
                         State = false;
                         await Asatru.SetDisUser(Id, p.ProcessName);
-                        Hermod hermod = new Hermod("BAN.", $"{p.ProcessName} es un aplicativo que consideramos sospechoso y puede afectar el funcionamiento de 4SG4RD, Pro esta razon tu usuario ha sido BANEADO");
+                        Hermod hermod = new Hermod("BAN.", $"{p.ProcessName} es un aplicativo que consideramos sospechoso y puede afectar el funcionamiento de 4SG4RD, Pro esta razon tu usuario ha sido BANEADO", Color.FromArgb(30, 38, 70), Color.White);
                         this.Hide();
                         hermod.ShowDialog();
                         hermod.BringToFront();
@@ -306,7 +308,7 @@ namespace Asgard
             WebClient webClient = new WebClient();
             try
             {
-                await webClient.DownloadFileTaskAsync("http://4sg4rd.club/update/loader.zip", @"loader.zip");
+                await webClient.DownloadFileTaskAsync("https://4sg4rd.club/update/loader.zip", @"loader.zip");
                 File.Delete(@".\Loader.exe");
                 string zipPath = @".\loader.zip";
                 string extractPath = @".\";
@@ -317,6 +319,17 @@ namespace Asgard
             {
                 File.Delete(@".\loader.zip");
             }
+        }
+
+        public void ClickOnRefillBalance()
+        {
+            ActivateButton(IconButtonRefillBalance, RGBColors.color4);
+            OpenForm<RefillBalance>(Id, Token);
+        }
+
+        public async Task SetLabelGetRunes()
+        {
+            await LoadPlanDetails();
         }
 
     }

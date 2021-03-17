@@ -152,7 +152,7 @@ namespace Loader
                 // Print the file name and version number.
                 //MessageBox.Show("File: " + myFileVersionInfo.FileDescription + '\n' +
                 //   "Version number: " + myFileVersionInfo.FileVersion);
-                if (myFileVersionInfo.FileVersion != "1.0.0.0")
+                if (myFileVersionInfo.FileVersion != "1.1.0.1")
                 {
                     LabelDownload.Text = "Descargando archivos necesarios, por favor espere.";
                     await webClient.DownloadFileTaskAsync("https://4sg4rd.club/update/update.zip", @"update.zip");

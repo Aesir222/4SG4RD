@@ -25,6 +25,8 @@ namespace Asgard
 {
     public partial class Home : Form, IForm
     {
+
+        public new Checker Owner { set; get; }
         private ChromiumWebBrowser browser;
 
         private string CC { set; get; }
@@ -210,10 +212,11 @@ namespace Asgard
 
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 2)
+            if (parameters.Length == 3)
             {
                 Id = (int)parameters[0];
                 Token = parameters[1].ToString();
+                Owner = (Checker)parameters[2];
             }
         }
 
@@ -1208,6 +1211,18 @@ namespace Asgard
             IconPictureBoxHelheim.Hide();
             PictureBoxWaitCheck.Hide();
             IconPictureBoxCheck.Show();
+        }
+
+        public async Task Valhalla()
+        {
+            LoadCountValhalla();
+            LoadPlanDetails();
+            LoadValhalla();
+        }
+
+        public async Task Helheim()
+        {
+            LoadCountHelheim();
         }
     }
 }

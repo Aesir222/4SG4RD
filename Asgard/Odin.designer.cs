@@ -240,7 +240,7 @@
             this.IconButtonGenerarStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IconButtonGenerarStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonGenerarStop.ForeColor = System.Drawing.Color.White;
-            this.IconButtonGenerarStop.IconChar = FontAwesome.Sharp.IconChar.HandMiddleFinger;
+            this.IconButtonGenerarStop.IconChar = FontAwesome.Sharp.IconChar.HandPaper;
             this.IconButtonGenerarStop.IconColor = System.Drawing.Color.White;
             this.IconButtonGenerarStop.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.IconButtonGenerarStop.IconSize = 24;
@@ -1511,9 +1511,9 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(30, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 21);
+            this.label3.Size = new System.Drawing.Size(105, 21);
             this.label3.TabIndex = 20;
-            this.label3.Text = "Bye, Bye";
+            this.label3.Text = "Lo Sentimos!";
             // 
             // iconPictureBox2
             // 
@@ -1541,9 +1541,6 @@
             this.ClientSize = new System.Drawing.Size(730, 499);
             this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelConfirm);
-            this.Controls.Add(this.PanelValkyrie);
-            this.Controls.Add(this.PanelValkyrieDie);
-            this.Controls.Add(this.PanelValkyrieLive);
             this.Controls.Add(this.PanelGenerator);
             this.Controls.Add(this.PanelInformation);
             this.Controls.Add(this.PanelValhalla);
@@ -1551,6 +1548,9 @@
             this.Controls.Add(this.PanelCreditCards);
             this.Controls.Add(this.PanelConsole);
             this.Controls.Add(this.PanelTitleOdin);
+            this.Controls.Add(this.PanelValkyrie);
+            this.Controls.Add(this.PanelValkyrieDie);
+            this.Controls.Add(this.PanelValkyrieLive);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Silver;

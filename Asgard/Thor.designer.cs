@@ -113,6 +113,15 @@
             this.IconButtonConfirmClose = new FontAwesome.Sharp.IconButton();
             this.LabelConfirmHeaderTitle = new System.Windows.Forms.Label();
             this.IconPictureBoxConfirmFavicon = new FontAwesome.Sharp.IconPictureBox();
+            this.PanelBlockGate = new System.Windows.Forms.Panel();
+            this.PanelBlockGateClose = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.IconButtonBlockGateClose = new FontAwesome.Sharp.IconButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label3 = new System.Windows.Forms.Label();
+            this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
             this.PanelGenerator.SuspendLayout();
             this.PanelValhalla.SuspendLayout();
             this.PanelValkyrieLive.SuspendLayout();
@@ -132,6 +141,10 @@
             this.PanelConfirm.SuspendLayout();
             this.PanelConfirmHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IconPictureBoxConfirmFavicon)).BeginInit();
+            this.PanelBlockGate.SuspendLayout();
+            this.PanelBlockGateClose.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // LabelMonth
@@ -360,7 +373,6 @@
             this.IconButtonGenerarStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonGenerarStop.FlatAppearance.BorderSize = 0;
             this.IconButtonGenerarStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonGenerarStop.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonGenerarStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonGenerarStop.ForeColor = System.Drawing.Color.Black;
             this.IconButtonGenerarStop.IconChar = FontAwesome.Sharp.IconChar.HandMiddleFinger;
@@ -370,7 +382,6 @@
             this.IconButtonGenerarStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonGenerarStop.Location = new System.Drawing.Point(21, 191);
             this.IconButtonGenerarStop.Name = "IconButtonGenerarStop";
-            this.IconButtonGenerarStop.Rotation = 0D;
             this.IconButtonGenerarStop.Size = new System.Drawing.Size(200, 30);
             this.IconButtonGenerarStop.TabIndex = 105;
             this.IconButtonGenerarStop.Text = "DETENER";
@@ -385,7 +396,6 @@
             this.IconButtonGenerar.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonGenerar.FlatAppearance.BorderSize = 0;
             this.IconButtonGenerar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonGenerar.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonGenerar.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonGenerar.ForeColor = System.Drawing.Color.Black;
             this.IconButtonGenerar.IconChar = FontAwesome.Sharp.IconChar.Cogs;
@@ -395,7 +405,6 @@
             this.IconButtonGenerar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonGenerar.Location = new System.Drawing.Point(21, 191);
             this.IconButtonGenerar.Name = "IconButtonGenerar";
-            this.IconButtonGenerar.Rotation = 0D;
             this.IconButtonGenerar.Size = new System.Drawing.Size(200, 30);
             this.IconButtonGenerar.TabIndex = 6;
             this.IconButtonGenerar.Text = "GENERAR";
@@ -453,7 +462,6 @@
             this.IconButtonValkyrieStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonValkyrieStop.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrieStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieStop.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonValkyrieStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonValkyrieStop.ForeColor = System.Drawing.Color.Black;
             this.IconButtonValkyrieStop.IconChar = FontAwesome.Sharp.IconChar.HandMiddleFinger;
@@ -463,7 +471,6 @@
             this.IconButtonValkyrieStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonValkyrieStop.Location = new System.Drawing.Point(21, 190);
             this.IconButtonValkyrieStop.Name = "IconButtonValkyrieStop";
-            this.IconButtonValkyrieStop.Rotation = 0D;
             this.IconButtonValkyrieStop.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrieStop.TabIndex = 104;
             this.IconButtonValkyrieStop.Text = "DETENER";
@@ -489,7 +496,6 @@
             this.IconButtonValkyrieStart.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonValkyrieStart.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrieStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieStart.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonValkyrieStart.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonValkyrieStart.ForeColor = System.Drawing.Color.Black;
             this.IconButtonValkyrieStart.IconChar = FontAwesome.Sharp.IconChar.SignInAlt;
@@ -499,7 +505,6 @@
             this.IconButtonValkyrieStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonValkyrieStart.Location = new System.Drawing.Point(21, 190);
             this.IconButtonValkyrieStart.Name = "IconButtonValkyrieStart";
-            this.IconButtonValkyrieStart.Rotation = 0D;
             this.IconButtonValkyrieStart.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrieStart.TabIndex = 102;
             this.IconButtonValkyrieStart.Text = "RAGNARÖK";
@@ -552,7 +557,6 @@
             this.IconButtonStop.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonStop.FlatAppearance.BorderSize = 0;
             this.IconButtonStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonStop.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonStop.ForeColor = System.Drawing.Color.Black;
             this.IconButtonStop.IconChar = FontAwesome.Sharp.IconChar.HandPaper;
@@ -562,7 +566,6 @@
             this.IconButtonStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonStop.Location = new System.Drawing.Point(21, 190);
             this.IconButtonStop.Name = "IconButtonStop";
-            this.IconButtonStop.Rotation = 0D;
             this.IconButtonStop.Size = new System.Drawing.Size(200, 30);
             this.IconButtonStop.TabIndex = 102;
             this.IconButtonStop.Text = "DETENER";
@@ -722,7 +725,6 @@
             this.IconButtonValkyrieClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonValkyrieClear.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrieClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieClear.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonValkyrieClear.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonValkyrieClear.ForeColor = System.Drawing.Color.Black;
             this.IconButtonValkyrieClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
@@ -732,7 +734,6 @@
             this.IconButtonValkyrieClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonValkyrieClear.Location = new System.Drawing.Point(21, 190);
             this.IconButtonValkyrieClear.Name = "IconButtonValkyrieClear";
-            this.IconButtonValkyrieClear.Rotation = 0D;
             this.IconButtonValkyrieClear.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrieClear.TabIndex = 104;
             this.IconButtonValkyrieClear.Text = "LIMPIAR";
@@ -785,7 +786,6 @@
             this.IconButtonClear.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonClear.FlatAppearance.BorderSize = 0;
             this.IconButtonClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonClear.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonClear.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonClear.ForeColor = System.Drawing.Color.Black;
             this.IconButtonClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
@@ -795,7 +795,6 @@
             this.IconButtonClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonClear.Location = new System.Drawing.Point(21, 190);
             this.IconButtonClear.Name = "IconButtonClear";
-            this.IconButtonClear.Rotation = 0D;
             this.IconButtonClear.Size = new System.Drawing.Size(200, 30);
             this.IconButtonClear.TabIndex = 104;
             this.IconButtonClear.Text = "LIMPIAR";
@@ -1066,7 +1065,6 @@
             this.IconButtonValkyrie.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonValkyrie.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrie.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonValkyrie.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonValkyrie.ForeColor = System.Drawing.Color.Black;
             this.IconButtonValkyrie.IconChar = FontAwesome.Sharp.IconChar.Studiovinari;
@@ -1076,7 +1074,6 @@
             this.IconButtonValkyrie.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonValkyrie.Location = new System.Drawing.Point(21, 191);
             this.IconButtonValkyrie.Name = "IconButtonValkyrie";
-            this.IconButtonValkyrie.Rotation = 0D;
             this.IconButtonValkyrie.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrie.TabIndex = 90;
             this.IconButtonValkyrie.Text = "VALKIRIAS";
@@ -1118,7 +1115,6 @@
             this.IconButtonBack.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonBack.FlatAppearance.BorderSize = 0;
             this.IconButtonBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonBack.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonBack.IconChar = FontAwesome.Sharp.IconChar.ArrowCircleLeft;
             this.IconButtonBack.IconColor = System.Drawing.Color.Black;
             this.IconButtonBack.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -1126,7 +1122,6 @@
             this.IconButtonBack.Location = new System.Drawing.Point(4, 3);
             this.IconButtonBack.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.IconButtonBack.Name = "IconButtonBack";
-            this.IconButtonBack.Rotation = 0D;
             this.IconButtonBack.Size = new System.Drawing.Size(24, 24);
             this.IconButtonBack.TabIndex = 110;
             this.IconButtonBack.UseVisualStyleBackColor = true;
@@ -1140,7 +1135,6 @@
             this.IconButtonClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonClose.FlatAppearance.BorderSize = 0;
             this.IconButtonClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonClose.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.IconButtonClose.IconColor = System.Drawing.Color.Black;
             this.IconButtonClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -1148,7 +1142,6 @@
             this.IconButtonClose.Location = new System.Drawing.Point(701, 2);
             this.IconButtonClose.Margin = new System.Windows.Forms.Padding(0);
             this.IconButtonClose.Name = "IconButtonClose";
-            this.IconButtonClose.Rotation = 0D;
             this.IconButtonClose.Size = new System.Drawing.Size(24, 24);
             this.IconButtonClose.TabIndex = 109;
             this.IconButtonClose.UseVisualStyleBackColor = true;
@@ -1213,7 +1206,6 @@
             this.IconButtonValkyrieVerify.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonValkyrieVerify.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrieVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieVerify.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonValkyrieVerify.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonValkyrieVerify.ForeColor = System.Drawing.Color.Black;
             this.IconButtonValkyrieVerify.IconChar = FontAwesome.Sharp.IconChar.Share;
@@ -1223,7 +1215,6 @@
             this.IconButtonValkyrieVerify.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonValkyrieVerify.Location = new System.Drawing.Point(21, 190);
             this.IconButtonValkyrieVerify.Name = "IconButtonValkyrieVerify";
-            this.IconButtonValkyrieVerify.Rotation = 0D;
             this.IconButtonValkyrieVerify.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrieVerify.TabIndex = 8;
             this.IconButtonValkyrieVerify.Text = "VERIFICAR";
@@ -1264,7 +1255,6 @@
             this.IconButtonVerify.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonVerify.FlatAppearance.BorderSize = 0;
             this.IconButtonVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonVerify.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonVerify.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonVerify.ForeColor = System.Drawing.Color.Black;
             this.IconButtonVerify.IconChar = FontAwesome.Sharp.IconChar.ArrowRight;
@@ -1274,7 +1264,6 @@
             this.IconButtonVerify.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonVerify.Location = new System.Drawing.Point(21, 190);
             this.IconButtonVerify.Name = "IconButtonVerify";
-            this.IconButtonVerify.Rotation = 0D;
             this.IconButtonVerify.Size = new System.Drawing.Size(200, 30);
             this.IconButtonVerify.TabIndex = 94;
             this.IconButtonVerify.Text = "VERIFICAR";
@@ -1314,7 +1303,6 @@
             this.IconButtonCancel.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonCancel.FlatAppearance.BorderSize = 0;
             this.IconButtonCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonCancel.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonCancel.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonCancel.ForeColor = System.Drawing.Color.Black;
             this.IconButtonCancel.IconChar = FontAwesome.Sharp.IconChar.Times;
@@ -1324,7 +1312,6 @@
             this.IconButtonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonCancel.Location = new System.Drawing.Point(126, 103);
             this.IconButtonCancel.Name = "IconButtonCancel";
-            this.IconButtonCancel.Rotation = 0D;
             this.IconButtonCancel.Size = new System.Drawing.Size(96, 30);
             this.IconButtonCancel.TabIndex = 130;
             this.IconButtonCancel.Text = "CANCELAR";
@@ -1350,7 +1337,6 @@
             this.IconButtonConfirm.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonConfirm.FlatAppearance.BorderSize = 0;
             this.IconButtonConfirm.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonConfirm.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonConfirm.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonConfirm.ForeColor = System.Drawing.Color.Black;
             this.IconButtonConfirm.IconChar = FontAwesome.Sharp.IconChar.Check;
@@ -1360,7 +1346,6 @@
             this.IconButtonConfirm.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.IconButtonConfirm.Location = new System.Drawing.Point(19, 103);
             this.IconButtonConfirm.Name = "IconButtonConfirm";
-            this.IconButtonConfirm.Rotation = 0D;
             this.IconButtonConfirm.Size = new System.Drawing.Size(96, 30);
             this.IconButtonConfirm.TabIndex = 126;
             this.IconButtonConfirm.Text = "ACEPTAR";
@@ -1396,7 +1381,6 @@
             this.IconButtonConfirmClose.Cursor = System.Windows.Forms.Cursors.Hand;
             this.IconButtonConfirmClose.FlatAppearance.BorderSize = 0;
             this.IconButtonConfirmClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonConfirmClose.Flip = FontAwesome.Sharp.FlipOrientation.Normal;
             this.IconButtonConfirmClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.IconButtonConfirmClose.IconColor = System.Drawing.Color.Black;
             this.IconButtonConfirmClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
@@ -1404,7 +1388,6 @@
             this.IconButtonConfirmClose.Location = new System.Drawing.Point(214, 3);
             this.IconButtonConfirmClose.Margin = new System.Windows.Forms.Padding(0);
             this.IconButtonConfirmClose.Name = "IconButtonConfirmClose";
-            this.IconButtonConfirmClose.Rotation = 0D;
             this.IconButtonConfirmClose.Size = new System.Drawing.Size(24, 24);
             this.IconButtonConfirmClose.TabIndex = 22;
             this.IconButtonConfirmClose.UseVisualStyleBackColor = true;
@@ -1439,12 +1422,128 @@
             this.IconPictureBoxConfirmFavicon.TabIndex = 21;
             this.IconPictureBoxConfirmFavicon.TabStop = false;
             // 
+            // PanelBlockGate
+            // 
+            this.PanelBlockGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBlockGate.Controls.Add(this.PanelBlockGateClose);
+            this.PanelBlockGate.Location = new System.Drawing.Point(0, 31);
+            this.PanelBlockGate.Name = "PanelBlockGate";
+            this.PanelBlockGate.Size = new System.Drawing.Size(730, 468);
+            this.PanelBlockGate.TabIndex = 132;
+            // 
+            // PanelBlockGateClose
+            // 
+            this.PanelBlockGateClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBlockGateClose.Controls.Add(this.label1);
+            this.PanelBlockGateClose.Controls.Add(this.label2);
+            this.PanelBlockGateClose.Controls.Add(this.IconButtonBlockGateClose);
+            this.PanelBlockGateClose.Controls.Add(this.panel2);
+            this.PanelBlockGateClose.Controls.Add(this.panel3);
+            this.PanelBlockGateClose.Location = new System.Drawing.Point(243, 158);
+            this.PanelBlockGateClose.Name = "PanelBlockGateClose";
+            this.PanelBlockGateClose.Size = new System.Drawing.Size(243, 151);
+            this.PanelBlockGateClose.TabIndex = 131;
+            // 
+            // label1
+            // 
+            this.label1.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.White;
+            this.label1.Location = new System.Drawing.Point(20, 40);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(200, 15);
+            this.label1.TabIndex = 131;
+            this.label1.Text = "Insuficiencia Runica.";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label2
+            // 
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Silver;
+            this.label2.Location = new System.Drawing.Point(20, 59);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(200, 30);
+            this.label2.TabIndex = 129;
+            this.label2.Text = "Por favor adquiere un nuevo plan.";
+            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // IconButtonBlockGateClose
+            // 
+            this.IconButtonBlockGateClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.IconButtonBlockGateClose.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonBlockGateClose.FlatAppearance.BorderSize = 0;
+            this.IconButtonBlockGateClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconButtonBlockGateClose.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IconButtonBlockGateClose.ForeColor = System.Drawing.Color.Black;
+            this.IconButtonBlockGateClose.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.IconButtonBlockGateClose.IconColor = System.Drawing.Color.Black;
+            this.IconButtonBlockGateClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.IconButtonBlockGateClose.IconSize = 24;
+            this.IconButtonBlockGateClose.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonBlockGateClose.Location = new System.Drawing.Point(72, 103);
+            this.IconButtonBlockGateClose.Name = "IconButtonBlockGateClose";
+            this.IconButtonBlockGateClose.Size = new System.Drawing.Size(96, 30);
+            this.IconButtonBlockGateClose.TabIndex = 126;
+            this.IconButtonBlockGateClose.Text = "ACEPTAR";
+            this.IconButtonBlockGateClose.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IconButtonBlockGateClose.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.IconButtonBlockGateClose.UseVisualStyleBackColor = false;
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 144);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(241, 5);
+            this.panel2.TabIndex = 112;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.panel3.Controls.Add(this.label3);
+            this.panel3.Controls.Add(this.iconPictureBox2);
+            this.panel3.ForeColor = System.Drawing.Color.White;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(241, 30);
+            this.panel3.TabIndex = 111;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.Black;
+            this.label3.Location = new System.Drawing.Point(30, 5);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(105, 21);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "Lo Sentimos!";
+            // 
+            // iconPictureBox2
+            // 
+            this.iconPictureBox2.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconPictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.iconPictureBox2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconPictureBox2.ForeColor = System.Drawing.Color.Black;
+            this.iconPictureBox2.IconChar = FontAwesome.Sharp.IconChar.GalacticSenate;
+            this.iconPictureBox2.IconColor = System.Drawing.Color.Black;
+            this.iconPictureBox2.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox2.IconSize = 24;
+            this.iconPictureBox2.Location = new System.Drawing.Point(2, 3);
+            this.iconPictureBox2.Margin = new System.Windows.Forms.Padding(0);
+            this.iconPictureBox2.Name = "iconPictureBox2";
+            this.iconPictureBox2.Size = new System.Drawing.Size(24, 24);
+            this.iconPictureBox2.TabIndex = 21;
+            this.iconPictureBox2.TabStop = false;
+            // 
             // Thor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.ClientSize = new System.Drawing.Size(730, 499);
+            this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelConfirm);
             this.Controls.Add(this.PanelGenerator);
             this.Controls.Add(this.PanelValhalla);
@@ -1489,6 +1588,11 @@
             this.PanelConfirmHeader.ResumeLayout(false);
             this.PanelConfirmHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IconPictureBoxConfirmFavicon)).EndInit();
+            this.PanelBlockGate.ResumeLayout(false);
+            this.PanelBlockGateClose.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1580,5 +1684,14 @@
         private FontAwesome.Sharp.IconButton IconButtonConfirmClose;
         private System.Windows.Forms.Label LabelConfirmHeaderTitle;
         private FontAwesome.Sharp.IconPictureBox IconPictureBoxConfirmFavicon;
+        private System.Windows.Forms.Panel PanelBlockGate;
+        private System.Windows.Forms.Panel PanelBlockGateClose;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private FontAwesome.Sharp.IconButton IconButtonBlockGateClose;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label3;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
     }
 }

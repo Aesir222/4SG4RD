@@ -250,7 +250,7 @@
             // PictureBoxItemLoadInfo
             // 
             this.PictureBoxItemLoadInfo.Image = global::Asgard.Properties.Resources.Eclipse_1_4s_16px;
-            this.PictureBoxItemLoadInfo.Location = new System.Drawing.Point(465, 6);
+            this.PictureBoxItemLoadInfo.Location = new System.Drawing.Point(233, 77);
             this.PictureBoxItemLoadInfo.Name = "PictureBoxItemLoadInfo";
             this.PictureBoxItemLoadInfo.Size = new System.Drawing.Size(16, 16);
             this.PictureBoxItemLoadInfo.TabIndex = 151;

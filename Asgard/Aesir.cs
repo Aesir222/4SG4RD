@@ -8,8 +8,10 @@ using System.Windows.Forms;
 
 namespace Asgard
 {
-    public partial class Aesir : Form, IForm, IClans
+    public partial class Aesir : Form, IForm, IAesir
     {
+        public new IChecker Owner { set; get; }
+        public new IHome OHome { set; get; }
         private int Id { set; get; }
         private string Token { set; get; }
 
@@ -42,47 +44,79 @@ namespace Asgard
 
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 2)
+            if (parameters.Length == 3)
             {
                 Id = (int)parameters[0];
                 Token = parameters[1].ToString();
+                Owner = (Checker)parameters[2];
             }
         }
 
-        private void IconButtonOdin_Click(object sender, EventArgs e)
+        private async void IconButtonOdin_Click(object sender, EventArgs e)
         {
-            IconButton iconbutton = (IconButton)sender;
-            iconbutton.IconChar = IconChar.Cogs;
-            iconbutton.Text = "VOLVER A ODIN";
-            IconButtonOdinOff.Hide();
-            OpenForm<Odin>(Id, Token, this);
+            bool odin = await Asatru.BlockAesir(Id, 1, Token);
+            if (!odin)
+            {
+                IconButton iconbutton = (IconButton)sender;
+                iconbutton.IconChar = IconChar.Cogs;
+                iconbutton.Text = "VOLVER A ODIN";
+                IconButtonOdinOff.Hide();
+                OpenForm<Odin>(Id, Token, this, Owner);
+            }
+            else
+            {
+                PanelBlockGate.Show();
+            }
+        }
+        private async void IconButtonFrigg_Click(object sender, EventArgs e)
+        {
+            bool frigg = await Asatru.BlockAesir(Id, 2, Token);
+            if (!frigg)
+            {
+                IconButton iconbutton = (IconButton)sender;
+                iconbutton.IconChar = IconChar.Cogs;
+                iconbutton.Text = "VOLVER A FRIGG";
+                IconButtonFriggOff.Hide();
+                OpenForm<Frigg>(Id, Token, this, Owner);
+            }
+            else
+            {
+                PanelBlockGate.Show();
+            }
         }
 
-        private void IconButtonFrigg_Click(object sender, EventArgs e)
+        private async void IconButtonThor_Click(object sender, EventArgs e)
         {
-            IconButton iconbutton = (IconButton)sender;
-            iconbutton.IconChar = IconChar.Cogs;
-            iconbutton.Text = "VOLVER A FRIGG";
-            IconButtonFriggOff.Hide();
-            OpenForm<Frigg>(Id, Token, this);
+            bool thor = await Asatru.BlockAesir(Id, 3, Token);
+            if (!thor)
+            {
+                IconButton iconbutton = (IconButton)sender;
+                iconbutton.Text = "VOLVER A THOR";
+                iconbutton.IconChar = IconChar.Cogs;
+                IconButtonThorOff.Hide();
+                OpenForm<Thor>(Id, Token, this, Owner);
+            }
+            else
+            {
+                PanelBlockGate.Show();
+            }
         }
 
-        private void IconButtonThor_Click(object sender, EventArgs e)
+        private async void IconButtonBalder_Click(object sender, EventArgs e)
         {
-            IconButton iconbutton = (IconButton)sender;
-            IconButtonThor.Text = "VOLVER A THOR";
-            iconbutton.IconChar = IconChar.Cogs;
-            IconButtonThorOff.Hide();
-            OpenForm<Thor>(Id, Token, this);
-        }
-
-        private void IconButtonBalder_Click(object sender, EventArgs e)
-        {
-            IconButton iconbutton = (IconButton)sender;
-            iconbutton.IconChar = IconChar.Cogs;
-            iconbutton.Text = "VOLVER A BALDER";
-            IconButtonBalderOff.Hide();
-            OpenForm<Balder>(Id, Token, this);
+            bool balder = await Asatru.BlockAesir(Id, 4, Token);
+            if (!balder)
+            {
+                IconButton iconbutton = (IconButton)sender;
+                iconbutton.IconChar = IconChar.Cogs;
+                iconbutton.Text = "VOLVER A BALDER";
+                IconButtonBalderOff.Hide();
+                OpenForm<Balder>(Id, Token, this, Owner);
+            }
+            else
+            {
+                PanelBlockGate.Show();
+            }
         }
 
         private void IconButtonHeimdal_Click(object sender, EventArgs e)
@@ -123,8 +157,8 @@ namespace Asgard
 
         private void Aesir_Load(object sender, EventArgs e)
         {
-            Block();
-            TimerSync.Start();
+            PanelBlockGate.Hide();
+            // Task.Run(() => Block());
         }
 
         private async Task Block()
@@ -172,7 +206,7 @@ namespace Asgard
             }
 
             bool balder = await Asatru.BlockAesir(Id, 4, Token);
-            if (thor)
+            if (balder)
             {
                 IconButtonBalder.Enabled = false;
                 IconButtonBalder.IconColor = Color.Black;
@@ -209,6 +243,12 @@ namespace Asgard
             {
                 form.BringToFront();
             }
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            Owner.ClickOnRefillBalance();
+            this.Close();
         }
     }
 }

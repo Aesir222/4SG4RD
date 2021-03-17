@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Asgard
 {
-    public interface IClans
+    public interface IJotun
     {
-        //void HideIconActive(string god);
-        //void ClickOnRefillBalanceClans();
+        void HideIconActive(string god);
     }
 }

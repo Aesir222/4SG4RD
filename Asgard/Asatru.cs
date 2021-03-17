@@ -67,7 +67,7 @@ namespace Asgard
         //             "BlueJ",
         //             //"cmd"
         //         };//Black List Applications
-
+        public static String GetTimestamp(DateTime value) { return value.ToString("HH_mm_ss_ffff"); }
         public static string VarDump(this object obj, int recursion)
         {
             StringBuilder result = new StringBuilder();
@@ -477,7 +477,7 @@ namespace Asgard
             object parameters = new { gateId, userId, cC };
             string json = JsonConvert.SerializeObject(new { name, parameters });
 
-            dynamic response = await Api(json, token, true);
+            dynamic response = await Api(json, token);
 
             if (response != null)
             {
@@ -495,7 +495,6 @@ namespace Asgard
                 return false;
             }
         }
-
 
         public static async Task<dynamic> GetUserDetails(int id, string token)
         {
@@ -1410,7 +1409,7 @@ namespace Asgard
             //return null;
         }
 
-        public static async Task<dynamic> Api(string json, string token, bool testc = false)
+        public static async Task<dynamic> Api(string json, string token)
         {
             try
             {
@@ -1421,10 +1420,10 @@ namespace Asgard
                 request.AddHeader("Content-Type", "application/json");
                 request.AddParameter("application/json", json, ParameterType.RequestBody);
                 IRestResponse restResponse = await client.ExecuteAsync(request);
-                if (testc)
-                {
-                    MessageBox.Show(json + "\n\r" + "---" + "\n\r" + restResponse.Content);
-                }
+                //if (testc)
+                //{
+                //MessageBox.Show(json + "\n\r" + "---" + "\n\r" + restResponse.Content);
+                //}
 
                 return JsonConvert.DeserializeObject(restResponse.Content);
             }

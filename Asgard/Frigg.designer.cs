@@ -1432,13 +1432,11 @@
             // PanelBlockGate
             // 
             this.PanelBlockGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.PanelBlockGate.Controls.Add(this.PanelConfirm);
             this.PanelBlockGate.Controls.Add(this.PanelBlockGateClose);
             this.PanelBlockGate.Location = new System.Drawing.Point(0, 31);
             this.PanelBlockGate.Name = "PanelBlockGate";
             this.PanelBlockGate.Size = new System.Drawing.Size(730, 468);
             this.PanelBlockGate.TabIndex = 132;
-            this.PanelBlockGate.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBlockGate_Paint);
             // 
             // PanelBlockGateClose
             // 
@@ -1524,9 +1522,9 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(30, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 21);
+            this.label3.Size = new System.Drawing.Size(105, 21);
             this.label3.TabIndex = 20;
-            this.label3.Text = "Bye, Bye";
+            this.label3.Text = "Lo Sentimos!";
             // 
             // iconPictureBox2
             // 
@@ -1552,6 +1550,7 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.ClientSize = new System.Drawing.Size(730, 499);
             this.Controls.Add(this.PanelBlockGate);
+            this.Controls.Add(this.PanelConfirm);
             this.Controls.Add(this.PanelValkyrieDie);
             this.Controls.Add(this.PanelGenerator);
             this.Controls.Add(this.PanelTitleOdin);

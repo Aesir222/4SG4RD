@@ -8,8 +8,10 @@ using System.Windows.Forms;
 
 namespace Asgard
 {
-    public partial class Clans : Form, IForm
+    public partial class Clans : Form, IForm, IClans
     {
+        public new IChecker Owner { get; set; }
+        public new IHome OHome { get; set; }
         private int Id { set; get; }
         private string Token { set; get; }
         private dynamic Voucher { set; get; }
@@ -43,10 +45,11 @@ namespace Asgard
 
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 2)
+            if (parameters.Length == 3)
             {
                 Id = (int)parameters[0];
                 Token = parameters[1].ToString();
+                Owner = (Checker)parameters[2];
             }
         }
 
@@ -103,45 +106,67 @@ namespace Asgard
         {
             //Block();
             //TimerSync.Start();
-            IconButtonJotun.Enabled = false;
-            IconButtonJotun.IconColor = Color.Black;
+            //IconButtonJotun.Enabled = false;
+            //IconButtonJotun.IconColor = Color.Black;
+            //PanelBlockGateClose.Hide();
             PictureBoxJotun.Hide();
             PanelConfirm.Hide();
             PanelVoucher.Hide();
-
-            Task.Run(() => LoadPlanVIP());
-           // TimerSync.Start();
+            Task.Run(() => Block());
+            //Task.Run(() => LoadPlanVIP());
+            // TimerSync.Start();
         }
 
-        public async void LoadPlanVIP()
-        {
-            try
-            {
-                PictureBoxLoadJotun.Show();
-                bool planVIP = await Asatru.GetPlanVIP(Id, Token);
-                if (planVIP)
-                {
-                    IconButtonJotun.Enabled = true;
-                    IconButtonJotun.IconColor =Color.White;
-                    IconButtonVIP.Hide();
-                    PictureBoxJotun.Show();
-                    PictureBoxJotunDisable.Hide();
-                }
-                else
-                {
-                    IconButtonJotun.Enabled = false;
-                    IconButtonJotun.IconColor = Color.Black;
-                    PictureBoxJotun.Show();
-                    PictureBoxJotunDisable.Hide();
-                    //IconButtonJotun.BackColor = Color.Silver;
-                }
-                PictureBoxLoadJotun.Hide();
-            }
-            catch (Exception) { }
-        }
+        //public async void LoadPlanVIP()
+        //{
+        //    try
+        //    {
+        //        PictureBoxLoadJotun.Show();
+        //        bool planVIP = await Asatru.GetPlanVIP(Id, Token);
+        //        if (planVIP)
+        //        {
+        //            IconButtonJotun.Enabled = true;
+        //            IconButtonJotun.IconColor =Color.White;
+        //            IconButtonVIP.Hide();
+        //            PictureBoxJotun.Show();
+        //            PictureBoxJotunDisable.Hide();
+        //        }
+        //        else
+        //        {
+        //            IconButtonJotun.Enabled = false;
+        //            IconButtonJotun.IconColor = Color.Black;
+        //            PictureBoxJotun.Show();
+        //            PictureBoxJotunDisable.Hide();
+        //            //IconButtonJotun.BackColor = Color.Silver;
+        //        }
+        //        PictureBoxLoadJotun.Hide();
+        //    }
+        //    catch (Exception) { }
+        //}
+
 
         private async Task Block()
         {
+            try
+            {
+                PanelBlockGate.Show();
+                dynamic planDetails = await Asatru.GetPlanDetails(Id, Token);
+                if (planDetails == null)
+                {
+                    PanelBlockGateClose.Show();
+                }
+                else
+                {
+                    PanelBlockGateClose.Hide();
+                    PanelBlockGate.Hide();
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
             //bool odin = await Asatru.BlockClans(Id, 1, Token);
             //if (odin)
             //{
@@ -174,12 +199,22 @@ namespace Asgard
 
         private void IconButtonAesir_Click(object sender, EventArgs e)
         {
-            OpenForm<Aesir>(Id, Token);
+            
+            OpenForm<Aesir>(Id, Token, Owner);
         }
 
-        private void IconButtonJotun_Click(object sender, EventArgs e)
+        private async void IconButtonJotun_Click(object sender, EventArgs e)
         {
-            OpenForm<Jotun>(Id, Token);
+            PictureBoxLoadJotun.Show();
+            bool planVIP = await Asatru.GetPlanVIP(Id, Token);
+            if (planVIP)
+            {
+                OpenForm<Jotun>(Id, Token, Owner);
+            }
+            else
+            {
+                PanelConfirm.Show();
+            }
         }
 
         private void IconButtonVIP_Click(object sender, EventArgs e)
@@ -244,5 +279,17 @@ namespace Asgard
         {
             PanelConfirm.Hide();
         }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            Owner.ClickOnRefillBalance();
+            this.Close();
+        }
+
+        //public void ClickOnRefillBalanceClans()
+        //{
+        //    Owner.ClickOnRefillBalanceChecker();
+        //    this.Close();
+        //}
     }
 }

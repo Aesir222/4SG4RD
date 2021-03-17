@@ -283,11 +283,11 @@
             this.LabelTitleGenerator.AutoSize = true;
             this.LabelTitleGenerator.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelTitleGenerator.ForeColor = System.Drawing.Color.White;
-            this.LabelTitleGenerator.Location = new System.Drawing.Point(83, 24);
+            this.LabelTitleGenerator.Location = new System.Drawing.Point(79, 10);
             this.LabelTitleGenerator.Name = "LabelTitleGenerator";
-            this.LabelTitleGenerator.Size = new System.Drawing.Size(72, 17);
+            this.LabelTitleGenerator.Size = new System.Drawing.Size(85, 17);
             this.LabelTitleGenerator.TabIndex = 78;
-            this.LabelTitleGenerator.Text = "Generador";
+            this.LabelTitleGenerator.Text = "GENERADOR";
             this.LabelTitleGenerator.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // LabelMonth
@@ -529,11 +529,11 @@
             this.LabelTitleConsole.AutoSize = true;
             this.LabelTitleConsole.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelTitleConsole.ForeColor = System.Drawing.Color.White;
-            this.LabelTitleConsole.Location = new System.Drawing.Point(92, 24);
+            this.LabelTitleConsole.Location = new System.Drawing.Point(92, 10);
             this.LabelTitleConsole.Name = "LabelTitleConsole";
-            this.LabelTitleConsole.Size = new System.Drawing.Size(56, 17);
+            this.LabelTitleConsole.Size = new System.Drawing.Size(68, 17);
             this.LabelTitleConsole.TabIndex = 80;
-            this.LabelTitleConsole.Text = "Consola";
+            this.LabelTitleConsole.Text = "CONSOLA";
             this.LabelTitleConsole.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PanelCreditCards
@@ -605,11 +605,11 @@
             this.LabelCreditCards.AutoSize = true;
             this.LabelCreditCards.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelCreditCards.ForeColor = System.Drawing.Color.White;
-            this.LabelCreditCards.Location = new System.Drawing.Point(87, 10);
+            this.LabelCreditCards.Location = new System.Drawing.Point(89, 10);
             this.LabelCreditCards.Name = "LabelCreditCards";
-            this.LabelCreditCards.Size = new System.Drawing.Size(54, 17);
+            this.LabelCreditCards.Size = new System.Drawing.Size(65, 17);
             this.LabelCreditCards.TabIndex = 92;
-            this.LabelCreditCards.Text = "Tarjetas";
+            this.LabelCreditCards.Text = "TARJETAS";
             // 
             // PanelHellheim
             // 
@@ -681,11 +681,11 @@
             this.LabelHelheim.AutoSize = true;
             this.LabelHelheim.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelHelheim.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(179)))), ((int)(((byte)(31)))));
-            this.LabelHelheim.Location = new System.Drawing.Point(92, 10);
+            this.LabelHelheim.Location = new System.Drawing.Point(89, 10);
             this.LabelHelheim.Name = "LabelHelheim";
-            this.LabelHelheim.Size = new System.Drawing.Size(58, 17);
+            this.LabelHelheim.Size = new System.Drawing.Size(64, 17);
             this.LabelHelheim.TabIndex = 101;
-            this.LabelHelheim.Text = "Helheim";
+            this.LabelHelheim.Text = "HELHEIM";
             // 
             // PanelValhalla
             // 
@@ -757,11 +757,11 @@
             this.LabelValhalla.AutoSize = true;
             this.LabelValhalla.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelValhalla.ForeColor = System.Drawing.Color.White;
-            this.LabelValhalla.Location = new System.Drawing.Point(94, 12);
+            this.LabelValhalla.Location = new System.Drawing.Point(86, 12);
             this.LabelValhalla.Name = "LabelValhalla";
-            this.LabelValhalla.Size = new System.Drawing.Size(53, 17);
+            this.LabelValhalla.Size = new System.Drawing.Size(70, 17);
             this.LabelValhalla.TabIndex = 100;
-            this.LabelValhalla.Text = "Valhalla";
+            this.LabelValhalla.Text = "VALHALLA";
             // 
             // PanelInformation
             // 
@@ -999,7 +999,7 @@
             this.IconButtonValkyrie.Name = "IconButtonValkyrie";
             this.IconButtonValkyrie.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrie.TabIndex = 90;
-            this.IconButtonValkyrie.Text = "VALKIRIAS";
+            this.IconButtonValkyrie.Text = "VALQUIRIAS";
             this.IconButtonValkyrie.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonValkyrie.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.IconButtonValkyrie.UseVisualStyleBackColor = false;
@@ -1010,11 +1010,11 @@
             this.LabelTitleInfo.AutoSize = true;
             this.LabelTitleInfo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelTitleInfo.ForeColor = System.Drawing.Color.White;
-            this.LabelTitleInfo.Location = new System.Drawing.Point(79, 24);
+            this.LabelTitleInfo.Location = new System.Drawing.Point(79, 10);
             this.LabelTitleInfo.Name = "LabelTitleInfo";
-            this.LabelTitleInfo.Size = new System.Drawing.Size(81, 17);
+            this.LabelTitleInfo.Size = new System.Drawing.Size(100, 17);
             this.LabelTitleInfo.TabIndex = 79;
-            this.LabelTitleInfo.Text = "Información";
+            this.LabelTitleInfo.Text = "INFORMACION";
             this.LabelTitleInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PanelValkyrieLive
@@ -1504,9 +1504,9 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(30, 5);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 21);
+            this.label3.Size = new System.Drawing.Size(105, 21);
             this.label3.TabIndex = 20;
-            this.label3.Text = "Bye, Bye";
+            this.label3.Text = "Lo Sentimos!";
             // 
             // iconPictureBox2
             // 
@@ -1542,18 +1542,18 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(730, 499);
-            this.Controls.Add(this.PanelConfirm);
-            this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelHellheim);
             this.Controls.Add(this.PanelValhalla);
             this.Controls.Add(this.PanelCreditCards);
-            this.Controls.Add(this.PanelValkyrie);
-            this.Controls.Add(this.PanelValkyrieDie);
-            this.Controls.Add(this.PanelValkyrieLive);
             this.Controls.Add(this.PanelGenerator);
             this.Controls.Add(this.PanelInformation);
             this.Controls.Add(this.PanelConsole);
             this.Controls.Add(this.PanelTitleBalder);
+            this.Controls.Add(this.PanelValkyrie);
+            this.Controls.Add(this.PanelValkyrieDie);
+            this.Controls.Add(this.PanelValkyrieLive);
+            this.Controls.Add(this.PanelBlockGate);
+            this.Controls.Add(this.PanelConfirm);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Silver;

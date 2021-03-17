@@ -21,7 +21,7 @@ namespace Asgard
 {
     public partial class OdinBrwnlls : Form, IForm
     {
-        public new IClans Owner { get; set; }
+        public new IAesir Owner { get; set; }
         //public new IHome Home { set; get; }
         //public new IChecker Checker { set; get; }
 
@@ -111,7 +111,7 @@ namespace Asgard
             {
                 UserId = (int)parameters[0];
                 Token = parameters[1].ToString();
-                Owner = (Aesir)parameters[2];
+                //Owner = (Aesir)parameters[2];
             }
         }
 

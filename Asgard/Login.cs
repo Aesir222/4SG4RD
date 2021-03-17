@@ -158,8 +158,11 @@ namespace Asgard
             PictureBoxLoading.Visible = false;
             IconButtonSigin.Enabled = false;
             IconButtonSigin.IconColor = Color.Black;
-            //TextBoxUsernameOrEmail.Text = "crango.cero";
-            //TextBoxPassword.Text = "Eli.Chris1915";
+            /*
+             * TODO: comentar!
+             */
+            TextBoxUsernameOrEmail.Text = "crango.cero";
+            TextBoxPassword.Text = "Eli.Chris1915";
         }
 
         private void TextBoxUser_TextChanged(object sender, EventArgs e)
@@ -239,7 +242,7 @@ namespace Asgard
                         {
                             await Asatru.SetDisUser(Id, p.ProcessName);
                         }
-                        Hermod hermod = new Hermod("Advertencia.", $"{p.ProcessName} es un aplicativo que consideramos sospechoso y puede afectar el funcionamiento de 4SG4RD.");
+                        Hermod hermod = new Hermod("Advertencia.", $"{p.ProcessName} es un aplicativo que consideramos sospechoso y puede afectar el funcionamiento de 4SG4RD.", Color.FromArgb(30, 38, 70), Color.White);
                         this.Hide();
                         hermod.ShowDialog();
                         hermod.BringToFront();

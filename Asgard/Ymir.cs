@@ -22,7 +22,7 @@ namespace Asgard
 {
     public partial class Ymir : Form, IForm
     {
-        public new IClans Owner { get; set; }
+        public new IJotun Owner { get; set; }
         //public new IHome Home { set; get; }
         //public new IChecker Checker { set; get; }
 
@@ -37,6 +37,7 @@ namespace Asgard
 
 
         private static ChromiumWebBrowser browser;
+        private static ChromiumWebBrowser browser2;
 
         private const string web = "www.manscaped.com";
         private string initialUrl = "http://" + web;
@@ -47,6 +48,7 @@ namespace Asgard
         private bool forsetiError = false;
 
         private CancellationTokenSource tokenCancel;
+        private CancellationTokenSource tokenCancel2;
 
         SoundPlayer Valhalla;
 
@@ -54,6 +56,7 @@ namespace Asgard
 
         //private string Size;
 
+        private bool Stop = false;
 
         public Ymir()
         {
@@ -105,6 +108,7 @@ namespace Asgard
             if (browser != null)
             {
                 await browser.Kill(web);
+                await KillGod();
             }
             this.Close();
         }
@@ -147,6 +151,12 @@ namespace Asgard
             CircularProgressBarMain.Minimum = 0;
             CircularProgressBarMain.Maximum = 100;
             CircularProgressBarMain.Value = 0;
+
+            //JOTUNHEIM
+            IconButtonStop.Enabled = false;
+            IconButtonStop.IconColor = Color.Black;
+
+            await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES.", 0);
 
             //SOUND
             Valhalla = new SoundPlayer(@"Valhalla.wav");
@@ -1055,33 +1065,19 @@ namespace Asgard
                 iconButton.Enabled = false;
 
                 await tokenCancel.Kill();
-                await browser.Kill("www.brownells.com");
+                await browser.Kill(web);
 
                 await ConsoleProgressGeneral("Ymir esta siendo Detenido.", 0, "Success");
                 await ConsoleProgressDetail("Ymir esta siendo Detenido.", 0, "Success");
                 await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES..", 0);
                 await ConsoleProgressDetail("AURGELMIR ENTRE LOS GIGANTES..", 0);
-                //IconButtonGenerar.IconColor = IconButtonGenerarIconColor;
-                //IconButtonGenerar.Enabled = IconButtonGenerarEnabled;
-                //IconButtonClear.IconColor = Color.White;
-                //IconButtonClear.Enabled = true;
-                //IconButtonValkyrie.IconColor = Color.White;
-                //IconButtonValkyrie.Enabled = true;
-                if (CreditCards != null)
-                {
-                    if (CreditCards.Count > 0)
-                    {
-                        //IconButtonVerify.IconColor = Color.White;
-                        //IconButtonVerify.Enabled = true;
 
-                    }
-                    else
-                    {
-                        TextBoxItems.Clear();
-                        //IconButtonVerify.IconColor = Color.Black;
-                        //IconButtonVerify.Enabled = false;
-                    }
-                }
+                IconButtonStart.Enabled = true;
+                IconButtonStart.IconColor = Color.White;
+                iconButton4.Enabled = true;
+                iconButton4.IconColor = Color.White;
+                Stop = true;
+
             }
             catch (Exception) { }
         }
@@ -1791,17 +1787,21 @@ namespace Asgard
             catch (Exception) { }
 
             //await browser.Kill(web);
-            if (!persistentLoading)
-            {
-                await browser.Kill("www.manscaped.com");
-                await tokenCancel.Kill();
-            }
+            //if (!persistentLoading)
+            //{
+            await browser.Kill(web);
+            await tokenCancel.Kill();
+            //}
 
             if (ymir)
             {
                 await ConsoleProgressGeneral("Ymir finalizo los procesos correctamente.", 100, "Success");
-                //IconButtonClear.IconColor = Color.White;
-                //IconButtonClear.Enabled = true;
+                IconButtonStart.Enabled = true;
+                IconButtonStart.IconColor = Color.White;
+                iconButton4.IconColor = Color.White;
+                iconButton4.Enabled = true;
+                IconButtonStop.Enabled = false;
+                IconButtonStop.IconColor = Color.Black;
                 //IconButtonValkyrie.IconColor = Color.White;
                 //IconButtonValkyrie.Enabled = true;
             }
@@ -1809,10 +1809,20 @@ namespace Asgard
             {
                 if (CreditCards.Count > 0 && Items.Count > 0)
                 {
-                    await ConsoleProgressGeneral("Ymir requiere un sacrificio.", 0, "Fail");
-                    await ConsoleProgressDetail("", 0);
-                    await ConsoleProgressGeneral("Ofreciendo un sacrificio a Ymir.", 0, "Success");
-                    await InvokeYmir(urlItem, sizeItem);
+                    if (!Stop)
+                    {
+                        await ConsoleProgressGeneral("Ymir requiere un sacrificio.", 0, "Fail");
+                        await ConsoleProgressDetail("", 0);
+                        await ConsoleProgressGeneral("Ofreciendo un sacrificio a Ymir.", 0, "Success");
+                        await InvokeYmir(urlItem, sizeItem);
+                    }
+                    else
+                    {
+                        await Task.Delay(2000);
+                        await ConsoleProgressDetail("", 0);
+                        await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES.", 0);
+                        Stop = false;
+                    }
                 }
                 else
                 {
@@ -1820,8 +1830,9 @@ namespace Asgard
                 }
             }
             await Task.Delay(2000);
-            await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES.", 0);
             await ConsoleProgressDetail("", 0);
+            await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES.", 0);
+
         }
 
         private async Task<bool> LoadBrowser(string urlItem, string sizeItem)
@@ -1904,8 +1915,10 @@ namespace Asgard
                 if (size != null)
                 {
                     await browser.Click("select[name=size]");
+                    await Task.Delay(500);
                     await browser.SendKeys(string.Empty, size);
-                    await browser.Click("select[name=size]");
+                    await Task.Delay(500);
+                    await browser.SendKeyCode(0x0D);
                     //string selectSize = $"let sizes = document.querySelectorAll('select[name=size] > option');" +
                     //    "for (let size of sizes)" +
                     //    "{" +
@@ -1915,7 +1928,9 @@ namespace Asgard
                     //        "}" +
                     //    "}";
                     //await browser.ExecuteScript(selectSize);
+                    // await browser.Click("select[name=size]");
                     await Task.Delay(5000);
+                    //await browser.Screenshot("2.SelectSize");
                 }
             }
             catch (Exception) { }
@@ -1944,11 +1959,11 @@ namespace Asgard
             catch (Exception) { }
             //if ()
             //{
-                bool anchorCheckout = await browser.ElementVisible("div.ModalUpsell > div:nth-child(1) > div:nth-child(2) > div > a", "4.ExceptionAddToCart");
-                if (anchorCheckout)
-                {
-                    return await Cart();
-                }
+            bool anchorCheckout = await browser.ElementVisible("div.ModalUpsell > div:nth-child(1) > div:nth-child(2) > div > a", "4.ExceptionAddToCart");
+            if (anchorCheckout)
+            {
+                return await Cart();
+            }
             //}
 
             await ConsoleProgressGeneral("Trazando retícula de Splines. ¡Fallo!", 30, "Fail");
@@ -2272,8 +2287,8 @@ namespace Asgard
                     bool valhalla = await browser.ElementInnerTextContent("div > section > h1", "Thank", "10.1.ExceptionValhalla");
                     if (valhalla)
                     {
-                        //return true;
-                        return false;
+                        return true;
+                        //return false;
                     }
                 }
                 else
@@ -2281,8 +2296,8 @@ namespace Asgard
                     bool helheim = await browser.ElementVisible("form > div:nth-child(6) > div > div > div:nth-child(2) > div > p", "10.ExceptionHelheim");
                     if (helheim)
                     {
-                        //  return false;
-                        return true;
+                        return false;
+                        //return true;
                     }
                 }
 
@@ -2568,15 +2583,15 @@ namespace Asgard
             {
                 // await browser.Screenshot("1.GetItem");
                 //await ConsoleProgressGeneral("Recalibración del motor de motivación.", 10);
-                await browser.DisableAlerts();
-                browser.Load(TextBoxItemLink.Text);
+                await browser2.DisableAlerts();
+                await browser2.LoadPage(TextBoxItemLink.Text);
                 //await browser.Click("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button");
             }
             catch (Exception) { }
 
-            await Task.Delay(5000);
+            //await Task.Delay(5000);
 
-            bool header1NameItem = await browser.ElementExists("#product > div > div:nth-child(1) > div:nth-child(1) > h1", "1.ExceptionGetItem");
+            bool header1NameItem = await browser2.ElementExists("#product > div > div > h1", "1.ExceptionGetItem");
             //bool header1NameItem = await browser.Element("button > div > div > div", "1.ExceptionGetItem",30);
 
             if (header1NameItem)
@@ -2596,11 +2611,11 @@ namespace Asgard
             {
                 // await browser.Screenshot("3.DataItem");
                 //await ConsoleProgressGeneral("Recalibración del motor de motivación.", 20);
-                await browser.DisableAlerts();
-                string getNameItem = "document.querySelector('#product > div > div:nth-child(1) > div:nth-child(1) > h1').textContent.trim();";
-                NameItem = (string)await browser.ExecuteScript(getNameItem);
+                await browser2.DisableAlerts();
+                string getNameItem = "document.querySelector('#product > div > div > h1').textContent.trim();";
+                NameItem = (string)await browser2.ExecuteScript(getNameItem);
                 string getPriceItem = "document.querySelector('span.price-test').textContent.trim();";
-                PriceItem = (string)await browser.ExecuteScript(getPriceItem);
+                PriceItem = (string)await browser2.ExecuteScript(getPriceItem);
 
                 //await browser.Click("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button");
 
@@ -2611,7 +2626,7 @@ namespace Asgard
                 PriceItem = "-";
             }
 
-            bool selectOption = await browser.ElementVisible("select[name=size]", "3.ExceptionSelectOptionDataItem");
+            bool selectOption = await browser2.ElementVisible("select[name=size]", "3.ExceptionSelectOptionDataItem");
             if (selectOption)
             {
                 LabelItemSize.Show();
@@ -2628,12 +2643,10 @@ namespace Asgard
 
         private void IconButtonItemLoad_Click(object sender, EventArgs e)
         {
-            if (TextBoxItemLink.Text != "")
+            if (!string.IsNullOrEmpty(TextBoxItemLink.Text.Trim()))
             {
                 AddItemToList();
             }
-
-
         }
 
         private void AddItemToList()
@@ -2686,30 +2699,36 @@ namespace Asgard
 
         private void IconButtonInfoLoad_Click(object sender, EventArgs e)
         {
-            var name = TextBoxInfoName.Text;
-            var lastName = TextBoxInfoLastName.Text;
-            var address1 = TextBoxInfoAddress1.Text;
-            var address2 = TextBoxInfoAddress2.Text;
-            var city = TextBoxInfoCity.Text;
-            var state = ComboBoxInfoState.GetItemText(ComboBoxInfoState.SelectedItem);
-            var zip = TextBoxInfoZip.Text;
-            var email = TextBoxInfoEmail.Text;
-            var phone = TextBoxInfoPhone.Text;
-
-
-            string info = name + "|" + lastName + "|" + address1 + "|" + address2 + "|" + city + "|" + state + "|" + zip + "|" + email + "|" + phone;
-
-            string infoLineText = "";
-            if (!string.IsNullOrEmpty(TextBoxInfo.Text))
+            try
             {
-                infoLineText += "\r\n" + info;
-            }
-            else
-            {
-                infoLineText += info;
-            }
+                string name = TextBoxInfoName.Text.Trim();
+                string lastName = TextBoxInfoLastName.Text.Trim();
+                string address1 = TextBoxInfoAddress1.Text.Trim();
+                string address2 = TextBoxInfoAddress2.Text.Trim();
+                string city = TextBoxInfoCity.Text.Trim();
+                string state = ComboBoxInfoState.GetItemText(ComboBoxInfoState.SelectedItem);
+                string zip = TextBoxInfoZip.Text.Trim();
+                string email = TextBoxInfoEmail.Text.Trim();
+                string phone = TextBoxInfoPhone.Text.Trim();
 
-            TextBoxInfo.Text += infoLineText;
+                if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(lastName) && !string.IsNullOrEmpty(address1) && !string.IsNullOrEmpty(address2) && !string.IsNullOrEmpty(city) && !string.IsNullOrEmpty(state) && !string.IsNullOrEmpty(zip) && !string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(phone))
+                {
+                    string info = name + "|" + lastName + "|" + address1 + "|" + address2 + "|" + city + "|" + state + "|" + zip + "|" + email + "|" + phone;
+
+                    string infoLineText = "";
+                    if (!string.IsNullOrEmpty(TextBoxInfo.Text))
+                    {
+                        infoLineText += "\r\n" + info;
+                    }
+                    else
+                    {
+                        infoLineText += info;
+                    }
+
+                    TextBoxInfo.Text += infoLineText;
+                }
+            }
+            catch (Exception) { }
         }
 
         private void TextBoxInfo_TextChanged(object sender, EventArgs e)
@@ -2726,93 +2745,109 @@ namespace Asgard
         {
             try
             {
-                string items = TextBoxItems.Text.Trim();
-                Items = new List<List<string>>();
-                if (items.Contains("\r\n"))
+                if (!string.IsNullOrEmpty(TextBoxItems.Text.Trim()) && !string.IsNullOrEmpty(TextBoxInfo.Text.Trim()) && !string.IsNullOrEmpty(TextBoxCC.Text.Trim()))
                 {
-                    string[] listItems = items.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                    int listItemsLength = listItems.Length;
-                    for (int i = 0; i < listItemsLength; i++)
+                    IconButton iconButton = (IconButton)sender;
+                    iconButton.Enabled = false;
+                    iconButton.IconColor = Color.Black;
+                    iconButton4.Enabled = false;
+                    iconButton4.IconColor = Color.Black;
+                    IconButtonStop.Enabled = true;
+                    IconButtonStop.IconColor = Color.White;
+
+                    string items = TextBoxItems.Text.Trim();
+                    Items = new List<List<string>>();
+                    if (items.Contains("\r\n"))
+                    {
+                        string[] listItems = items.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                        int listItemsLength = listItems.Length;
+                        for (int i = 0; i < listItemsLength; i++)
+                        {
+                            Items.Add(new List<string>());
+                            if (listItems[i].Contains("|"))
+                            {
+                                string[] listItem = listItems[i].Split('|');
+                                Items[i].Add(listItem[0]);
+                                Items[i].Add(listItem[1]);
+                            }
+                            else
+                            {
+                                Items[i].Add(listItems[i]);
+                            }
+                        }
+                    }
+                    else if (items.Contains("|"))
                     {
                         Items.Add(new List<string>());
-                        if (listItems[i].Contains("|"))
+                        string[] listItem = items.Split('|');
+                        Items[0].Add(listItem[0]);
+                        Items[0].Add(listItem[1]);
+                    }
+                    else if (items.Contains("https://www.manscaped.com/"))
+                    {
+                        Items.Add(new List<string>());
+                        Items[0].Add(items);
+                    }
+
+
+                    var info = TextBoxInfo.Text.Trim();
+                    Info = new List<List<string>>();
+                    if (info.Contains("\r\n"))
+                    {
+                        string[] listInfo = info.Split(new string[] { "\r\n" }, StringSplitOptions.None);
+                        int listInfoLength = listInfo.Length;
+                        for (int i = 0; i < listInfoLength; i++)
                         {
-                            string[] listItem = listItems[i].Split('|');
-                            Items[i].Add(listItem[0]);
-                            Items[i].Add(listItem[1]);
+                            Info.Add(new List<string>());
+                            if (listInfo[i].Contains("|"))
+                            {
+                                string[] listInf = listInfo[i].Split('|');
+                                Info[i].Add(listInf[0]);
+                                Info[i].Add(listInf[1]);
+                                Info[i].Add(listInf[2]);
+                                Info[i].Add(listInf[3]);
+                                Info[i].Add(listInf[4]);
+                                Info[i].Add(listInf[5]);
+                                Info[i].Add(listInf[6]);
+                                Info[i].Add(listInf[7]);
+                                Info[i].Add(listInf[8]);
+                            }
+                        }
+                    }
+                    else if (info.Contains("|"))
+                    {
+                        string[] listInf = info.Split('|');
+                        Info.Add(new List<string>());
+                        Info[0].Add(listInf[0]);
+                        Info[0].Add(listInf[1]);
+                        Info[0].Add(listInf[2]);
+                        Info[0].Add(listInf[3]);
+                        Info[0].Add(listInf[4]);
+                        Info[0].Add(listInf[5]);
+                        Info[0].Add(listInf[6]);
+                        Info[0].Add(listInf[7]);
+                        Info[0].Add(listInf[8]);
+                    }
+
+                    for (int i = 0; i < Items.Count; i++)
+                    {
+                        initialUrl = Items[i][0];
+                        if (Items[i].Count > 1)
+                        {
+                            await InvokeYmir(Items[i][0], Items[i][1]);
+                            //await StartYmir(Items[i][1]);
                         }
                         else
                         {
-                            Items[i].Add(listItems[i]);
+                            await InvokeYmir(Items[i][0]);
+                            //await StartYmir(null);
                         }
                     }
                 }
-                else if (items.Contains("|"))
+                else
                 {
-                    Items.Add(new List<string>());
-                    string[] listItem = items.Split('|');
-                    Items[0].Add(listItem[0]);
-                    Items[0].Add(listItem[1]);
-                }
-                else if (items.Contains("https://www.manscaped.com/"))
-                {
-                    Items.Add(new List<string>());
-                    Items[0].Add(items);
-                }
-
-
-                var info = TextBoxInfo.Text.Trim();
-                Info = new List<List<string>>();
-                if (info.Contains("\r\n"))
-                {
-                    string[] listInfo = info.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                    int listInfoLength = listInfo.Length;
-                    for (int i = 0; i < listInfoLength; i++)
-                    {
-                        Info.Add(new List<string>());
-                        if (listInfo[i].Contains("|"))
-                        {
-                            string[] listInf = listInfo[i].Split('|');
-                            Info[i].Add(listInf[0]);
-                            Info[i].Add(listInf[1]);
-                            Info[i].Add(listInf[2]);
-                            Info[i].Add(listInf[3]);
-                            Info[i].Add(listInf[4]);
-                            Info[i].Add(listInf[5]);
-                            Info[i].Add(listInf[6]);
-                            Info[i].Add(listInf[7]);
-                            Info[i].Add(listInf[8]);
-                        }
-                    }
-                }
-                else if (info.Contains("|"))
-                {
-                    string[] listInf = info.Split('|');
-                    Info.Add(new List<string>());
-                    Info[0].Add(listInf[0]);
-                    Info[0].Add(listInf[1]);
-                    Info[0].Add(listInf[2]);
-                    Info[0].Add(listInf[3]);
-                    Info[0].Add(listInf[4]);
-                    Info[0].Add(listInf[5]);
-                    Info[0].Add(listInf[6]);
-                    Info[0].Add(listInf[7]);
-                    Info[0].Add(listInf[8]);
-                }
-
-                for (int i = 0; i < Items.Count; i++)
-                {
-                    initialUrl = Items[i][0];
-                    if (Items[i].Count > 1)
-                    {
-                        await InvokeYmir(Items[i][0], Items[i][1]);
-                        //await StartYmir(Items[i][1]);
-                    }
-                    else
-                    {
-                        await InvokeYmir(Items[i][0]);
-                        //await StartYmir(null);
-                    }
+                    await ConsoleProgressGeneral("TODA LA INFORMACION ES NECESARIA.", 0, "Fail");
+                    await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES.", 0);
                 }
             }
             catch (Exception) { throw; }
@@ -2890,17 +2925,17 @@ namespace Asgard
             {
                 await MainProgress(LabelProgressBarMain, CircularProgressBarMain, "Invocando a Ymir.", 0, 25);
 
-                browser = new ChromiumWebBrowser();
+                browser2 = new ChromiumWebBrowser();
                 await Task.Delay(500);
 
-                tokenCancel = new CancellationTokenSource();
-                CancellationToken token = tokenCancel.Token;
+                tokenCancel2 = new CancellationTokenSource();
+                CancellationToken token = tokenCancel2.Token;
 
                 god = await Task<bool>.Run(async () =>
                 {
                     if (!token.IsCancellationRequested)
                     {
-                        bool loadPage = await browser.LoadPage(initialUrl);
+                        bool loadPage = await browser2.LoadPage(initialUrl);
                         await Task.Delay(500);
                         return loadPage;
                     }
@@ -2937,8 +2972,8 @@ namespace Asgard
         {
             try
             {
-                await browser.Kill(web);
-                await tokenCancel.Kill();
+                await browser2.Kill(web);
+                await tokenCancel2.Kill();
             }
             catch (Exception) { }
         }
@@ -2947,7 +2982,7 @@ namespace Asgard
         {
             Owner.HideIconActive("ymir");
             //PanelConfirm.Hide();
-            if (browser != null)
+            if (browser2 != null)
             {
                 await KillGod();
                 //await browser.Kill("www.brownells.com");

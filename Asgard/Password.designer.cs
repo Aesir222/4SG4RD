@@ -155,7 +155,7 @@
             this.LabelInfo.Name = "LabelInfo";
             this.LabelInfo.Size = new System.Drawing.Size(250, 12);
             this.LabelInfo.TabIndex = 110;
-            this.LabelInfo.Text = "4SG4RD TEAM - 2020";
+            this.LabelInfo.Text = "4SG4RD TEAM - 2021";
             this.LabelInfo.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PictureBoxLoading

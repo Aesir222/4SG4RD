@@ -130,7 +130,7 @@ namespace Asgard
                         Yggdrasil.KillCEF();
                         TimerMonitorAplications.Stop();
                         State = false;
-                        Hermod hermod = new Hermod("Advertencia.", $"{p.ProcessName} es un aplicativo que consideramos sospechoso y puede afectar el funcionamiento de 4SG4RD.");
+                        Hermod hermod = new Hermod("Advertencia.", $"{p.ProcessName} es un aplicativo que consideramos sospechoso y puede afectar el funcionamiento de 4SG4RD.", Color.FromArgb(30, 38, 70), Color.White);
                         hermod.ShowDialog();
                         hermod.BringToFront();
                         Application.Exit();

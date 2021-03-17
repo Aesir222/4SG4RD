@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Asgard
 {
-    public interface IClans
+    public interface IHome
     {
-        //void HideIconActive(string god);
-        //void ClickOnRefillBalanceClans();
+        Task Valhalla();
+        Task Helheim();
     }
 }

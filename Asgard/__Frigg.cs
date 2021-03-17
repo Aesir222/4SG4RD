@@ -20,7 +20,7 @@ namespace Asgard
 {
     public partial class __Frigg : Form, IForm
     {
-        public new IClans Owner { get; set; }
+        public new IAesir Owner { get; set; }
         private string Bin { set; get; }
         private string Quatity { set; get; }
         private int UserId { set; get; }
@@ -103,7 +103,7 @@ namespace Asgard
             {
                 UserId = (int)parameters[0];
                 Token = parameters[1].ToString();
-                Owner = (Aesir)parameters[2];
+                //Owner = (Aesir)parameters[2];
             }
         }
 

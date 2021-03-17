@@ -8,8 +8,9 @@ using System.Windows.Forms;
 
 namespace Asgard
 {
-    public partial class Jotun : Form, IForm, IClans
+    public partial class Jotun : Form, IForm, IJotun
     {
+        public new IChecker Owner { set; get; }
         private int Id { set; get; }
         private string Token { set; get; }
 
@@ -42,10 +43,11 @@ namespace Asgard
 
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 2)
+            if (parameters.Length == 3)
             {
                 Id = (int)parameters[0];
                 Token = parameters[1].ToString();
+                Owner = (Checker)parameters[2];
             }
         }
 
@@ -74,9 +76,10 @@ namespace Asgard
             }
         }
 
-        private async void Jotun_Load(object sender, EventArgs e)
+        private void Jotun_Load(object sender, EventArgs e)
         {
-            await Block();
+            PanelBlockGate.Hide();
+            // Block();
             //TimerSync.Start();
         }
 
@@ -122,13 +125,27 @@ namespace Asgard
             }
         }
 
-        private void IconButtonYmir_Click(object sender, EventArgs e)
+        private async void IconButtonYmir_Click(object sender, EventArgs e)
         {
-            IconButton iconbutton = (IconButton)sender;
-            iconbutton.IconChar = IconChar.Cogs;
-            iconbutton.Text = "VOLVER A YMIR";
-            IconButtonYmirOff.Hide();
-            OpenForm<Ymir>(Id, Token, this);
+            bool ymir = await Asatru.BlockJotun(Id, 5, Token);
+            if (!ymir)
+            {
+                IconButton iconbutton = (IconButton)sender;
+                iconbutton.IconChar = IconChar.Cogs;
+                iconbutton.Text = "VOLVER A YMIR";
+                IconButtonYmirOff.Hide();
+                OpenForm<Ymir>(Id, Token, this);
+            }
+            else
+            {
+                PanelBlockGate.Show();
+            }
+        }
+
+        private void iconButton1_Click(object sender, EventArgs e)
+        {
+            Owner.ClickOnRefillBalance();
+            this.Close();
         }
     }
 }

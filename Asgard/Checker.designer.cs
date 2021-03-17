@@ -54,7 +54,7 @@
             this.IconButtonTools = new FontAwesome.Sharp.IconButton();
             this.IconButtonRefillBalance = new FontAwesome.Sharp.IconButton();
             this.IconButtonBifrost = new FontAwesome.Sharp.IconButton();
-            this.IconButtonClans = new FontAwesome.Sharp.IconButton();
+            this.IconButtonChecker = new FontAwesome.Sharp.IconButton();
             this.IconButtonHome = new FontAwesome.Sharp.IconButton();
             this.PanelLogo = new System.Windows.Forms.Panel();
             this.LabelLogo = new System.Windows.Forms.Label();
@@ -217,7 +217,7 @@
             this.PanelMenu.Controls.Add(this.IconButtonTools);
             this.PanelMenu.Controls.Add(this.IconButtonRefillBalance);
             this.PanelMenu.Controls.Add(this.IconButtonBifrost);
-            this.PanelMenu.Controls.Add(this.IconButtonClans);
+            this.PanelMenu.Controls.Add(this.IconButtonChecker);
             this.PanelMenu.Controls.Add(this.IconButtonHome);
             this.PanelMenu.Controls.Add(this.PanelLogo);
             this.PanelMenu.Dock = System.Windows.Forms.DockStyle.Left;
@@ -343,9 +343,9 @@
             this.label1.ForeColor = System.Drawing.Color.White;
             this.label1.Location = new System.Drawing.Point(48, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(97, 12);
+            this.label1.Size = new System.Drawing.Size(91, 12);
             this.label1.TabIndex = 117;
-            this.label1.Text = "4SG4RD TEAM - 4EVER";
+            this.label1.Text = "4SG4RD TEAM - 2021";
             // 
             // IconButtonHelp
             // 
@@ -472,30 +472,30 @@
             this.IconButtonBifrost.UseVisualStyleBackColor = true;
             this.IconButtonBifrost.Click += new System.EventHandler(this.IconButtonBifrost_Click);
             // 
-            // IconButtonClans
+            // IconButtonChecker
             // 
-            this.IconButtonClans.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconButtonClans.Dock = System.Windows.Forms.DockStyle.Top;
-            this.IconButtonClans.FlatAppearance.BorderSize = 0;
-            this.IconButtonClans.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonClans.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IconButtonClans.ForeColor = System.Drawing.Color.White;
-            this.IconButtonClans.IconChar = FontAwesome.Sharp.IconChar.Jedi;
-            this.IconButtonClans.IconColor = System.Drawing.Color.White;
-            this.IconButtonClans.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonClans.IconSize = 24;
-            this.IconButtonClans.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IconButtonClans.Location = new System.Drawing.Point(0, 168);
-            this.IconButtonClans.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.IconButtonClans.Name = "IconButtonClans";
-            this.IconButtonClans.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
-            this.IconButtonClans.Size = new System.Drawing.Size(220, 40);
-            this.IconButtonClans.TabIndex = 2;
-            this.IconButtonClans.Text = "Clanes";
-            this.IconButtonClans.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IconButtonClans.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.IconButtonClans.UseVisualStyleBackColor = true;
-            this.IconButtonClans.Click += new System.EventHandler(this.IconButtonAesir_Click);
+            this.IconButtonChecker.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonChecker.Dock = System.Windows.Forms.DockStyle.Top;
+            this.IconButtonChecker.FlatAppearance.BorderSize = 0;
+            this.IconButtonChecker.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconButtonChecker.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IconButtonChecker.ForeColor = System.Drawing.Color.White;
+            this.IconButtonChecker.IconChar = FontAwesome.Sharp.IconChar.Jedi;
+            this.IconButtonChecker.IconColor = System.Drawing.Color.White;
+            this.IconButtonChecker.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.IconButtonChecker.IconSize = 24;
+            this.IconButtonChecker.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonChecker.Location = new System.Drawing.Point(0, 168);
+            this.IconButtonChecker.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
+            this.IconButtonChecker.Name = "IconButtonChecker";
+            this.IconButtonChecker.Padding = new System.Windows.Forms.Padding(10, 0, 20, 0);
+            this.IconButtonChecker.Size = new System.Drawing.Size(220, 40);
+            this.IconButtonChecker.TabIndex = 2;
+            this.IconButtonChecker.Text = "Clanes";
+            this.IconButtonChecker.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonChecker.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.IconButtonChecker.UseVisualStyleBackColor = true;
+            this.IconButtonChecker.Click += new System.EventHandler(this.IconButtonAesir_Click);
             // 
             // IconButtonHome
             // 
@@ -716,7 +716,7 @@
         private FontAwesome.Sharp.IconButton IconButtonClose;
         private FontAwesome.Sharp.IconButton IconButtonHome;
         private FontAwesome.Sharp.IconButton IconButtonRefillBalance;
-        private FontAwesome.Sharp.IconButton IconButtonClans;
+        private FontAwesome.Sharp.IconButton IconButtonChecker;
         private FontAwesome.Sharp.IconButton IconButtonHelp;
         private FontAwesome.Sharp.IconButton IconButtonSettings;
         private System.Windows.Forms.Panel PanelInfo;

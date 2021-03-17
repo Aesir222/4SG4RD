@@ -58,8 +58,8 @@ namespace Asgard
 
         private void IconButtonOdin_Click(object sender, EventArgs e)
         {
-            string url = "https://www.youtube.com/embed/7SLl5x35wdo";
-            string name = "Como Registrarse En ASGARD CHECKER.";
+            string url = "https://www.youtube.com/embed/f0X9ZtQ8DQU";
+            string name = "Zona Vip Asgard Checker.";
             Color color = Color.DarkRed;
             OpenForm<Video1>(Id, Token, name, url, color);
         }
