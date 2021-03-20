@@ -11,16 +11,10 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Media;
-using System.Net;
-using System.Reflection.Emit;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.IO;
-using System.Runtime.InteropServices;
 
 namespace Asgard
 {
@@ -601,7 +595,7 @@ namespace Asgard
                     IconButtonGenerarClick = true;
                     await ConsoleProgressGeneral("Iniciando Motor del Generador.", 0);
                     await GenerateCreditCards();
-                    await ConsoleProgressGeneral("Tarjetas de credito generadas correctamente.", 100, "Success");
+                    await ConsoleProgressGeneral("Material de pago generado correctamente.", 100, "Success");
                     await ConsoleProgressGeneral("BALDER DIOS DE LA PAZ.", 0);
                     IconButtonGenerarStop.Hide();
                     iconButton.IconColor = Color.Black;
@@ -1921,7 +1915,7 @@ namespace Asgard
             bool item = false;
             try
             {
-                await browser.Screenshot("1.Item");
+                //await browser.Screenshot("1.Item");
                 await ConsoleProgressGeneral("Estableciendo registro de regalos.", 10);
                 await browser.DisableAlerts();
                 string clickItemInStock = @"let allItems = document.querySelectorAll('#app > div > div > div > div:nth-child(2) > div:nth-child(2) > div > div > div:nth-child(2) > a:nth-child(2)');
@@ -1952,7 +1946,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("2.SelectSize");
+                //await browser.Screenshot("2.SelectSize");
                 await ConsoleProgressGeneral("Reajustando peso emocional.", 15);
                 await browser.DisableAlerts();
                 string clickRandomSize = @"let allSizes = document.querySelectorAll('#content > div > div > section > section.grid--direction-row.grid--justify-start.grid--wrap.grid__column.grid__col-md-4.grid__col-sm-12.grid--order-3 > section > div:nth-child(7) > div > div > button');
@@ -1986,7 +1980,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("3.SelectLength");
+                //await browser.Screenshot("3.SelectLength");
                 await ConsoleProgressGeneral("Calculando tasa de cambio.", 20);
                 await browser.DisableAlerts();
                 string clickItemInStock = @"let allLengths = document.querySelectorAll('#content > div > div > section > section.grid--direction-row.grid--justify-start.grid--wrap.grid__column.grid__col-md-4.grid__col-sm-12.grid--order-3 > section > div:nth-child(7) > div > div > button');
@@ -2010,7 +2004,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("4.AddToBag");
+                //await browser.Screenshot("4.AddToBag");
                 await ConsoleProgressGeneral("Activando umbral de desviación.", 25);
                 await browser.DisableAlerts();
                 string clickAddToBag = @"document.querySelector('#content > div > div > section > section.grid--direction-row.grid--justify-start.grid--wrap.grid__column.grid__col-md-4.grid__col-sm-12.grid--order-3 > section > button').click();";
@@ -2031,7 +2025,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("5.GoToBag");
+                //await browser.Screenshot("5.GoToBag");
                 await ConsoleProgressGeneral("Requisando donaciones del alumnado.", 30);
                 browser.Load("https://www.express.com/bag");
                 await browser.DisableAlerts();
@@ -2051,7 +2045,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("6.ContinueToCheckout");
+                //await browser.Screenshot("6.ContinueToCheckout");
                 await ConsoleProgressGeneral("Saborizando segundos platos.", 35);
                 await browser.DisableAlerts();
                 await browser.ExecuteScript("document.querySelector('#continue-to-checkout').click()");
@@ -2073,7 +2067,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("7.CheckoutAsGuest");
+                //await browser.Screenshot("7.CheckoutAsGuest");
                 await ConsoleProgressGeneral("Concienciando de que \"somos una piña\".", 40);
                 await browser.DisableAlerts();
                 await browser.Click("section[name=loginFormContainer] > section > section:nth-child(2) > section > button");
@@ -2093,7 +2087,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("8.ContactInformation");
+                //await browser.Screenshot("8.ContactInformation");
                 await ConsoleProgressGeneral("Prediciendo prevalencia de los charcos.", 45);
                 await browser.DisableAlerts();
                 string email = Faker.Internet.Email();
@@ -2126,7 +2120,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("9.ShippingBillingAddress");
+                //await browser.Screenshot("9.ShippingBillingAddress");
                 await ConsoleProgressGeneral("Iniciando intrigas viles.", 50);
                 await browser.DisableAlerts();
                 string email = Faker.Internet.Email();
@@ -2150,7 +2144,7 @@ namespace Asgard
                 await browser.ExecuteScript("document.querySelector('#shippingAndBillingForm > div:nth-child(3) > button').click()");
             }
             catch (Exception) { }
-            await browser.Screenshot("9.1.ShippingBillingAddressFill");
+            //await browser.Screenshot("9.1.ShippingBillingAddressFill");
             //#shippingAndBillingForm > div:nth-child(3) > button
             bool buttonDeliveryOptions = await browser.ElementVisible("#delivery-and-pickup > div > div:nth-child(2) > button", "ExceptionShippingBillingAddress");
             if (buttonDeliveryOptions)
@@ -2165,7 +2159,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("10.DeliveryOptions");
+                //await browser.Screenshot("10.DeliveryOptions");
                 await ConsoleProgressGeneral("Escribiendo textos del arranque.", 55);
                 await browser.DisableAlerts();
                 await browser.ExecuteScript("document.querySelector('#delivery-and-pickup > div > div:nth-child(2) > button').click()");
@@ -2175,7 +2169,7 @@ namespace Asgard
             bool inputCreditCard = await browser.ElementVisible("#creditCardNumberInput", "ExceptionShippingBillingAddress");
             if (inputCreditCard)
             {
-                await browser.Screenshot("11.Last");
+                //await browser.Screenshot("11.Last");
                 return await Last();
             }
             await ConsoleProgressGeneral("Escribiendo textos del arranque. ¡Fallo! ", 55, "Fail");
@@ -2190,7 +2184,7 @@ namespace Asgard
         //    {
         //        try
         //        {
-        //            await browser.Screenshot("6.SetOTP");
+        //            //await browser.Screenshot("6.SetOTP");
         //            await ConsoleProgressGeneral("Iniciando intrigas viles.", 50);
         //            await browser.SendKeys("input[name=code]", EmailOTP);
         //            await browser.Click("#a-autoid-0");
@@ -2213,7 +2207,7 @@ namespace Asgard
         //{
         //    try
         //    {
-        //        await browser.Screenshot("7.ChangeEmail");
+        //        //await browser.Screenshot("7.ChangeEmail");
         //        await ConsoleProgressGeneral("Escribiendo textos del arranque.", 55);
         //        await browser.Click("a.a-link-normal.cvf-widget-link-claim-change");
         //    }
@@ -2235,7 +2229,7 @@ namespace Asgard
         //    {
         //        try
         //        {
-        //            await browser.Screenshot("8.Phone");
+        //            //await browser.Screenshot("8.Phone");
         //            await ConsoleProgressGeneral("Preparando pitos y flautas.", 60);
         //            PanelPhone.Show();
         //            await IconButtonPhone.OnClickAsync();
@@ -2278,7 +2272,7 @@ namespace Asgard
         //{
         //    try
         //    {
-        //        await browser.Screenshot("10.PhoneOTP");
+        //        //await browser.Screenshot("10.PhoneOTP");
         //        await ConsoleProgressGeneral("Generando Algoritmo de cotorreo.", 65);
         //        PanelOTP.Show();
         //        await IconButtonOTP.OnClickAsync();
@@ -2300,7 +2294,7 @@ namespace Asgard
         //    bool inputAccountHolderName = await browser.ElementVisible("input[name=ppw-accountHolderName]", "ExceptionPhoneOTP");
         //    if (inputAccountHolderName)
         //    {
-        //        await browser.Screenshot("11.Algo");
+        //        //await browser.Screenshot("11.Algo");
         //        //return true;
         //    }
         //    else
@@ -2329,7 +2323,7 @@ namespace Asgard
         //    {
         //        try
         //        {
-        //            await browser.Screenshot("11.SignIn");
+        //            //await browser.Screenshot("11.SignIn");
         //            await ConsoleProgressGeneral("Incremento de las conductas laborales.", 70);
         //            await browser.SendKeys("#ap_password", Password);
         //            await browser.Click("#signInSubmit");
@@ -2378,7 +2372,7 @@ namespace Asgard
         //            }
 
         //            await Task.Delay(10000);
-        //            await browser.Screenshot("16.resolveCaptcha2");
+        //            //await browser.Screenshot("16.resolveCaptcha2");
         //            await browser.GetSource();
         //        }
         //        await ConsoleProgressGeneral("Incremento de las conductas laborales. ¡Fallo!", 70, "Fail");
@@ -2391,17 +2385,17 @@ namespace Asgard
         //{
         //    try
         //    {
-        //        await browser.Screenshot("12.resolveCaptcha2");
+        //        //await browser.Screenshot("12.resolveCaptcha2");
         //        await ConsoleProgressGeneral("Prediciendo prevalencia de los charcos.", 75);
         //        await browser.SendKeys("#ap_password", Password);
-        //        await browser.Screenshot("13.resolveCaptcha2");
+        //        //await browser.Screenshot("13.resolveCaptcha2");
         //        await browser.SendKeys("#auth-captcha-guess", textCaptchaResolve2);
-        //        await browser.Screenshot("14.resolveCaptcha2");
+        //        //await browser.Screenshot("14.resolveCaptcha2");
         //        string clickSignIn = "document.querySelector('#signInSubmit').click();";
         //        await browser.ExecuteScript(clickSignIn);
         //    }
         //    catch (Exception) { }
-        //    await browser.Screenshot("15.resolveCaptcha2");
+        //    //await browser.Screenshot("15.resolveCaptcha2");
         //}
         #endregion
 
@@ -2409,7 +2403,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("11.Last");
+                //await browser.Screenshot("11.Last");
                 await ConsoleProgressGeneral("Preparando pitos y flautas.", 60);
                 await browser.DisableAlerts();
                 string listLiveCreditCard = string.Empty;
@@ -2435,6 +2429,7 @@ namespace Asgard
                             bool forseti = await Forseti();
                             if (forseti)
                             {
+                                await browser.Scroll(0);
                                 await browser.Screenshot(x.ToString() + ".Valhalla_" + number);
                                 await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
@@ -2474,7 +2469,7 @@ namespace Asgard
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
                                         listDieCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                        //        await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
+                                        //  await Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                     }
                                     else
                                     {
@@ -2560,7 +2555,7 @@ namespace Asgard
             try
             {
                 //  await Task.Delay(5000);
-                await browser.Screenshot("12.Card");
+                //await browser.Screenshot("12.Card");
                 await ConsoleProgressDetail("Prediciendo prevalencia de los charcos.", 20);
                 await browser.DisableAlerts();
                 await browser.SendKeys("#creditCardNumberInput", number);
@@ -2591,11 +2586,11 @@ namespace Asgard
                 await Task.Delay(500);
                 await browser.SendKeys("#credit-card-list > span > li > div > div > div > span > div:nth-child(2) > div:nth-child(1) > div > div > input[type=text]", cvv);
                 await Task.Delay(1000);
-                await browser.Screenshot("13.FillCC");
+                //await browser.Screenshot("13.FillCC");
                 string buttonPlaceOrder = "document.querySelector('#payment > div > form > section > section > div > button').click();";
                 await browser.ExecuteScript(buttonPlaceOrder);
                 // await Task.Delay(10000);
-                await browser.Screenshot("14.FillCC-Diemessage");
+                //await browser.Screenshot("14.FillCC-Diemessage");
                 //return true;
             }
             catch (Exception) { }
@@ -2620,7 +2615,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("11.LatestData");
+                //await browser.Screenshot("11.LatestData");
                 await ConsoleProgressDetail("Insuflando furia subatómica.", 40);
 
                 bool hellheim = await browser.ElementInnerTextContent("#payment > div > div:nth-child(1) > div > section > section > div", "Please try again.", "ExceptionForsetiHellheim");
@@ -2691,7 +2686,7 @@ namespace Asgard
                     await browser.SendKeyCode(0x08);
                 }
                 await Task.Delay(500);
-                //await browser.Screenshot("paymentDie");
+                ////await browser.Screenshot("paymentDie");
 
             }
             catch (Exception) { }

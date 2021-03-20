@@ -46,12 +46,6 @@
             this.IconButtonGenerar = new FontAwesome.Sharp.IconButton();
             this.LabelHelheim = new System.Windows.Forms.Label();
             this.PanelValhalla = new System.Windows.Forms.Panel();
-            this.PanelValkyrieLive = new System.Windows.Forms.Panel();
-            this.IconButtonValkyrieStop = new FontAwesome.Sharp.IconButton();
-            this.LabelCountValkyrieLive = new System.Windows.Forms.Label();
-            this.IconButtonValkyrieStart = new FontAwesome.Sharp.IconButton();
-            this.TextBoxValkyrieLive = new System.Windows.Forms.TextBox();
-            this.LabelValkyrieLive = new System.Windows.Forms.Label();
             this.LabelCountValhalla = new System.Windows.Forms.Label();
             this.IconButtonStop = new FontAwesome.Sharp.IconButton();
             this.TextBoxValhalla = new System.Windows.Forms.TextBox();
@@ -62,11 +56,6 @@
             this.LabelTitleConsole = new System.Windows.Forms.Label();
             this.CircularProgressBarDetail = new CircularProgressBar.CircularProgressBar();
             this.PanelHellheim = new System.Windows.Forms.Panel();
-            this.PanelValkyrieDie = new System.Windows.Forms.Panel();
-            this.IconButtonValkyrieClear = new FontAwesome.Sharp.IconButton();
-            this.LabelCountValkyrieDie = new System.Windows.Forms.Label();
-            this.TextBoxValkyrieDie = new System.Windows.Forms.TextBox();
-            this.LabelValkyrieDie = new System.Windows.Forms.Label();
             this.IconButtonClear = new FontAwesome.Sharp.IconButton();
             this.LabelCountCreditCards = new System.Windows.Forms.Label();
             this.TextBoxCreditCards = new System.Windows.Forms.TextBox();
@@ -97,11 +86,6 @@
             this.IconButtonClose = new FontAwesome.Sharp.IconButton();
             this.labelTitleToolBar = new System.Windows.Forms.Label();
             this.PanelCreditCards = new System.Windows.Forms.Panel();
-            this.PanelValkyrie = new System.Windows.Forms.Panel();
-            this.LabelCountValkyrie = new System.Windows.Forms.Label();
-            this.IconButtonValkyrieVerify = new FontAwesome.Sharp.IconButton();
-            this.TextBoxValkyrie = new System.Windows.Forms.TextBox();
-            this.LabelValkyrie = new System.Windows.Forms.Label();
             this.IconButtonVerify = new FontAwesome.Sharp.IconButton();
             this.PanelConfirm = new System.Windows.Forms.Panel();
             this.LabelConfirmTitle = new System.Windows.Forms.Label();
@@ -122,12 +106,26 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.iconPictureBox2 = new FontAwesome.Sharp.IconPictureBox();
+            this.PanelValkyrieDie = new System.Windows.Forms.Panel();
+            this.IconButtonValkyrieClear = new FontAwesome.Sharp.IconButton();
+            this.LabelCountValkyrieDie = new System.Windows.Forms.Label();
+            this.TextBoxValkyrieDie = new System.Windows.Forms.TextBox();
+            this.LabelValkyrieDie = new System.Windows.Forms.Label();
+            this.PanelValkyrieLive = new System.Windows.Forms.Panel();
+            this.IconButtonValkyrieStop = new FontAwesome.Sharp.IconButton();
+            this.LabelCountValkyrieLive = new System.Windows.Forms.Label();
+            this.IconButtonValkyrieStart = new FontAwesome.Sharp.IconButton();
+            this.TextBoxValkyrieLive = new System.Windows.Forms.TextBox();
+            this.LabelValkyrieLive = new System.Windows.Forms.Label();
+            this.PanelValkyrie = new System.Windows.Forms.Panel();
+            this.LabelCountValkyrie = new System.Windows.Forms.Label();
+            this.IconButtonValkyrieVerify = new FontAwesome.Sharp.IconButton();
+            this.TextBoxValkyrie = new System.Windows.Forms.TextBox();
+            this.LabelValkyrie = new System.Windows.Forms.Label();
             this.PanelGenerator.SuspendLayout();
             this.PanelValhalla.SuspendLayout();
-            this.PanelValkyrieLive.SuspendLayout();
             this.PanelConsole.SuspendLayout();
             this.PanelHellheim.SuspendLayout();
-            this.PanelValkyrieDie.SuspendLayout();
             this.PanelInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox5)).BeginInit();
@@ -137,7 +135,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.PanelTitleOdin.SuspendLayout();
             this.PanelCreditCards.SuspendLayout();
-            this.PanelValkyrie.SuspendLayout();
             this.PanelConfirm.SuspendLayout();
             this.PanelConfirmHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IconPictureBoxConfirmFavicon)).BeginInit();
@@ -145,6 +142,9 @@
             this.PanelBlockGateClose.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
+            this.PanelValkyrieDie.SuspendLayout();
+            this.PanelValkyrieLive.SuspendLayout();
+            this.PanelValkyrie.SuspendLayout();
             this.SuspendLayout();
             // 
             // LabelMonth
@@ -375,7 +375,7 @@
             this.IconButtonGenerarStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IconButtonGenerarStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.IconButtonGenerarStop.ForeColor = System.Drawing.Color.Black;
-            this.IconButtonGenerarStop.IconChar = FontAwesome.Sharp.IconChar.HandMiddleFinger;
+            this.IconButtonGenerarStop.IconChar = FontAwesome.Sharp.IconChar.HandPaper;
             this.IconButtonGenerarStop.IconColor = System.Drawing.Color.Black;
             this.IconButtonGenerarStop.IconFont = FontAwesome.Sharp.IconFont.Auto;
             this.IconButtonGenerarStop.IconSize = 24;
@@ -428,7 +428,6 @@
             // 
             this.PanelValhalla.BackColor = System.Drawing.Color.Transparent;
             this.PanelValhalla.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelValhalla.Controls.Add(this.PanelValkyrieLive);
             this.PanelValhalla.Controls.Add(this.LabelCountValhalla);
             this.PanelValhalla.Controls.Add(this.IconButtonStop);
             this.PanelValhalla.Controls.Add(this.TextBoxValhalla);
@@ -439,106 +438,6 @@
             this.PanelValhalla.Size = new System.Drawing.Size(243, 234);
             this.PanelValhalla.TabIndex = 125;
             this.PanelValhalla.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelValhalla_Paint);
-            // 
-            // PanelValkyrieLive
-            // 
-            this.PanelValkyrieLive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
-            this.PanelValkyrieLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelValkyrieLive.Controls.Add(this.IconButtonValkyrieStop);
-            this.PanelValkyrieLive.Controls.Add(this.LabelCountValkyrieLive);
-            this.PanelValkyrieLive.Controls.Add(this.IconButtonValkyrieStart);
-            this.PanelValkyrieLive.Controls.Add(this.TextBoxValkyrieLive);
-            this.PanelValkyrieLive.Controls.Add(this.LabelValkyrieLive);
-            this.PanelValkyrieLive.Location = new System.Drawing.Point(0, 0);
-            this.PanelValkyrieLive.Name = "PanelValkyrieLive";
-            this.PanelValkyrieLive.Padding = new System.Windows.Forms.Padding(10);
-            this.PanelValkyrieLive.Size = new System.Drawing.Size(242, 234);
-            this.PanelValkyrieLive.TabIndex = 128;
-            this.PanelValkyrieLive.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelValkyrieLive_Paint);
-            // 
-            // IconButtonValkyrieStop
-            // 
-            this.IconButtonValkyrieStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.IconButtonValkyrieStop.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconButtonValkyrieStop.FlatAppearance.BorderSize = 0;
-            this.IconButtonValkyrieStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IconButtonValkyrieStop.ForeColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieStop.IconChar = FontAwesome.Sharp.IconChar.HandMiddleFinger;
-            this.IconButtonValkyrieStop.IconColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieStop.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonValkyrieStop.IconSize = 24;
-            this.IconButtonValkyrieStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IconButtonValkyrieStop.Location = new System.Drawing.Point(21, 190);
-            this.IconButtonValkyrieStop.Name = "IconButtonValkyrieStop";
-            this.IconButtonValkyrieStop.Size = new System.Drawing.Size(200, 30);
-            this.IconButtonValkyrieStop.TabIndex = 104;
-            this.IconButtonValkyrieStop.Text = "DETENER";
-            this.IconButtonValkyrieStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.IconButtonValkyrieStop.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.IconButtonValkyrieStop.UseVisualStyleBackColor = false;
-            this.IconButtonValkyrieStop.Click += new System.EventHandler(this.IconButtonValkyrieStop_Click);
-            // 
-            // LabelCountValkyrieLive
-            // 
-            this.LabelCountValkyrieLive.AutoSize = true;
-            this.LabelCountValkyrieLive.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelCountValkyrieLive.ForeColor = System.Drawing.Color.White;
-            this.LabelCountValkyrieLive.Location = new System.Drawing.Point(18, 16);
-            this.LabelCountValkyrieLive.Name = "LabelCountValkyrieLive";
-            this.LabelCountValkyrieLive.Size = new System.Drawing.Size(13, 13);
-            this.LabelCountValkyrieLive.TabIndex = 103;
-            this.LabelCountValkyrieLive.Text = "0";
-            // 
-            // IconButtonValkyrieStart
-            // 
-            this.IconButtonValkyrieStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.IconButtonValkyrieStart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconButtonValkyrieStart.FlatAppearance.BorderSize = 0;
-            this.IconButtonValkyrieStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieStart.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IconButtonValkyrieStart.ForeColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieStart.IconChar = FontAwesome.Sharp.IconChar.SignInAlt;
-            this.IconButtonValkyrieStart.IconColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonValkyrieStart.IconSize = 24;
-            this.IconButtonValkyrieStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IconButtonValkyrieStart.Location = new System.Drawing.Point(21, 190);
-            this.IconButtonValkyrieStart.Name = "IconButtonValkyrieStart";
-            this.IconButtonValkyrieStart.Size = new System.Drawing.Size(200, 30);
-            this.IconButtonValkyrieStart.TabIndex = 102;
-            this.IconButtonValkyrieStart.Text = "RAGNARÖK";
-            this.IconButtonValkyrieStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.IconButtonValkyrieStart.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.IconButtonValkyrieStart.UseVisualStyleBackColor = false;
-            this.IconButtonValkyrieStart.Click += new System.EventHandler(this.IconButtonValkyrieStart_Click);
-            // 
-            // TextBoxValkyrieLive
-            // 
-            this.TextBoxValkyrieLive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
-            this.TextBoxValkyrieLive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TextBoxValkyrieLive.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxValkyrieLive.ForeColor = System.Drawing.Color.White;
-            this.TextBoxValkyrieLive.Location = new System.Drawing.Point(21, 38);
-            this.TextBoxValkyrieLive.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.TextBoxValkyrieLive.Multiline = true;
-            this.TextBoxValkyrieLive.Name = "TextBoxValkyrieLive";
-            this.TextBoxValkyrieLive.ReadOnly = true;
-            this.TextBoxValkyrieLive.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBoxValkyrieLive.Size = new System.Drawing.Size(200, 135);
-            this.TextBoxValkyrieLive.TabIndex = 101;
-            this.TextBoxValkyrieLive.TextChanged += new System.EventHandler(this.TextBoxValkyrieLive_TextChanged);
-            // 
-            // LabelValkyrieLive
-            // 
-            this.LabelValkyrieLive.AutoSize = true;
-            this.LabelValkyrieLive.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelValkyrieLive.ForeColor = System.Drawing.Color.White;
-            this.LabelValkyrieLive.Location = new System.Drawing.Point(82, 10);
-            this.LabelValkyrieLive.Name = "LabelValkyrieLive";
-            this.LabelValkyrieLive.Size = new System.Drawing.Size(78, 17);
-            this.LabelValkyrieLive.TabIndex = 100;
-            this.LabelValkyrieLive.Text = "ESCOGIDAS";
             // 
             // LabelCountValhalla
             // 
@@ -692,7 +591,6 @@
             // 
             this.PanelHellheim.BackColor = System.Drawing.Color.Transparent;
             this.PanelHellheim.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelHellheim.Controls.Add(this.PanelValkyrieDie);
             this.PanelHellheim.Controls.Add(this.IconButtonClear);
             this.PanelHellheim.Controls.Add(this.LabelCountHellheim);
             this.PanelHellheim.Controls.Add(this.TextBoxHelheim);
@@ -703,82 +601,6 @@
             this.PanelHellheim.Size = new System.Drawing.Size(243, 234);
             this.PanelHellheim.TabIndex = 124;
             this.PanelHellheim.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelHellheim_Paint);
-            // 
-            // PanelValkyrieDie
-            // 
-            this.PanelValkyrieDie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
-            this.PanelValkyrieDie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelValkyrieDie.Controls.Add(this.IconButtonValkyrieClear);
-            this.PanelValkyrieDie.Controls.Add(this.LabelCountValkyrieDie);
-            this.PanelValkyrieDie.Controls.Add(this.TextBoxValkyrieDie);
-            this.PanelValkyrieDie.Controls.Add(this.LabelValkyrieDie);
-            this.PanelValkyrieDie.Location = new System.Drawing.Point(0, 0);
-            this.PanelValkyrieDie.Name = "PanelValkyrieDie";
-            this.PanelValkyrieDie.Padding = new System.Windows.Forms.Padding(10);
-            this.PanelValkyrieDie.Size = new System.Drawing.Size(243, 234);
-            this.PanelValkyrieDie.TabIndex = 127;
-            this.PanelValkyrieDie.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelValkyrieDie_Paint);
-            // 
-            // IconButtonValkyrieClear
-            // 
-            this.IconButtonValkyrieClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.IconButtonValkyrieClear.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconButtonValkyrieClear.FlatAppearance.BorderSize = 0;
-            this.IconButtonValkyrieClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieClear.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IconButtonValkyrieClear.ForeColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
-            this.IconButtonValkyrieClear.IconColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonValkyrieClear.IconSize = 24;
-            this.IconButtonValkyrieClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IconButtonValkyrieClear.Location = new System.Drawing.Point(21, 190);
-            this.IconButtonValkyrieClear.Name = "IconButtonValkyrieClear";
-            this.IconButtonValkyrieClear.Size = new System.Drawing.Size(200, 30);
-            this.IconButtonValkyrieClear.TabIndex = 104;
-            this.IconButtonValkyrieClear.Text = "LIMPIAR";
-            this.IconButtonValkyrieClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.IconButtonValkyrieClear.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.IconButtonValkyrieClear.UseVisualStyleBackColor = false;
-            this.IconButtonValkyrieClear.Click += new System.EventHandler(this.IconButtonValkyrieClear_Click);
-            // 
-            // LabelCountValkyrieDie
-            // 
-            this.LabelCountValkyrieDie.AutoSize = true;
-            this.LabelCountValkyrieDie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelCountValkyrieDie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.LabelCountValkyrieDie.Location = new System.Drawing.Point(18, 16);
-            this.LabelCountValkyrieDie.Name = "LabelCountValkyrieDie";
-            this.LabelCountValkyrieDie.Size = new System.Drawing.Size(13, 13);
-            this.LabelCountValkyrieDie.TabIndex = 103;
-            this.LabelCountValkyrieDie.Text = "0";
-            // 
-            // TextBoxValkyrieDie
-            // 
-            this.TextBoxValkyrieDie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
-            this.TextBoxValkyrieDie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TextBoxValkyrieDie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxValkyrieDie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.TextBoxValkyrieDie.Location = new System.Drawing.Point(21, 38);
-            this.TextBoxValkyrieDie.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.TextBoxValkyrieDie.Multiline = true;
-            this.TextBoxValkyrieDie.Name = "TextBoxValkyrieDie";
-            this.TextBoxValkyrieDie.ReadOnly = true;
-            this.TextBoxValkyrieDie.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBoxValkyrieDie.Size = new System.Drawing.Size(200, 135);
-            this.TextBoxValkyrieDie.TabIndex = 102;
-            this.TextBoxValkyrieDie.TextChanged += new System.EventHandler(this.TextBoxValkyrieDie_TextChanged);
-            // 
-            // LabelValkyrieDie
-            // 
-            this.LabelValkyrieDie.AutoSize = true;
-            this.LabelValkyrieDie.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelValkyrieDie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.LabelValkyrieDie.Location = new System.Drawing.Point(75, 10);
-            this.LabelValkyrieDie.Name = "LabelValkyrieDie";
-            this.LabelValkyrieDie.Size = new System.Drawing.Size(92, 17);
-            this.LabelValkyrieDie.TabIndex = 101;
-            this.LabelValkyrieDie.Text = "RECHAZADAS";
             // 
             // IconButtonClear
             // 
@@ -834,11 +656,11 @@
             this.LabelCreditCards.AutoSize = true;
             this.LabelCreditCards.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelCreditCards.ForeColor = System.Drawing.Color.White;
-            this.LabelCreditCards.Location = new System.Drawing.Point(87, 10);
+            this.LabelCreditCards.Location = new System.Drawing.Point(57, 10);
             this.LabelCreditCards.Name = "LabelCreditCards";
-            this.LabelCreditCards.Size = new System.Drawing.Size(65, 17);
+            this.LabelCreditCards.Size = new System.Drawing.Size(128, 17);
             this.LabelCreditCards.TabIndex = 92;
-            this.LabelCreditCards.Text = "TARJETAS";
+            this.LabelCreditCards.Text = "MATERIAL DE PAGO";
             // 
             // PanelInformation
             // 
@@ -1063,6 +885,7 @@
             // 
             this.IconButtonValkyrie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
             this.IconButtonValkyrie.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonValkyrie.Enabled = false;
             this.IconButtonValkyrie.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IconButtonValkyrie.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -1076,7 +899,7 @@
             this.IconButtonValkyrie.Name = "IconButtonValkyrie";
             this.IconButtonValkyrie.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrie.TabIndex = 90;
-            this.IconButtonValkyrie.Text = "VALKIRIAS";
+            this.IconButtonValkyrie.Text = "VALQUIRIAS";
             this.IconButtonValkyrie.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonValkyrie.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.IconButtonValkyrie.UseVisualStyleBackColor = false;
@@ -1118,7 +941,7 @@
             this.IconButtonBack.IconChar = FontAwesome.Sharp.IconChar.ArrowCircleLeft;
             this.IconButtonBack.IconColor = System.Drawing.Color.Black;
             this.IconButtonBack.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonBack.IconSize = 18;
+            this.IconButtonBack.IconSize = 24;
             this.IconButtonBack.Location = new System.Drawing.Point(4, 3);
             this.IconButtonBack.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.IconButtonBack.Name = "IconButtonBack";
@@ -1138,7 +961,7 @@
             this.IconButtonClose.IconChar = FontAwesome.Sharp.IconChar.Times;
             this.IconButtonClose.IconColor = System.Drawing.Color.Black;
             this.IconButtonClose.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonClose.IconSize = 18;
+            this.IconButtonClose.IconSize = 24;
             this.IconButtonClose.Location = new System.Drawing.Point(701, 2);
             this.IconButtonClose.Margin = new System.Windows.Forms.Padding(0);
             this.IconButtonClose.Name = "IconButtonClose";
@@ -1162,7 +985,6 @@
             // 
             this.PanelCreditCards.BackColor = System.Drawing.Color.Transparent;
             this.PanelCreditCards.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelCreditCards.Controls.Add(this.PanelValkyrie);
             this.PanelCreditCards.Controls.Add(this.LabelCountCreditCards);
             this.PanelCreditCards.Controls.Add(this.IconButtonVerify);
             this.PanelCreditCards.Controls.Add(this.TextBoxCreditCards);
@@ -1173,81 +995,6 @@
             this.PanelCreditCards.Size = new System.Drawing.Size(243, 234);
             this.PanelCreditCards.TabIndex = 122;
             this.PanelCreditCards.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelCreditCards_Paint);
-            // 
-            // PanelValkyrie
-            // 
-            this.PanelValkyrie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
-            this.PanelValkyrie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelValkyrie.Controls.Add(this.LabelCountValkyrie);
-            this.PanelValkyrie.Controls.Add(this.IconButtonValkyrieVerify);
-            this.PanelValkyrie.Controls.Add(this.TextBoxValkyrie);
-            this.PanelValkyrie.Controls.Add(this.LabelValkyrie);
-            this.PanelValkyrie.Location = new System.Drawing.Point(0, 0);
-            this.PanelValkyrie.Name = "PanelValkyrie";
-            this.PanelValkyrie.Padding = new System.Windows.Forms.Padding(10);
-            this.PanelValkyrie.Size = new System.Drawing.Size(243, 234);
-            this.PanelValkyrie.TabIndex = 126;
-            this.PanelValkyrie.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelValkyrie_Paint);
-            // 
-            // LabelCountValkyrie
-            // 
-            this.LabelCountValkyrie.AutoSize = true;
-            this.LabelCountValkyrie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelCountValkyrie.ForeColor = System.Drawing.Color.Silver;
-            this.LabelCountValkyrie.Location = new System.Drawing.Point(21, 16);
-            this.LabelCountValkyrie.Name = "LabelCountValkyrie";
-            this.LabelCountValkyrie.Size = new System.Drawing.Size(13, 13);
-            this.LabelCountValkyrie.TabIndex = 95;
-            this.LabelCountValkyrie.Text = "0";
-            // 
-            // IconButtonValkyrieVerify
-            // 
-            this.IconButtonValkyrieVerify.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
-            this.IconButtonValkyrieVerify.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.IconButtonValkyrieVerify.FlatAppearance.BorderSize = 0;
-            this.IconButtonValkyrieVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.IconButtonValkyrieVerify.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.IconButtonValkyrieVerify.ForeColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieVerify.IconChar = FontAwesome.Sharp.IconChar.Share;
-            this.IconButtonValkyrieVerify.IconColor = System.Drawing.Color.Black;
-            this.IconButtonValkyrieVerify.IconFont = FontAwesome.Sharp.IconFont.Auto;
-            this.IconButtonValkyrieVerify.IconSize = 24;
-            this.IconButtonValkyrieVerify.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.IconButtonValkyrieVerify.Location = new System.Drawing.Point(21, 190);
-            this.IconButtonValkyrieVerify.Name = "IconButtonValkyrieVerify";
-            this.IconButtonValkyrieVerify.Size = new System.Drawing.Size(200, 30);
-            this.IconButtonValkyrieVerify.TabIndex = 8;
-            this.IconButtonValkyrieVerify.Text = "VERIFICAR";
-            this.IconButtonValkyrieVerify.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.IconButtonValkyrieVerify.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.IconButtonValkyrieVerify.UseVisualStyleBackColor = false;
-            this.IconButtonValkyrieVerify.Click += new System.EventHandler(this.IconButtonValkyrieVerify_Click);
-            // 
-            // TextBoxValkyrie
-            // 
-            this.TextBoxValkyrie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
-            this.TextBoxValkyrie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TextBoxValkyrie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxValkyrie.ForeColor = System.Drawing.Color.Silver;
-            this.TextBoxValkyrie.Location = new System.Drawing.Point(21, 38);
-            this.TextBoxValkyrie.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.TextBoxValkyrie.Multiline = true;
-            this.TextBoxValkyrie.Name = "TextBoxValkyrie";
-            this.TextBoxValkyrie.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TextBoxValkyrie.Size = new System.Drawing.Size(200, 135);
-            this.TextBoxValkyrie.TabIndex = 7;
-            this.TextBoxValkyrie.TextChanged += new System.EventHandler(this.TextBoxValkyrie_TextChanged);
-            // 
-            // LabelValkyrie
-            // 
-            this.LabelValkyrie.AutoSize = true;
-            this.LabelValkyrie.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelValkyrie.ForeColor = System.Drawing.Color.White;
-            this.LabelValkyrie.Location = new System.Drawing.Point(50, 10);
-            this.LabelValkyrie.Name = "LabelValkyrie";
-            this.LabelValkyrie.Size = new System.Drawing.Size(142, 17);
-            this.LabelValkyrie.TabIndex = 92;
-            this.LabelValkyrie.Text = "VALQUIRIAS (PROXYS)";
             // 
             // IconButtonVerify
             // 
@@ -1537,21 +1284,264 @@
             this.iconPictureBox2.TabIndex = 21;
             this.iconPictureBox2.TabStop = false;
             // 
+            // PanelValkyrieDie
+            // 
+            this.PanelValkyrieDie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.PanelValkyrieDie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PanelValkyrieDie.Controls.Add(this.IconButtonValkyrieClear);
+            this.PanelValkyrieDie.Controls.Add(this.LabelCountValkyrieDie);
+            this.PanelValkyrieDie.Controls.Add(this.TextBoxValkyrieDie);
+            this.PanelValkyrieDie.Controls.Add(this.LabelValkyrieDie);
+            this.PanelValkyrieDie.Location = new System.Drawing.Point(238, 129);
+            this.PanelValkyrieDie.Name = "PanelValkyrieDie";
+            this.PanelValkyrieDie.Padding = new System.Windows.Forms.Padding(10);
+            this.PanelValkyrieDie.Size = new System.Drawing.Size(243, 234);
+            this.PanelValkyrieDie.TabIndex = 134;
+            // 
+            // IconButtonValkyrieClear
+            // 
+            this.IconButtonValkyrieClear.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.IconButtonValkyrieClear.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonValkyrieClear.FlatAppearance.BorderSize = 0;
+            this.IconButtonValkyrieClear.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconButtonValkyrieClear.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IconButtonValkyrieClear.ForeColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieClear.IconChar = FontAwesome.Sharp.IconChar.Broom;
+            this.IconButtonValkyrieClear.IconColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieClear.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.IconButtonValkyrieClear.IconSize = 24;
+            this.IconButtonValkyrieClear.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonValkyrieClear.Location = new System.Drawing.Point(21, 190);
+            this.IconButtonValkyrieClear.Name = "IconButtonValkyrieClear";
+            this.IconButtonValkyrieClear.Size = new System.Drawing.Size(200, 30);
+            this.IconButtonValkyrieClear.TabIndex = 104;
+            this.IconButtonValkyrieClear.Text = "LIMPIAR";
+            this.IconButtonValkyrieClear.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IconButtonValkyrieClear.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.IconButtonValkyrieClear.UseVisualStyleBackColor = false;
+            // 
+            // LabelCountValkyrieDie
+            // 
+            this.LabelCountValkyrieDie.AutoSize = true;
+            this.LabelCountValkyrieDie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelCountValkyrieDie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.LabelCountValkyrieDie.Location = new System.Drawing.Point(18, 16);
+            this.LabelCountValkyrieDie.Name = "LabelCountValkyrieDie";
+            this.LabelCountValkyrieDie.Size = new System.Drawing.Size(13, 13);
+            this.LabelCountValkyrieDie.TabIndex = 103;
+            this.LabelCountValkyrieDie.Text = "0";
+            // 
+            // TextBoxValkyrieDie
+            // 
+            this.TextBoxValkyrieDie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
+            this.TextBoxValkyrieDie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TextBoxValkyrieDie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxValkyrieDie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.TextBoxValkyrieDie.Location = new System.Drawing.Point(21, 38);
+            this.TextBoxValkyrieDie.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.TextBoxValkyrieDie.Multiline = true;
+            this.TextBoxValkyrieDie.Name = "TextBoxValkyrieDie";
+            this.TextBoxValkyrieDie.ReadOnly = true;
+            this.TextBoxValkyrieDie.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextBoxValkyrieDie.Size = new System.Drawing.Size(200, 135);
+            this.TextBoxValkyrieDie.TabIndex = 102;
+            // 
+            // LabelValkyrieDie
+            // 
+            this.LabelValkyrieDie.AutoSize = true;
+            this.LabelValkyrieDie.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelValkyrieDie.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.LabelValkyrieDie.Location = new System.Drawing.Point(75, 10);
+            this.LabelValkyrieDie.Name = "LabelValkyrieDie";
+            this.LabelValkyrieDie.Size = new System.Drawing.Size(92, 17);
+            this.LabelValkyrieDie.TabIndex = 101;
+            this.LabelValkyrieDie.Text = "RECHAZADAS";
+            // 
+            // PanelValkyrieLive
+            // 
+            this.PanelValkyrieLive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.PanelValkyrieLive.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PanelValkyrieLive.Controls.Add(this.PanelValkyrieDie);
+            this.PanelValkyrieLive.Controls.Add(this.IconButtonValkyrieStop);
+            this.PanelValkyrieLive.Controls.Add(this.LabelCountValkyrieLive);
+            this.PanelValkyrieLive.Controls.Add(this.IconButtonValkyrieStart);
+            this.PanelValkyrieLive.Controls.Add(this.TextBoxValkyrieLive);
+            this.PanelValkyrieLive.Controls.Add(this.LabelValkyrieLive);
+            this.PanelValkyrieLive.Location = new System.Drawing.Point(3, 138);
+            this.PanelValkyrieLive.Name = "PanelValkyrieLive";
+            this.PanelValkyrieLive.Padding = new System.Windows.Forms.Padding(10);
+            this.PanelValkyrieLive.Size = new System.Drawing.Size(242, 234);
+            this.PanelValkyrieLive.TabIndex = 135;
+            // 
+            // IconButtonValkyrieStop
+            // 
+            this.IconButtonValkyrieStop.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.IconButtonValkyrieStop.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonValkyrieStop.FlatAppearance.BorderSize = 0;
+            this.IconButtonValkyrieStop.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconButtonValkyrieStop.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IconButtonValkyrieStop.ForeColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieStop.IconChar = FontAwesome.Sharp.IconChar.HandMiddleFinger;
+            this.IconButtonValkyrieStop.IconColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieStop.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.IconButtonValkyrieStop.IconSize = 24;
+            this.IconButtonValkyrieStop.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonValkyrieStop.Location = new System.Drawing.Point(21, 190);
+            this.IconButtonValkyrieStop.Name = "IconButtonValkyrieStop";
+            this.IconButtonValkyrieStop.Size = new System.Drawing.Size(200, 30);
+            this.IconButtonValkyrieStop.TabIndex = 104;
+            this.IconButtonValkyrieStop.Text = "DETENER";
+            this.IconButtonValkyrieStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IconButtonValkyrieStop.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.IconButtonValkyrieStop.UseVisualStyleBackColor = false;
+            // 
+            // LabelCountValkyrieLive
+            // 
+            this.LabelCountValkyrieLive.AutoSize = true;
+            this.LabelCountValkyrieLive.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelCountValkyrieLive.ForeColor = System.Drawing.Color.White;
+            this.LabelCountValkyrieLive.Location = new System.Drawing.Point(18, 16);
+            this.LabelCountValkyrieLive.Name = "LabelCountValkyrieLive";
+            this.LabelCountValkyrieLive.Size = new System.Drawing.Size(13, 13);
+            this.LabelCountValkyrieLive.TabIndex = 103;
+            this.LabelCountValkyrieLive.Text = "0";
+            // 
+            // IconButtonValkyrieStart
+            // 
+            this.IconButtonValkyrieStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.IconButtonValkyrieStart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonValkyrieStart.FlatAppearance.BorderSize = 0;
+            this.IconButtonValkyrieStart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconButtonValkyrieStart.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IconButtonValkyrieStart.ForeColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieStart.IconChar = FontAwesome.Sharp.IconChar.SignInAlt;
+            this.IconButtonValkyrieStart.IconColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieStart.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.IconButtonValkyrieStart.IconSize = 24;
+            this.IconButtonValkyrieStart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonValkyrieStart.Location = new System.Drawing.Point(21, 190);
+            this.IconButtonValkyrieStart.Name = "IconButtonValkyrieStart";
+            this.IconButtonValkyrieStart.Size = new System.Drawing.Size(200, 30);
+            this.IconButtonValkyrieStart.TabIndex = 102;
+            this.IconButtonValkyrieStart.Text = "RAGNARÖK";
+            this.IconButtonValkyrieStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IconButtonValkyrieStart.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.IconButtonValkyrieStart.UseVisualStyleBackColor = false;
+            // 
+            // TextBoxValkyrieLive
+            // 
+            this.TextBoxValkyrieLive.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
+            this.TextBoxValkyrieLive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TextBoxValkyrieLive.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxValkyrieLive.ForeColor = System.Drawing.Color.White;
+            this.TextBoxValkyrieLive.Location = new System.Drawing.Point(21, 38);
+            this.TextBoxValkyrieLive.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.TextBoxValkyrieLive.Multiline = true;
+            this.TextBoxValkyrieLive.Name = "TextBoxValkyrieLive";
+            this.TextBoxValkyrieLive.ReadOnly = true;
+            this.TextBoxValkyrieLive.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextBoxValkyrieLive.Size = new System.Drawing.Size(200, 135);
+            this.TextBoxValkyrieLive.TabIndex = 101;
+            // 
+            // LabelValkyrieLive
+            // 
+            this.LabelValkyrieLive.AutoSize = true;
+            this.LabelValkyrieLive.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelValkyrieLive.ForeColor = System.Drawing.Color.White;
+            this.LabelValkyrieLive.Location = new System.Drawing.Point(82, 10);
+            this.LabelValkyrieLive.Name = "LabelValkyrieLive";
+            this.LabelValkyrieLive.Size = new System.Drawing.Size(78, 17);
+            this.LabelValkyrieLive.TabIndex = 100;
+            this.LabelValkyrieLive.Text = "ESCOGIDAS";
+            // 
+            // PanelValkyrie
+            // 
+            this.PanelValkyrie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(38)))), ((int)(((byte)(70)))));
+            this.PanelValkyrie.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PanelValkyrie.Controls.Add(this.PanelValkyrieLive);
+            this.PanelValkyrie.Controls.Add(this.LabelCountValkyrie);
+            this.PanelValkyrie.Controls.Add(this.IconButtonValkyrieVerify);
+            this.PanelValkyrie.Controls.Add(this.TextBoxValkyrie);
+            this.PanelValkyrie.Controls.Add(this.LabelValkyrie);
+            this.PanelValkyrie.Location = new System.Drawing.Point(0, 234);
+            this.PanelValkyrie.Name = "PanelValkyrie";
+            this.PanelValkyrie.Padding = new System.Windows.Forms.Padding(10);
+            this.PanelValkyrie.Size = new System.Drawing.Size(243, 234);
+            this.PanelValkyrie.TabIndex = 133;
+            // 
+            // LabelCountValkyrie
+            // 
+            this.LabelCountValkyrie.AutoSize = true;
+            this.LabelCountValkyrie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelCountValkyrie.ForeColor = System.Drawing.Color.Silver;
+            this.LabelCountValkyrie.Location = new System.Drawing.Point(21, 16);
+            this.LabelCountValkyrie.Name = "LabelCountValkyrie";
+            this.LabelCountValkyrie.Size = new System.Drawing.Size(13, 13);
+            this.LabelCountValkyrie.TabIndex = 95;
+            this.LabelCountValkyrie.Text = "0";
+            // 
+            // IconButtonValkyrieVerify
+            // 
+            this.IconButtonValkyrieVerify.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(227)))), ((int)(((byte)(184)))), ((int)(((byte)(20)))));
+            this.IconButtonValkyrieVerify.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonValkyrieVerify.FlatAppearance.BorderSize = 0;
+            this.IconButtonValkyrieVerify.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.IconButtonValkyrieVerify.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.IconButtonValkyrieVerify.ForeColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieVerify.IconChar = FontAwesome.Sharp.IconChar.Share;
+            this.IconButtonValkyrieVerify.IconColor = System.Drawing.Color.Black;
+            this.IconButtonValkyrieVerify.IconFont = FontAwesome.Sharp.IconFont.Auto;
+            this.IconButtonValkyrieVerify.IconSize = 24;
+            this.IconButtonValkyrieVerify.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.IconButtonValkyrieVerify.Location = new System.Drawing.Point(21, 190);
+            this.IconButtonValkyrieVerify.Name = "IconButtonValkyrieVerify";
+            this.IconButtonValkyrieVerify.Size = new System.Drawing.Size(200, 30);
+            this.IconButtonValkyrieVerify.TabIndex = 8;
+            this.IconButtonValkyrieVerify.Text = "VERIFICAR";
+            this.IconButtonValkyrieVerify.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.IconButtonValkyrieVerify.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.IconButtonValkyrieVerify.UseVisualStyleBackColor = false;
+            // 
+            // TextBoxValkyrie
+            // 
+            this.TextBoxValkyrie.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
+            this.TextBoxValkyrie.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.TextBoxValkyrie.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TextBoxValkyrie.ForeColor = System.Drawing.Color.Silver;
+            this.TextBoxValkyrie.Location = new System.Drawing.Point(21, 38);
+            this.TextBoxValkyrie.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
+            this.TextBoxValkyrie.Multiline = true;
+            this.TextBoxValkyrie.Name = "TextBoxValkyrie";
+            this.TextBoxValkyrie.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextBoxValkyrie.Size = new System.Drawing.Size(200, 135);
+            this.TextBoxValkyrie.TabIndex = 7;
+            // 
+            // LabelValkyrie
+            // 
+            this.LabelValkyrie.AutoSize = true;
+            this.LabelValkyrie.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelValkyrie.ForeColor = System.Drawing.Color.White;
+            this.LabelValkyrie.Location = new System.Drawing.Point(50, 10);
+            this.LabelValkyrie.Name = "LabelValkyrie";
+            this.LabelValkyrie.Size = new System.Drawing.Size(142, 17);
+            this.LabelValkyrie.TabIndex = 92;
+            this.LabelValkyrie.Text = "VALQUIRIAS (PROXYS)";
+            // 
             // Thor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.ClientSize = new System.Drawing.Size(730, 499);
+            this.Controls.Add(this.PanelTitleOdin);
             this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelConfirm);
             this.Controls.Add(this.PanelGenerator);
-            this.Controls.Add(this.PanelValhalla);
             this.Controls.Add(this.PanelConsole);
-            this.Controls.Add(this.PanelHellheim);
             this.Controls.Add(this.PanelInformation);
-            this.Controls.Add(this.PanelTitleOdin);
             this.Controls.Add(this.PanelCreditCards);
+            this.Controls.Add(this.PanelValhalla);
+            this.Controls.Add(this.PanelHellheim);
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Silver;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -1562,14 +1552,10 @@
             this.PanelGenerator.PerformLayout();
             this.PanelValhalla.ResumeLayout(false);
             this.PanelValhalla.PerformLayout();
-            this.PanelValkyrieLive.ResumeLayout(false);
-            this.PanelValkyrieLive.PerformLayout();
             this.PanelConsole.ResumeLayout(false);
             this.PanelConsole.PerformLayout();
             this.PanelHellheim.ResumeLayout(false);
             this.PanelHellheim.PerformLayout();
-            this.PanelValkyrieDie.ResumeLayout(false);
-            this.PanelValkyrieDie.PerformLayout();
             this.PanelInformation.ResumeLayout(false);
             this.PanelInformation.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
@@ -1582,8 +1568,6 @@
             this.PanelTitleOdin.PerformLayout();
             this.PanelCreditCards.ResumeLayout(false);
             this.PanelCreditCards.PerformLayout();
-            this.PanelValkyrie.ResumeLayout(false);
-            this.PanelValkyrie.PerformLayout();
             this.PanelConfirm.ResumeLayout(false);
             this.PanelConfirmHeader.ResumeLayout(false);
             this.PanelConfirmHeader.PerformLayout();
@@ -1593,6 +1577,12 @@
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).EndInit();
+            this.PanelValkyrieDie.ResumeLayout(false);
+            this.PanelValkyrieDie.PerformLayout();
+            this.PanelValkyrieLive.ResumeLayout(false);
+            this.PanelValkyrieLive.PerformLayout();
+            this.PanelValkyrie.ResumeLayout(false);
+            this.PanelValkyrie.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1655,22 +1645,6 @@
         private FontAwesome.Sharp.IconButton IconButtonClose;
         private System.Windows.Forms.Label labelTitleToolBar;
         private System.Windows.Forms.Panel PanelCreditCards;
-        private System.Windows.Forms.Label LabelValkyrieLive;
-        private System.Windows.Forms.Panel PanelValkyrieLive;
-        private FontAwesome.Sharp.IconButton IconButtonValkyrieStop;
-        private System.Windows.Forms.Label LabelCountValkyrieLive;
-        private FontAwesome.Sharp.IconButton IconButtonValkyrieStart;
-        private System.Windows.Forms.TextBox TextBoxValkyrieLive;
-        private System.Windows.Forms.Panel PanelValkyrieDie;
-        private FontAwesome.Sharp.IconButton IconButtonValkyrieClear;
-        private System.Windows.Forms.Label LabelCountValkyrieDie;
-        private System.Windows.Forms.TextBox TextBoxValkyrieDie;
-        private System.Windows.Forms.Label LabelValkyrieDie;
-        private System.Windows.Forms.Label LabelCountValkyrie;
-        private System.Windows.Forms.TextBox TextBoxValkyrie;
-        private System.Windows.Forms.Panel PanelValkyrie;
-        private FontAwesome.Sharp.IconButton IconButtonValkyrieVerify;
-        private System.Windows.Forms.Label LabelValkyrie;
         private System.Windows.Forms.Label LabelHelheim;
         private System.Windows.Forms.Label LabelCountHellheim;
         private System.Windows.Forms.TextBox TextBoxHelheim;
@@ -1693,5 +1667,21 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
+        private System.Windows.Forms.Panel PanelValkyrie;
+        private System.Windows.Forms.Panel PanelValkyrieLive;
+        private System.Windows.Forms.Panel PanelValkyrieDie;
+        private FontAwesome.Sharp.IconButton IconButtonValkyrieClear;
+        private System.Windows.Forms.Label LabelCountValkyrieDie;
+        private System.Windows.Forms.TextBox TextBoxValkyrieDie;
+        private System.Windows.Forms.Label LabelValkyrieDie;
+        private FontAwesome.Sharp.IconButton IconButtonValkyrieStop;
+        private System.Windows.Forms.Label LabelCountValkyrieLive;
+        private FontAwesome.Sharp.IconButton IconButtonValkyrieStart;
+        private System.Windows.Forms.TextBox TextBoxValkyrieLive;
+        private System.Windows.Forms.Label LabelValkyrieLive;
+        private System.Windows.Forms.Label LabelCountValkyrie;
+        private FontAwesome.Sharp.IconButton IconButtonValkyrieVerify;
+        private System.Windows.Forms.TextBox TextBoxValkyrie;
+        private System.Windows.Forms.Label LabelValkyrie;
     }
 }

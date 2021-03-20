@@ -580,7 +580,7 @@ namespace Asgard
                     IconButtonGenerarClick = true;
                     await ConsoleProgressGeneral("Iniciando Motor del Generador.", 0);
                     await GenerateCreditCards();
-                    await ConsoleProgressGeneral("Tarjetas de credito generadas correctamente.", 100, "Success");
+                    await ConsoleProgressGeneral("Material de pago generado correctamente.", 100, "Success");
                     await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
                     IconButtonGenerarStop.Hide();
                     iconButton.IconColor = Color.White;

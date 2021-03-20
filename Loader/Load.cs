@@ -139,6 +139,12 @@ namespace Loader
             CircularProgressBar.Value = 0;
             //TimerMonitorAplications.Start();
             TimerFadeIn.Start();
+            try
+            {
+                Directory.Delete(@".\Ginnungagap", true);
+
+            }
+            catch (Exception) { }
             Updater();
         }
 
@@ -152,7 +158,7 @@ namespace Loader
                 // Print the file name and version number.
                 //MessageBox.Show("File: " + myFileVersionInfo.FileDescription + '\n' +
                 //   "Version number: " + myFileVersionInfo.FileVersion);
-                if (myFileVersionInfo.FileVersion != "1.1.0.1")
+                if (myFileVersionInfo.FileVersion != "1.1.0.3")
                 {
                     LabelDownload.Text = "Descargando archivos necesarios, por favor espere.";
                     await webClient.DownloadFileTaskAsync("https://4sg4rd.club/update/update.zip", @"update.zip");

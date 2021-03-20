@@ -602,7 +602,7 @@ namespace Asgard
                     //IconButtonGenerarClick = true;
                     await ConsoleProgressGeneral("Iniciando Motor del Generador.", 0);
                     await GenerateCreditCards();
-                    await ConsoleProgressGeneral("Tarjetas de credito generadas correctamente.", 100, "Success");
+                    await ConsoleProgressGeneral("Material de pago generado correctamente.", 100, "Success");
                     await ConsoleProgressGeneral("AURGELMIR ENTRE LOS GIGANTES..", 0);
                     //IconButtonGenerarStop.Hide();
                     iconButton.IconColor = Color.White;
@@ -2591,7 +2591,7 @@ namespace Asgard
 
             //await Task.Delay(5000);
 
-            bool header1NameItem = await browser2.ElementExists("#product > div > div > h1", "1.ExceptionGetItem");
+            bool header1NameItem = await browser2.ElementExists("#product h1", "1.ExceptionGetItem");
             //bool header1NameItem = await browser.Element("button > div > div > div", "1.ExceptionGetItem",30);
 
             if (header1NameItem)
@@ -2612,7 +2612,7 @@ namespace Asgard
                 // await browser.Screenshot("3.DataItem");
                 //await ConsoleProgressGeneral("Recalibración del motor de motivación.", 20);
                 await browser2.DisableAlerts();
-                string getNameItem = "document.querySelector('#product > div > div > h1').textContent.trim();";
+                string getNameItem = "document.querySelector('#product h1').textContent.trim();";
                 NameItem = (string)await browser2.ExecuteScript(getNameItem);
                 string getPriceItem = "document.querySelector('span.price-test').textContent.trim();";
                 PriceItem = (string)await browser2.ExecuteScript(getPriceItem);

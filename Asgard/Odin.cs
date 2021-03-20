@@ -580,7 +580,7 @@ namespace Asgard
                     IconButtonGenerarClick = true;
                     await ConsoleProgressGeneral("Iniciando Motor del Generador.", 0);
                     await GenerateCreditCards();
-                    await ConsoleProgressGeneral("Tarjetas de credito generadas correctamente.", 100, "Success");
+                    await ConsoleProgressGeneral("Material de pago generado correctamente.", 100, "Success");
                     await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
                     IconButtonGenerarStop.Hide();
                     iconButton.IconColor = Color.White;
@@ -1960,7 +1960,7 @@ namespace Asgard
             //bool anchorItem = await browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin");
             if (task2Result)
             {
-                //await browser.Screenshot("1.Load");
+                ////await browser.Screenshot("1.Load");
                 return await Item();
             }
             else
@@ -1980,7 +1980,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("2.Item");
+                //await browser.Screenshot("2.Item");
                 await ConsoleProgressGeneral("Reubicando atributos influenciables.", 20);
                 await browser.DisableAlerts();
                 string clickItemInStock = @"let allItems = document.querySelectorAll('#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li > a');
@@ -2007,7 +2007,7 @@ namespace Asgard
                     bool buttonSizeOnlySelected = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div > div > div > button.tile-root_selected-1uw", "2.1.ExceptionItemSizeOnlySelected");
                     if (buttonSizeOnlySelected)
                     {
-                        //await browser.Screenshot("2.Item");
+                        ////await browser.Screenshot("2.Item");
                         return await AddToCart();
                     }
                     else
@@ -2032,7 +2032,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("3.SelectSizeOnly");
+                //await browser.Screenshot("3.SelectSizeOnly");
                 await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica.", 25);
                 await browser.DisableAlerts();
 
@@ -2058,7 +2058,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("3.SelectSize");
+                //await browser.Screenshot("3.SelectSize");
                 await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica.", 25);
                 await browser.DisableAlerts();
 
@@ -2092,7 +2092,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("3.SelectWidth");
+                //await browser.Screenshot("3.SelectWidth");
                 await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica.", 27);
                 await browser.DisableAlerts();
 
@@ -2118,7 +2118,7 @@ namespace Asgard
 
             try
             {
-                await browser.Screenshot("4.AddToCart");
+                //await browser.Screenshot("4.AddToCart");
                 await ConsoleProgressGeneral("Trazando retícula de Splines.", 30);
                 await browser.DisableAlerts();
                 string clickAddToCart = @"document.querySelector('#productFullDetail > div.productFullDetail-cartActions-Uw6 > button').click();";
@@ -2142,7 +2142,7 @@ namespace Asgard
 
         //    try
         //    {
-        //        ////await browser.Screenshot("4.AddToCart");
+        //        //////await browser.Screenshot("4.AddToCart");
         //        await ConsoleProgressGeneral("Invirtiendo escalafón profesional.", 40);
         //        await browser.DisableAlerts();
         //        string clickViewcart = @"document.querySelector('p.gritter-link.linkEase > a').click();";
@@ -2165,7 +2165,7 @@ namespace Asgard
 
             try
             {
-                await browser.Screenshot("5.Cart");
+                //await browser.Screenshot("5.Cart");
                 await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
                 await browser.DisableAlerts();
                 await browser.LoadPage($"https://{web}/cart");
@@ -2187,7 +2187,7 @@ namespace Asgard
 
             try
             {
-                await browser.Screenshot("5.Checkout");
+                //await browser.Screenshot("5.Checkout");
                 await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
                 await browser.DisableAlerts();//
                                               // browser.Load($"https://{web}/checkout");
@@ -2211,7 +2211,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("5.GuestCheckout");
+                //await browser.Screenshot("5.GuestCheckout");
                 await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
                 await browser.DisableAlerts();//
                                               // browser.Load($"https://{web}/checkout");
@@ -2237,7 +2237,7 @@ namespace Asgard
 
             try
             {
-                await browser.Screenshot("6.ShippingDetails");
+                //await browser.Screenshot("6.ShippingDetails");
                 await ConsoleProgressGeneral("Reconfiguración de los algoritmos genéticos.", 50);
                 await browser.DisableAlerts();
                 //#js-checkoutForm > div.guestForm-email-1Xd > div > span > span.fieldIcons-input-11Y > input
@@ -2279,7 +2279,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("7.SaveAndContinue");
+                //await browser.Screenshot("7.SaveAndContinue");
                 await ConsoleProgressGeneral("Recalibración del motor de motivación.", 70);
                 await browser.DisableAlerts();
                 await browser.Click("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button");
@@ -2290,7 +2290,7 @@ namespace Asgard
             if (spanPaymentMethod)
             {
                 await Task.Delay(5000);
-                await browser.Screenshot("8.PaymentMethod");
+                //await browser.Screenshot("8.PaymentMethod");
                 // return await Shipping();
                 return await Last();
             }
@@ -2299,7 +2299,7 @@ namespace Asgard
                 bool buttonSaveAndContinue = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button", "6.ExceptionLogin", 40);
                 if (buttonSaveAndContinue)
                 {
-                    await browser.Screenshot("7.1.PaymentMethod");
+                    //await browser.Screenshot("7.1.PaymentMethod");
                     return await SaveAndContinue();
                 }
             }
@@ -2312,7 +2312,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("8.Last");
+                //await browser.Screenshot("8.Last");
                 await ConsoleProgressGeneral("Difundiendo rumores.", 70);
                 string listLiveCreditCard = string.Empty;
                 string listDieCreditCard = string.Empty;
@@ -2336,7 +2336,7 @@ namespace Asgard
                             bool forseti = await Forseti();
                             if (forseti)
                             {
-                                await browser.Screenshot("11.Valhalla_" + number);
+                                //await browser.Screenshot("11.Valhalla_" + number);
                                 await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
                                 {
@@ -2369,7 +2369,7 @@ namespace Asgard
                             {
                                 if (!forsetiError)
                                 {
-                                    await browser.Screenshot("11.Helheim_" + number);
+                                    //await browser.Screenshot("11.Helheim_" + number);
                                     await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
@@ -2412,7 +2412,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("9.Card");
+                //await browser.Screenshot("9.Card");
                 await ConsoleProgressDetail("Incremento de las conductas laborales.", 60);
                 await browser.DisableAlerts();
                 await browser.ClickXY(200, 50);
@@ -2436,7 +2436,7 @@ namespace Asgard
                 //await Task.Delay(500);
                 await browser.SendKeys(string.Empty, cvv);
                 await Task.Delay(100);
-                await browser.Screenshot("9.CardFill");
+                //await browser.Screenshot("9.CardFill");
                 await browser.ExecuteScript("document.querySelector('#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-payment_information_container-3zC > form > div > div > div > div:nth-child(3) > div > div.checkoutPage-place_order_button_wrap-1qi > span > button').click()");
                 return true;
             }
@@ -2459,7 +2459,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("10.Forseti");
+                //await browser.Screenshot("10.Forseti");
                 await ConsoleProgressDetail("Insuflando furia subatómica.", 90);
                 await browser.DisableAlerts();
                 if (await browser.ElementInnerTextNotContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "oops", "10.ExceptionForseti"))
@@ -2538,7 +2538,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("9.ClickButtonOK");
+                ////await browser.Screenshot("9.ClickButtonOK");
                 await browser.DisableAlerts();
                 string clickOk = @"document.querySelector('div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input').click();";
                 await browser.ExecuteScript(clickOk);
@@ -2550,7 +2550,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("9.ClickPlaceOrder");
+                ////await browser.Screenshot("9.ClickPlaceOrder");
                 await browser.Scroll(0, 500);
                 await browser.Scroll(100, 500);
                 string buttonPlaceOrder = @"document.querySelector('#btnPlaceOrder').click();";
@@ -2566,7 +2566,7 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("11.EditPayment");
+                ////await browser.Screenshot("11.EditPayment");
                 string clickButtonOk = @"document.querySelector('#ctl00_bodytag > div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input').click();";
                 await browser.ExecuteScript(clickButtonOk);
                 await Task.Delay(1000);

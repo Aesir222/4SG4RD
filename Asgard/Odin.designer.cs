@@ -605,11 +605,11 @@
             this.LabelCreditCards.AutoSize = true;
             this.LabelCreditCards.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.LabelCreditCards.ForeColor = System.Drawing.Color.White;
-            this.LabelCreditCards.Location = new System.Drawing.Point(89, 10);
+            this.LabelCreditCards.Location = new System.Drawing.Point(57, 10);
             this.LabelCreditCards.Name = "LabelCreditCards";
-            this.LabelCreditCards.Size = new System.Drawing.Size(65, 17);
+            this.LabelCreditCards.Size = new System.Drawing.Size(128, 17);
             this.LabelCreditCards.TabIndex = 92;
-            this.LabelCreditCards.Text = "TARJETAS";
+            this.LabelCreditCards.Text = "MATERIAL DE PAGO";
             // 
             // PanelHellheim
             // 
@@ -986,6 +986,7 @@
             // 
             this.IconButtonValkyrie.BackColor = System.Drawing.Color.DarkRed;
             this.IconButtonValkyrie.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.IconButtonValkyrie.Enabled = false;
             this.IconButtonValkyrie.FlatAppearance.BorderSize = 0;
             this.IconButtonValkyrie.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.IconButtonValkyrie.Font = new System.Drawing.Font("Segoe UI Semibold", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -999,7 +1000,7 @@
             this.IconButtonValkyrie.Name = "IconButtonValkyrie";
             this.IconButtonValkyrie.Size = new System.Drawing.Size(200, 30);
             this.IconButtonValkyrie.TabIndex = 90;
-            this.IconButtonValkyrie.Text = "VALKIRIAS";
+            this.IconButtonValkyrie.Text = "VALQUIRIAS";
             this.IconButtonValkyrie.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonValkyrie.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.IconButtonValkyrie.UseVisualStyleBackColor = false;
@@ -1541,13 +1542,13 @@
             this.ClientSize = new System.Drawing.Size(730, 499);
             this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelConfirm);
+            this.Controls.Add(this.PanelTitleOdin);
             this.Controls.Add(this.PanelGenerator);
+            this.Controls.Add(this.PanelConsole);
             this.Controls.Add(this.PanelInformation);
+            this.Controls.Add(this.PanelCreditCards);
             this.Controls.Add(this.PanelValhalla);
             this.Controls.Add(this.PanelHellheim);
-            this.Controls.Add(this.PanelCreditCards);
-            this.Controls.Add(this.PanelConsole);
-            this.Controls.Add(this.PanelTitleOdin);
             this.Controls.Add(this.PanelValkyrie);
             this.Controls.Add(this.PanelValkyrieDie);
             this.Controls.Add(this.PanelValkyrieLive);

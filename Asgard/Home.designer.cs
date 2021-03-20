@@ -753,9 +753,10 @@
             this.TextBoxValhalla.Multiline = true;
             this.TextBoxValhalla.Name = "TextBoxValhalla";
             this.TextBoxValhalla.ReadOnly = true;
-            this.TextBoxValhalla.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TextBoxValhalla.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextBoxValhalla.Size = new System.Drawing.Size(302, 155);
             this.TextBoxValhalla.TabIndex = 102;
+            this.TextBoxValhalla.WordWrap = false;
             // 
             // LabelTitleValhalla
             // 

@@ -1849,7 +1849,7 @@ namespace Asgard
             {
                 if (!valkyrie)
                 {
-                    await browser.Screenshot("1.StartThor");
+                    ////await browser.Screenshot("1.StartThor");
                     await ConsoleProgressGeneral("Reciclando hexadecimales.", 10);
                     await browser.DisableAlerts();
                 }
@@ -1878,7 +1878,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("2.StartFreeTrial");
+                ////await browser.Screenshot("2.StartFreeTrial");
                 await ConsoleProgressGeneral("Generando infraestructura imaginaria.", 20);
                 await browser.DisableAlerts();
                 //string clickStartFreeTrial = "document.querySelector('#main-app > div > main > div > div > div > div.plan-grid-expanded__list-contatiner > div > ul.plan-grid-expanded__list.plan-grid-expanded__list--upper > li.plan-grid-expanded__item.plan-grid-expanded__item--first.plan-grid-expanded__item--first-en.plan-grid-expanded__item--en > div > a').click();";
@@ -1900,7 +1900,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("3.Continue");
+                ////await browser.Screenshot("3.Continue");
                 await ConsoleProgressGeneral("Cotejando sinergias interdimensionales.", 30);
                 string clickContinue = @"document.querySelector('#main-app > div > main > div > div > div.cart-account-continue__contents > div.cart-account-continue__left-wrap > a').click();";
                 await browser.ExecuteScript(clickContinue);
@@ -1919,7 +1919,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("4.CreateYourAccount");
+                ////await browser.Screenshot("4.CreateYourAccount");
                 await ConsoleProgressGeneral("Simulando ejecución de programa.", 40);
                 await browser.DisableAlerts();
                 if (repeatPassword)
@@ -1969,7 +1969,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("5.CardMethod");
+                ////await browser.Screenshot("5.CardMethod");
                 await ConsoleProgressGeneral("Identificando cálculos desviados.", 50);
                 await browser.DisableAlerts();
                 string clickStartCheckout = @"document.querySelector('#main-app > div > main > div > div > div.cart-choose-payment__content > div.cart-choose-payment__show > div > a.cart-choose-payment__card-method').click();";
@@ -1999,7 +1999,7 @@ namespace Asgard
             firstTime = true;
             try
             {
-                await browser.Screenshot("6.Last");
+                ////await browser.Screenshot("6.Last");
                 await ConsoleProgressGeneral("Atenuando discontinuidades temporales.", 60);
                 await browser.DisableAlerts();
                 string listLiveCreditCard = string.Empty;
@@ -2025,7 +2025,7 @@ namespace Asgard
                             bool forseti = await Forseti();
                             if (forseti)
                             {
-                                await browser.Screenshot("Valhalla_" + number);
+                                ////await browser.Screenshot("Valhalla_" + number);
                                 await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
                                 {
@@ -2064,7 +2064,7 @@ namespace Asgard
                                 {
                                     await browser.Scroll(0, 100, 100);
                                     await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
-                                    await browser.Screenshot(number + "HellheimCreditCard");
+                                    ////await browser.Screenshot(number + "HellheimCreditCard");
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
                                         listDieCreditCard += string.Join("|", CreditCards[i].ToArray());
@@ -2112,7 +2112,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("8.Card");
+                ////await browser.Screenshot("8.Card");
                 await ConsoleProgressDetail("Poniendo lo que pone.", 80);
                 await browser.DisableAlerts();
                 await browser.ClickXY(0, 0);
@@ -2185,7 +2185,7 @@ namespace Asgard
         {
             try
             {
-                await browser.Screenshot("9.Forseti");
+                ////await browser.Screenshot("9.Forseti");
                 await ConsoleProgressDetail("Insuflando furia subatómica.", 90);
                 await browser.DisableAlerts();
                 string urlIframeScript = "document.querySelector('#z_hppm_iframe').getAttribute('src')";

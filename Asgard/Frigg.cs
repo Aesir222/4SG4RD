@@ -558,7 +558,7 @@ namespace Asgard
                     IconButtonGenerarClick = true;
                     await ConsoleProgressGeneral("Iniciando Motor del Generador.", 0);
                     await GenerateCreditCards();
-                    await ConsoleProgressGeneral("Tarjetas de credito generadas correctamente.", 100, "Success");
+                    await ConsoleProgressGeneral("Material de pago generado correctamente.", 100, "Success");
                     await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
                     IconButtonGenerarStop.Hide();
                     iconButton.IconColor = Color.White;
@@ -1738,7 +1738,7 @@ namespace Asgard
             }
             catch (Exception) { }
 
-            ////await browser.Screenshot("100.Last_" + frigg.ToString() + "_" + Asatru.GetTimestamp(DateTime.Now));
+            //////await browser.Screenshot("100.Last_" + frigg.ToString() + "_" + Asatru.GetTimestamp(DateTime.Now));
             await browser.Kill("www.calm.com");
             await tokenCancel.Kill();
 
@@ -1863,7 +1863,7 @@ namespace Asgard
 
             try
             {
-                ////await browser.Screenshot("0.LoadPage_" + Asatru.GetTimestamp(DateTime.Now));
+                //////await browser.Screenshot("0.LoadPage_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Invocando a Frigg...", 3);
                 return await StartFrigg();
             }
@@ -1879,7 +1879,7 @@ namespace Asgard
             try
             {
                 //browser.Screenshot("1.Load");
-                ////await browser.Screenshot("1.StartFrigg_" + Asatru.GetTimestamp(DateTime.Now));
+                //////await browser.Screenshot("1.StartFrigg_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Zombificando ambiente", 10);
                 await browser.DisableAlerts();
             }
@@ -1900,7 +1900,7 @@ namespace Asgard
             try
             {
                 // browser.Screenshot("2.LogIn");
-                ////await browser.Screenshot("2.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                //////await browser.Screenshot("2.Login_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Resolviendo teorema de Gibbs.", 30);
                 FullName = Faker.Person.FullName;
                 await browser.SendKeys("div.visible > div > div > form > div:nth-child(1) > div > input", Faker.Internet.Email());
@@ -1916,11 +1916,11 @@ namespace Asgard
             bool divModal = await browser.ElementInvisible("div.visible", "ExceptionLogIn");
             if (divModal)
             {
-                ////await browser.Screenshot("2.1.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                //////await browser.Screenshot("2.1.Login_" + Asatru.GetTimestamp(DateTime.Now));
                 bool divWait = await browser.ElementInvisible("#take-a-deep-breath", "ExceptionLogInWait");
                 if (divWait)
                 {
-                    ////await browser.Screenshot("2.2.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                    //////await browser.Screenshot("2.2.Login_" + Asatru.GetTimestamp(DateTime.Now));
                     return await Last();
                 }
             }
@@ -1933,7 +1933,7 @@ namespace Asgard
             try
             {
                 // browser.Screenshot("3.Last");
-                ////await browser.Screenshot("3.Last_" + Asatru.GetTimestamp(DateTime.Now));
+                //////await browser.Screenshot("3.Last_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Mancillando reputaciones.", 50);
                 string listLiveCreditCard = string.Empty;
                 string listDieCreditCard = string.Empty;
@@ -2038,7 +2038,7 @@ namespace Asgard
         {
             try
             {
-                ////await browser.Screenshot("4.LatestData_" + Asatru.GetTimestamp(DateTime.Now));
+                //////await browser.Screenshot("4.LatestData_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressDetail("Fregando animaciones.", 50);
 
                 await browser.SendKeys("#id-first-name > input[type=text]", FullName);

@@ -143,6 +143,16 @@ namespace Asgard.Properties {
         /// <summary>
         ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Eclipse_1s_128px {
+            get {
+                object obj = ResourceManager.GetObject("Eclipse-1s-128px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Eclipse_1s_24px {
             get {
                 object obj = ResourceManager.GetObject("Eclipse-1s-24px", resourceCulture);

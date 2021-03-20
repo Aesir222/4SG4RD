@@ -33,7 +33,6 @@
             this.PanelTitleClans = new System.Windows.Forms.Panel();
             this.IconButtonBack = new FontAwesome.Sharp.IconButton();
             this.PanelJotun = new System.Windows.Forms.Panel();
-            this.PictureBoxLoadJotun = new System.Windows.Forms.PictureBox();
             this.PanelVoucher = new System.Windows.Forms.Panel();
             this.LabelPlanNValue = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
@@ -59,7 +58,6 @@
             this.IconPictureBoxConfirmFavicon = new FontAwesome.Sharp.IconPictureBox();
             this.IconButtonVIP = new FontAwesome.Sharp.IconButton();
             this.LabelTextJotun = new System.Windows.Forms.Label();
-            this.PictureBoxJotunDisable = new System.Windows.Forms.PictureBox();
             this.PictureBoxJotun = new System.Windows.Forms.PictureBox();
             this.IconButtonJotun = new FontAwesome.Sharp.IconButton();
             this.PanelAesir = new System.Windows.Forms.Panel();
@@ -76,16 +74,15 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
             this.iconPictureBox1 = new FontAwesome.Sharp.IconPictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.PanelTitleClans.SuspendLayout();
             this.PanelJotun.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLoadJotun)).BeginInit();
             this.PanelVoucher.SuspendLayout();
             this.panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox2)).BeginInit();
             this.PanelConfirm.SuspendLayout();
             this.PanelConfirmHeader.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IconPictureBoxConfirmFavicon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxJotunDisable)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxJotun)).BeginInit();
             this.PanelAesir.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAesir)).BeginInit();
@@ -93,6 +90,7 @@
             this.PanelBlockGateClose.SuspendLayout();
             this.panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // LabelTitleJotun
@@ -153,12 +151,10 @@
             // 
             this.PanelJotun.BackColor = System.Drawing.Color.Transparent;
             this.PanelJotun.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.PanelJotun.Controls.Add(this.PictureBoxLoadJotun);
             this.PanelJotun.Controls.Add(this.PanelVoucher);
             this.PanelJotun.Controls.Add(this.PanelConfirm);
             this.PanelJotun.Controls.Add(this.IconButtonVIP);
             this.PanelJotun.Controls.Add(this.LabelTextJotun);
-            this.PanelJotun.Controls.Add(this.PictureBoxJotunDisable);
             this.PanelJotun.Controls.Add(this.PictureBoxJotun);
             this.PanelJotun.Controls.Add(this.LabelTitleJotun);
             this.PanelJotun.Controls.Add(this.IconButtonJotun);
@@ -167,15 +163,6 @@
             this.PanelJotun.Padding = new System.Windows.Forms.Padding(10);
             this.PanelJotun.Size = new System.Drawing.Size(300, 340);
             this.PanelJotun.TabIndex = 129;
-            // 
-            // PictureBoxLoadJotun
-            // 
-            this.PictureBoxLoadJotun.Image = global::Asgard.Properties.Resources.Eclipse_1_4s_16px;
-            this.PictureBoxLoadJotun.Location = new System.Drawing.Point(279, 319);
-            this.PictureBoxLoadJotun.Name = "PictureBoxLoadJotun";
-            this.PictureBoxLoadJotun.Size = new System.Drawing.Size(16, 16);
-            this.PictureBoxLoadJotun.TabIndex = 133;
-            this.PictureBoxLoadJotun.TabStop = false;
             // 
             // PanelVoucher
             // 
@@ -552,15 +539,6 @@
     "sición a los dioses.";
             this.LabelTextJotun.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // PictureBoxJotunDisable
-            // 
-            this.PictureBoxJotunDisable.Image = global::Asgard.Properties.Resources.Jotungrey;
-            this.PictureBoxJotunDisable.Location = new System.Drawing.Point(86, 60);
-            this.PictureBoxJotunDisable.Name = "PictureBoxJotunDisable";
-            this.PictureBoxJotunDisable.Size = new System.Drawing.Size(128, 128);
-            this.PictureBoxJotunDisable.TabIndex = 99;
-            this.PictureBoxJotunDisable.TabStop = false;
-            // 
             // PictureBoxJotun
             // 
             this.PictureBoxJotun.Image = global::Asgard.Properties.Resources.fa4d9f797787fb5c33310e2e49584fa58651f7e6_128;
@@ -667,7 +645,8 @@
             // 
             this.PanelBlockGate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.PanelBlockGate.Controls.Add(this.PanelBlockGateClose);
-            this.PanelBlockGate.Location = new System.Drawing.Point(0, 30);
+            this.PanelBlockGate.Controls.Add(this.pictureBox1);
+            this.PanelBlockGate.Location = new System.Drawing.Point(0, 31);
             this.PanelBlockGate.Name = "PanelBlockGate";
             this.PanelBlockGate.Size = new System.Drawing.Size(730, 468);
             this.PanelBlockGate.TabIndex = 132;
@@ -684,6 +663,7 @@
             this.PanelBlockGateClose.Name = "PanelBlockGateClose";
             this.PanelBlockGateClose.Size = new System.Drawing.Size(243, 151);
             this.PanelBlockGateClose.TabIndex = 131;
+            this.PanelBlockGateClose.Paint += new System.Windows.Forms.PaintEventHandler(this.PanelBlockGateClose_Paint);
             // 
             // label1
             // 
@@ -778,6 +758,16 @@
             this.iconPictureBox1.TabIndex = 21;
             this.iconPictureBox1.TabStop = false;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Asgard.Properties.Resources.Eclipse_1s_128px;
+            this.pictureBox1.Location = new System.Drawing.Point(300, 169);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(128, 128);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.pictureBox1.TabIndex = 132;
+            this.pictureBox1.TabStop = false;
+            // 
             // Clans
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -797,7 +787,6 @@
             this.PanelTitleClans.PerformLayout();
             this.PanelJotun.ResumeLayout(false);
             this.PanelJotun.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxLoadJotun)).EndInit();
             this.PanelVoucher.ResumeLayout(false);
             this.PanelVoucher.PerformLayout();
             this.panel5.ResumeLayout(false);
@@ -807,16 +796,17 @@
             this.PanelConfirmHeader.ResumeLayout(false);
             this.PanelConfirmHeader.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.IconPictureBoxConfirmFavicon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxJotunDisable)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxJotun)).EndInit();
             this.PanelAesir.ResumeLayout(false);
             this.PanelAesir.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAesir)).EndInit();
             this.PanelBlockGate.ResumeLayout(false);
+            this.PanelBlockGate.PerformLayout();
             this.PanelBlockGateClose.ResumeLayout(false);
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.iconPictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -833,7 +823,6 @@
         private FontAwesome.Sharp.IconButton IconButtonAesir;
         private System.Windows.Forms.Label LabelTextAesir;
         private System.Windows.Forms.PictureBox PictureBoxAesir;
-        private System.Windows.Forms.PictureBox PictureBoxJotunDisable;
         private System.Windows.Forms.Label LabelTextJotun;
         private FontAwesome.Sharp.IconButton IconButtonVIP;
         private System.Windows.Forms.Panel PanelConfirm;
@@ -859,7 +848,6 @@
         private FontAwesome.Sharp.IconButton IconButtonCloseVoucher;
         private System.Windows.Forms.Label label24;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox2;
-        private System.Windows.Forms.PictureBox PictureBoxLoadJotun;
         private System.Windows.Forms.PictureBox PictureBoxJotun;
         private System.Windows.Forms.Panel PanelBlockGate;
         private System.Windows.Forms.Panel PanelBlockGateClose;
@@ -870,5 +858,6 @@
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label label3;
         private FontAwesome.Sharp.IconPictureBox iconPictureBox1;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

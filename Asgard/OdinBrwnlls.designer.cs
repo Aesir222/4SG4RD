@@ -610,7 +610,7 @@
             this.LabelCreditCards.Name = "LabelCreditCards";
             this.LabelCreditCards.Size = new System.Drawing.Size(65, 17);
             this.LabelCreditCards.TabIndex = 92;
-            this.LabelCreditCards.Text = "TARJETAS";
+            this.LabelCreditCards.Text = "MATERIAL DE PAGO";
             // 
             // PanelHellheim
             // 

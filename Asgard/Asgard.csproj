@@ -706,6 +706,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
+    <None Include="Resources\Eclipse-1s-128px.gif" />
     <None Include="Resources\youtube-icono.png" />
     <None Include="Resources\youtube.png" />
     <None Include="Resources\bitcoin.png" />

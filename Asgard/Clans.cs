@@ -109,7 +109,8 @@ namespace Asgard
             //IconButtonJotun.Enabled = false;
             //IconButtonJotun.IconColor = Color.Black;
             //PanelBlockGateClose.Hide();
-            PictureBoxJotun.Hide();
+         //   PictureBoxJotun.Hide();
+            PanelBlockGateClose.Hide();
             PanelConfirm.Hide();
             PanelVoucher.Hide();
             Task.Run(() => Block());
@@ -157,7 +158,7 @@ namespace Asgard
                 }
                 else
                 {
-                    PanelBlockGateClose.Hide();
+                    //PanelBlockGateClose.Hide();
                     PanelBlockGate.Hide();
                 }
 
@@ -205,7 +206,7 @@ namespace Asgard
 
         private async void IconButtonJotun_Click(object sender, EventArgs e)
         {
-            PictureBoxLoadJotun.Show();
+            //PictureBoxLoadJotun.Show();
             bool planVIP = await Asatru.GetPlanVIP(Id, Token);
             if (planVIP)
             {
@@ -284,6 +285,11 @@ namespace Asgard
         {
             Owner.ClickOnRefillBalance();
             this.Close();
+        }
+
+        private void PanelBlockGateClose_Paint(object sender, PaintEventArgs e)
+        {
+
         }
 
         //public void ClickOnRefillBalanceClans()
