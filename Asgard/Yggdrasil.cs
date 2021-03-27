@@ -118,53 +118,108 @@ namespace Asgard
 
         public static async Task<IFrame> GetFrameByName(this ChromiumWebBrowser browser, string name, string nameException = "ExceptionGetFrameByNameDefault", int limit = 5)
         {
-            List<long> identifier = browser.GetBrowser().GetFrameIdentifiers();
-            foreach (long i in identifier)
+            try
             {
-                IFrame frame = browser.GetBrowser().GetFrame(i);
-                if (frame != null)
+                for (int j = 0; j < limit; j++)
                 {
-                    for (int j = 0; j < limit; j++)
+                    List<long> identifier = browser.GetBrowser().GetFrameIdentifiers();
+                    foreach (long i in identifier)
                     {
-                        if (frame.Name == name)
+                        IFrame frame = browser.GetBrowser().GetFrame(i);
+                        if (frame != null)
                         {
-                            return frame;
+
+                            if (frame.Name == name)
+                            {
+                                return frame;
+                            }
                         }
-                        await Task.Delay(1000);
                     }
+                    await Task.Delay(1000);
                 }
             }
-            //await browser.Screenshot(nameException);
+            catch (Exception) { }
+            await browser.Screenshot(nameException);
             return null;
         }
 
 
         public static async Task<IFrame> GetFrameByUrl(this ChromiumWebBrowser browser, string url, string nameException = "ExceptionGetFrameByUrlDefault", int limit = 20)
         {
+            //TO-DO: se puede buscar en cada frame como una tarea.
+            for (int j = 0; j < limit; j++)
+            {
+                List<long> identifier = browser.GetBrowser().GetFrameIdentifiers();
+                foreach (long i in identifier)
+                {
+                    IFrame frame = browser.GetBrowser().GetFrame(i);
+                    if (frame != null)
+                    {
+                        if (frame.Url == url)
+                        {
+                            return frame;
+                        }
+                    }
+                }
+                await Task.Delay(1000);
+            }
+            await browser.Screenshot(nameException);
+            return null;
+        }
+
+        public static async Task<IFrame> GetFrameBy(this ChromiumWebBrowser browser, string by, string[] selector, string nameException = "ExceptionGetFrameByUrlDefault", int limit = 20)
+        {
+            //TO-DO: se puede buscar en cada frame como una tarea.
+            //for (int j = 0; j < limit; j++)
+            //{
             List<long> identifier = browser.GetBrowser().GetFrameIdentifiers();
             foreach (long i in identifier)
             {
                 IFrame frame = browser.GetBrowser().GetFrame(i);
                 if (frame != null)
                 {
-                    //for (int j = 0; j < limit; j++)
-                    //{
-                    if (frame.Url == url)
+                    switch (by)
                     {
-                        return frame;
+                        case "Exists":
+                            if (await frame.FElementExists(selector[0], limit))
+                            {
+                                return frame;
+                            }
+                            break;
+                        case "Visible":
+                            if (await frame.FrameElementVisible(selector[0], limit))
+                            {
+                                return frame;
+                            }
+                            break;
+                        case "TextEquals":
+                            if (await frame.FElementInnerTextEquals(selector[0], selector[1], limit))
+                            {
+                                return frame;
+                            }
+                            break;
+                        case "TextContent":
+                            if (await frame.FElementInnerTextContent(selector[0], selector[1], limit))
+                            {
+                                return frame;
+                            }
+                            break;
+
+                        default:
+                            return null;
                     }
-                    //}
-                    await Task.Delay(100);
                 }
+                //}
+                await Task.Delay(100);
             }
-            //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return null;
         }
 
         public static async Task<bool> ElementExists(this ChromiumWebBrowser browser, string selector, string nameException = "ExceptionExistsDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
+                $"var node = document.querySelector('{selector}');" +
                 @"return (node === document.body) ? false : document.body.contains(node);
                 })();";
 
@@ -176,15 +231,40 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
+            return false;
+        }
+        public static async Task<bool> AllElementInnerTextContent(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionExistsDefault", int limit = 20)
+        {
+            string JsScript = $@"(function(){{
+                var nodes = document.querySelectorAll('{selector}');
+                for(var i = 0; i < nodes.length; i++)
+                {{
+                    if(nodes[i].innerText.includes('{text}'))
+                    {{
+                        return true;
+                    }}  
+                }}
+                return false;
+            }})();";
+
+            for (int i = 0; i < limit; i++)
+            {
+                if ((bool)await browser.ExecuteScript(JsScript))
+                {
+                    return true;
+                }
+                await Task.Delay(1000);
+            }
+            await browser.Screenshot(nameException);
             return false;
         }
 
         public static async Task<bool> ElementInnerTextContent(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionExistsDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
-                @"let textFind = node.innerText.trim();" +
+                $"var node = document.querySelector('{selector}');" +
+                @"var textFind = node.innerText.trim();" +
                 $"if(textFind.includes('{text}'))" +
                 @"{
                     return true;
@@ -201,15 +281,15 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return false;
         }
 
         public static async Task<bool> ElementInnerTextNotContent(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionElementInnerTextNotContentDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
-                @"let textFind = node.innerText.trim();" +
+                $"var node = document.querySelector('{selector}');" +
+                @"var textFind = node.innerText.trim();" +
                 $"if(!textFind.includes('{text}'))" +
                 @"{
                     return true;
@@ -226,14 +306,17 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return false;
         }
+
+
+
         public static async Task<bool> FElementInnerTextContent(this IFrame frame, string selector, string text, int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
-                @"let textFind = node.innerText.trim();" +
+                $"var node = document.querySelector('{selector}');" +
+                @"var textFind = node.innerText.trim();" +
                 $"if(textFind.includes('{text}'))" +
                 @"{
                     return true;
@@ -257,7 +340,7 @@ namespace Asgard
         public static async Task<bool> ElementValue(this ChromiumWebBrowser browser, string selector, string value, string nameException = "ElementValue", int limit = 5)
         {
             string JsScript = @"(function(){" +
-                $"let value = document.querySelector('{selector}').value.trim();" +
+                $"var value = document.querySelector('{selector}').value.trim();" +
                 $"if(value == '{value}')" +
                 @"{
                     return true;
@@ -274,17 +357,41 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return false;
         }
 
+        public static async Task<bool> AllElementInnerTextEquals(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionElementInnerTextEqualsDefault", int limit = 20)
+        {
+            string JsScript = $@"(function(){{
+                var nodes = document.querySelectorAll('{selector}');
+                for(var i = 0; i < nodes.length; i++)
+                {{
+                    if(nodes[i].innerText == '{text}')
+                    {{
+                        return true;
+                    }}  
+                }}
+                return false;
+            }})();";
 
+            for (int i = 0; i < limit; i++)
+            {
+                if ((bool)await browser.ExecuteScript(JsScript))
+                {
+                    return true;
+                }
+                await Task.Delay(1000);
+            }
+            await browser.Screenshot(nameException);
+            return false;
+        }
 
         public static async Task<bool> ElementInnerTextEquals(this ChromiumWebBrowser browser, string selector, string text, string nameException = "ExceptionElementInnerTextEqualsDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
-                @"let textFind = node.innerText.trim();" +
+                $"var node = document.querySelector('{selector}');" +
+                @"var textFind = node.innerText.trim();" +
                 $"if(textFind == '{text}')" +
                 @"{
                     return true;
@@ -301,15 +408,15 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return false;
         }
 
-        public static async Task<bool> FElementInnerTextEquals(this IFrame frame, string selector, string text, string nameException = "ExceptionExistsDefault", int limit = 20)
+        public static async Task<bool> FElementInnerTextEquals(this IFrame frame, string selector, string text, int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
-                @"let textFind = node.innerText.trim();" +
+                $"var node = document.querySelector('{selector}');" +
+                @"var textFind = node.innerText.trim();" +
                 $"if(textFind == '{text}')" +
                 @"{
                     return true;
@@ -326,7 +433,6 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await browser.Screenshot(nameException);
             return false;
         }
 
@@ -335,13 +441,13 @@ namespace Asgard
             if (frame != null)
             {
                 string JsScript = @"(function(){" +
-    $"let node = document.querySelector('{selector}');" +
-    @"return (node === document.body) ? false : document.body.contains(node);
+                $"var node = document.querySelector('{selector}');" +
+                @"return (node === document.body) ? false : document.body.contains(node);
                 })();";
 
                 for (int i = 0; i < limit; i++)
                 {
-                    if ((bool)await frame.FExecuteScript(JsScript))
+                    if ((bool)await frame.FExecuteScript(JsScript, true))
                     {
                         return true;
                     }
@@ -356,7 +462,7 @@ namespace Asgard
         public static async Task<bool> ElementVisible(this ChromiumWebBrowser browser, string selector, string nameException = "ExceptionVisibleDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
+                $"var node = document.querySelector('{selector}');" +
                 @"return !!( node.offsetWidth || node.offsetHeight || node.getClientRects().length );
                 })();";
 
@@ -368,18 +474,16 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return false;
         }
 
-
-        public static async Task<bool> NodeVisibility(this ChromiumWebBrowser browser, string node, string nameException = "ExceptionVisibilityDefault", int limit = 20)
+        public static async Task<bool> NodeVisible(this ChromiumWebBrowser browser, string node, string nameException = "ExceptionVisibleDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = {node};" +
-                @"return (node == 'hidden') ? false : true;
+                $"var node = {node};" +
+                @"return !!( node.offsetWidth || node.offsetHeight || node.getClientRects().length );
                 })();";
-            //let node = document.querySelector("iframe[title='recaptcha challenge']").parentNode.parentNode.style.visibility
 
             for (int i = 0; i < limit; i++)
             {
@@ -389,14 +493,52 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
+            return false;
+        }
+        public static async Task<bool> NodeVisibility(this ChromiumWebBrowser browser, string node, string nameException = "ExceptionVisibilityDefault", int limit = 20)
+        {
+            string JsScript = @"(function(){" +
+                $"var node = {node};" +
+                @"return (node == 'hidden') ? false : true;
+                })();";
+            //var node = document.querySelector("iframe[title='recaptcha challenge']").parentNode.parentNode.style.visibility
+
+            for (int i = 0; i < limit; i++)
+            {
+                if ((bool)await browser.ExecuteScript(JsScript))
+                {
+                    return true;
+                }
+                await Task.Delay(1000);
+            }
+            await browser.Screenshot(nameException);
             return false;
         }
 
+        public static async Task<bool> NodeHidden(this ChromiumWebBrowser browser, string node, string nameException = "ExceptionHiddenDefault", int limit = 20)
+        {
+            string JsScript = $@"(function(){{
+                var node = {node};
+               return (node == 'hidden') ? true : false;
+                }})();";
+            //var node = document.querySelector("iframe[title='recaptcha challenge']").parentNode.parentNode.style.visibility
+
+            for (int i = 0; i < limit; i++)
+            {
+                if ((bool)await browser.ExecuteScript(JsScript))
+                {
+                    return true;
+                }
+                await Task.Delay(1000);
+            }
+            await browser.Screenshot(nameException);
+            return false;
+        }
         public static async Task<bool> ElementInvisible(this ChromiumWebBrowser browser, string selector, string nameException = "ExceptionInvisibleDefault", int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
+                $"var node = document.querySelector('{selector}');" +
                 @"return !!( node.offsetWidth || node.offsetHeight || node.getClientRects().length );
                 })();";
 
@@ -408,14 +550,14 @@ namespace Asgard
                 }
                 await Task.Delay(1000);
             }
-            //await //await browser.Screenshot(nameException);
+            await browser.Screenshot(nameException);
             return false;
         }
 
         public static async Task<bool> FrameElementVisible(this IFrame frame, string selector, int limit = 20)
         {
             string JsScript = @"(function(){" +
-                $"let node = document.querySelector('{selector}');" +
+                $"var node = document.querySelector('{selector}');" +
                 @"return !!( node.offsetWidth || node.offsetHeight || node.getClientRects().length );
                 })();";
 
@@ -531,12 +673,12 @@ namespace Asgard
             try
             {
                 string elementPosition = @"(function(){" +
-                    $"let gbc, X = 0, Y = 0; element = document.querySelector('{selector}');" +
+                    $"var gbc, X = 0, Y = 0; element = document.querySelector('{selector}');" +
                    @"if (element)
                     {
                         gbc = element.getBoundingClientRect();
-                        let centerX = gbc.width / 2;
-                        let centerY = gbc.height / 2;
+                        var centerX = gbc.width / 2;
+                        var centerY = gbc.height / 2;
                         X = gbc.x + centerX;
                         Y = gbc.y + centerY;
                     }
@@ -845,14 +987,14 @@ namespace Asgard
         //public static bool FindElement(this ChromiumWebBrowser browser, string selector)
         //{
         //    string jsScript = "(function(){" +
-        //        $"let gbc, X = 0, Y = 0; obj = document.querySelector('{selector}');" +
+        //        $"var gbc, X = 0, Y = 0; obj = document.querySelector('{selector}');" +
         //        "if (obj)" +
         //        "{" +
         //            "gbc = obj.getBoundingClientRect();" +
-        //            "let centerX = gbc.width / 2;" +
-        //            "let centerY = gbc.height / 2;" +
-        //            "let X = gbc.x + centerX;" +
-        //            "let Y = gbc.y + centerY;" +
+        //            "var centerX = gbc.width / 2;" +
+        //            "var centerY = gbc.height / 2;" +
+        //            "var X = gbc.x + centerX;" +
+        //            "var Y = gbc.y + centerY;" +
         //        "}" +
         //        "return { x: X, y: Y}" +
         //        "})();";
@@ -885,7 +1027,7 @@ namespace Asgard
         //public static void SelectElement(this ChromiumWebBrowser browser, string selector, string value, string by = "value")
         //{
         //    string jsScriptSelect = "(function(){" +
-        //    $"let el = document.querySelector('{selector}');" +
+        //    $"var el = document.querySelector('{selector}');" +
         //    "var rect = el.getBoundingClientRect();" +
         //    "scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;" +
         //    "scrollTop = window.pageYOffset || document.documentElement.scrollTop;" +
@@ -908,8 +1050,8 @@ namespace Asgard
         //            }
         //        }
 
-        //        string jsScriptOption = $"let options = document.querySelectorAll('{selector} > option');" +
-        //        "for (let option of options)" +
+        //        string jsScriptOption = $"var options = document.querySelectorAll('{selector} > option');" +
+        //        "for (var option of options)" +
         //        "{" +
         //            $"if (option.{by} == '{value}')" +
         //            "{" +

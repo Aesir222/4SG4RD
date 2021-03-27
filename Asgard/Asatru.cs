@@ -1409,7 +1409,31 @@ namespace Asgard
             //return null;
         }
 
-        public static async Task<dynamic> Api(string json, string token)
+        public static async Task<bool> Manscaped(int userId, string token, string email, string password, string address, string paymentMaterial, int status)
+        {
+            string name = "manscaped";
+            object parameters = new { email, password, address, paymentMaterial, status, createBy = userId};
+            string json = JsonConvert.SerializeObject(new { name, parameters });
+            dynamic response = await Api(json, token);
+
+            if (response != null)
+            {
+                if (response.success.status == "200" && response.success.result.Value == "Inserted successfully.")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public static async Task<dynamic> Api(string json, string token, bool test = false)
         {
             try
             {
@@ -1420,10 +1444,10 @@ namespace Asgard
                 request.AddHeader("Content-Type", "application/json");
                 request.AddParameter("application/json", json, ParameterType.RequestBody);
                 IRestResponse restResponse = await client.ExecuteAsync(request);
-                //if (testc)
-                //{
-                //MessageBox.Show(json + "\n\r" + "---" + "\n\r" + restResponse.Content);
-                //}
+                if (test)
+                {
+                    MessageBox.Show(json + "\n\r" + "---" + "\n\r" + restResponse.Content);
+                }
 
                 return JsonConvert.DeserializeObject(restResponse.Content);
             }
@@ -1651,13 +1675,18 @@ namespace Asgard
         public static Task OnClickAsync(this Control source)
         {
             TaskCompletionSource<bool> tcs = new TaskCompletionSource<bool>();
-            source.Click += OnClick;
-            return tcs.Task;
-
-            void OnClick(object sender, EventArgs e)
+            try
             {
-                tcs.SetResult(true);
+                source.Click += OnClick;
+                return tcs.Task;
+
+                void OnClick(object sender, EventArgs e)
+                {
+                    tcs.SetResult(true);
+                }
             }
+            catch (Exception) { }
+            return tcs.Task;
         }
 
         /// <summary>

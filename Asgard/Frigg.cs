@@ -9,8 +9,10 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Media;
+using System.Net;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
@@ -55,7 +57,9 @@ namespace Asgard
 
         private static ChromiumWebBrowser browser;
 
-        private const string initialUrl = "https://app.www.calm.com/subscribe?coupon=freetrial";
+
+        private const string web = "www.wish.com";
+        private const string initialUrl = "https://" + web;
 
         private Faker Faker { set; get; }
 
@@ -77,6 +81,9 @@ namespace Asgard
         SoundPlayer Valkyrie;
 
         private double OriginalCreditCardsCount;
+
+        private static IFrame Iframe;
+        private string sourceImageOriginal;
 
         public Frigg()
         {
@@ -131,7 +138,7 @@ namespace Asgard
             PanelConfirm.Hide();
             if (browser != null)
             {
-                await browser.Kill("www.calm.com");
+                await browser.Kill(web);
             }
             this.Close();
         }
@@ -181,6 +188,9 @@ namespace Asgard
             PanelValkyrieLive.Hide();
             PanelValkyrieDie.Hide();
             PanelBlockGate.Hide();
+            PanelReCaptcha.Hide();
+            PanelReCaptcha3x3.Hide();
+            PanelReCaptcha4x4.Hide();
             CircularProgressBarGeneral.Value = 0;
             CircularProgressBarDetail.Value = 0;
             Valhalla = new SoundPlayer(@"Valhalla.wav");
@@ -1007,7 +1017,7 @@ namespace Asgard
                 iconButton.Enabled = false;
 
                 await tokenCancel.Kill();
-                await browser.Kill("www.calm.com");
+                await browser.Kill(web);
 
                 await ConsoleProgressGeneral("Frigg esta siendo detenida.", 0, "Success");
                 await ConsoleProgressDetail("Frigg esta siendo detenida.", 0, "Success");
@@ -1739,7 +1749,7 @@ namespace Asgard
             catch (Exception) { }
 
             //////await browser.Screenshot("100.Last_" + frigg.ToString() + "_" + Asatru.GetTimestamp(DateTime.Now));
-            await browser.Kill("www.calm.com");
+            await browser.Kill(web);
             await tokenCancel.Kill();
 
             if (frigg)
@@ -1867,7 +1877,7 @@ namespace Asgard
                 await ConsoleProgressGeneral("Invocando a Frigg...", 3);
                 return await StartFrigg();
             }
-            catch (Exception) { }
+            catch (Exception) { throw; }
 
             await ConsoleProgressGeneral("Invocando a Frigg... ¡Fallo!", 0, "Fail");
             return false;
@@ -1878,53 +1888,247 @@ namespace Asgard
         {
             try
             {
-                //browser.Screenshot("1.Load");
-                //////await browser.Screenshot("1.StartFrigg_" + Asatru.GetTimestamp(DateTime.Now));
+                await browser.Screenshot("1.StartFrigg_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Zombificando ambiente", 10);
                 await browser.DisableAlerts();
             }
             catch (Exception) { }
             //await Task.Delay(10000);
             //await browser.GetSource("registry");
-            bool InputEmail = await browser.ElementVisible("div.visible > div > div > form > div:nth-child(1) > div > input", "ExceptionLoad");
-            if (InputEmail)
+            bool divGoToSingUp = await browser.ElementVisible("div[data-testid=login-signuptab]", "ExceptionStartFrigg");
+            if (divGoToSingUp)
             {
-                return await LogIn();
+                return await GoToSingUp();
             }
             await ConsoleProgressGeneral("Zombificando ambiente. !Fallo¡", 10, "Fail");
             return false;
         }
-
-        private async Task<bool> LogIn()
+        private async Task<bool> GoToSingUp()
+        {
+            try
+            {
+                await browser.Screenshot("2.GoToSingUp_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressGeneral("Zombificando ambiente", 20);
+                await browser.DisableAlerts();
+                await browser.Click("div[data-testid=login-signuptab]");
+            }
+            catch (Exception) { }
+            //await Task.Delay(10000);
+            //await browser.GetSource("registry");
+            bool inputSignUp = await browser.ElementVisible("input[data-id=firstName]", "ExceptionGoToSingUp");
+            if (inputSignUp)
+            {
+                return await SignUp();
+            }
+            await ConsoleProgressGeneral("Zombificando ambiente. !Fallo¡", 20, "Fail");
+            return false;
+        }
+        private async Task<bool> SignUp()
         {
             try
             {
                 // browser.Screenshot("2.LogIn");
-                //////await browser.Screenshot("2.Login_" + Asatru.GetTimestamp(DateTime.Now));
+                await browser.Screenshot("3.SignUp_" + Asatru.GetTimestamp(DateTime.Now));
                 await ConsoleProgressGeneral("Resolviendo teorema de Gibbs.", 30);
-                FullName = Faker.Person.FullName;
-                await browser.SendKeys("div.visible > div > div > form > div:nth-child(1) > div > input", Faker.Internet.Email());
-                await browser.SendKeys("div.visible > div > div > form > div:nth-child(2) > div > input", Faker.Internet.Password());
-                await browser.SendKeys("div.visible > div > div > form > div:nth-child(3) > div > input", FullName);
-
-                await Task.Delay(1000);
-                await browser.Click("div.visible > div > div > form > button");
-                await Task.Delay(3000);
+                await browser.SendKeys("input[data-id=firstName]", Faker.Name.FirstName());
+                await browser.SendKeys("input[data-id=lastName]", Faker.Name.LastName());
+                await browser.SendKeys("input[data-id=emailAddress]", Faker.Internet.Email());
+                await browser.SendKeys("input[data-id=password]", Faker.Internet.Password());
+                await browser.ExecuteScript("document.querySelector('div[data-testid=signup-button]').click();");
+                //await Task.Delay(3000);
             }
             catch (Exception) { }
 
-            bool divModal = await browser.ElementInvisible("div.visible", "ExceptionLogIn");
-            if (divModal)
+            Task<bool> task1 = browser.NodeVisibility("document.querySelector(\"iframe[title = 'recaptcha challenge']\").parentNode.parentNode.style.visibility", "3.ExceptionSignupWomen");
+            Task<bool> task2 = browser.ElementVisible("div[data-testid=signup-women]", "3.1.ExceptionSignupCaptcha");
+
+            await Task.WhenAny(task1, task2);
+            bool task1Result = task1.Result; // or await task1
+            bool task2Result = task2.Result; // or await task2
+
+
+            //bool divSignUpWomen = await 
+            //bool iframeReCaptcha = await ;
+            //bool iframeReCaptcha = await browser.NodeVisibility("document.querySelector(\"iframe[sandbox = 'allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox']\").parentNode.parentNode.style.visibility", "ExceptionSignup");
+            if (task1Result)
             {
-                //////await browser.Screenshot("2.1.Login_" + Asatru.GetTimestamp(DateTime.Now));
-                bool divWait = await browser.ElementInvisible("#take-a-deep-breath", "ExceptionLogInWait");
-                if (divWait)
+                string urlIframe = (string)await browser.ExecuteScript("document.querySelector(\"iframe[title = 'recaptcha challenge']\").getAttribute('src')");
+                Iframe = await browser.GetFrameByUrl(urlIframe, "3.ExceptionCaptcha");
+                if (Iframe != null)
                 {
-                    //////await browser.Screenshot("2.2.Login_" + Asatru.GetTimestamp(DateTime.Now));
-                    return await Last();
+                    return await ReCaptcha();
                 }
             }
+            else if (task2Result)
+            {
+                return await MoreInfo();
+            }
+
+            //bool divModal = await browser.ElementInvisible("input[data-id=firstName]", "ExceptionSignUp");
+            //if (divModal)
+            //{
+            //    //////await browser.Screenshot("2.1.Login_" + Asatru.GetTimestamp(DateTime.Now));
+            //    bool divWait = await browser.ElementInvisible("#take-a-deep-breath", "ExceptionLogInWait");
+            //    if (divWait)
+            //    {
+            //        //////await browser.Screenshot("2.2.Login_" + Asatru.GetTimestamp(DateTime.Now));
+            //        return await Last();
+            //    }
+            //}
             await ConsoleProgressGeneral("Resolviendo teorema de Gibbs. ¡Fallo!", 30, "Fail");
+            return false;
+        }
+
+        private async Task<bool> ReCaptcha()
+        {
+
+            try
+            {
+                await browser.Screenshot("4.ReCaptcha_" + Asatru.GetTimestamp(DateTime.Now));
+                await ConsoleProgressGeneral("Cotejando sinergias interdimensionales.", 30);
+                await browser.DisableAlerts();
+                //await Task.Delay(3000);
+
+                sourceImageOriginal = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+
+                if (sourceImageOriginal != null)
+                {
+                    var request = WebRequest.Create(sourceImageOriginal);
+
+                    using (WebResponse response = await request.GetResponseAsync())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        PictureBoxOriginal.Image = Bitmap.FromStream(stream);
+                        stream.Dispose();
+                    }
+
+                    int numberChild = (int)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody').children.length;");
+                    LabelInfoReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect > div.rc-imageselect-payload > div.rc-imageselect-instructions > div.rc-imageselect-desc-wrapper > div').textContent");
+                    LabelInfoStrongReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect > div.rc-imageselect-payload > div.rc-imageselect-instructions > div.rc-imageselect-desc-wrapper > div > strong').textContent");
+
+                    IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+
+                    //browser.Screenshot("4.recapcha");
+
+                    if (numberChild == 3)
+                    {
+                        ReCaptcha3x3();
+                        PanelReCaptcha3x3.Show();
+                        PanelReCaptcha.Show();
+                    }
+                    else if (numberChild == 4)
+                    {
+                        ReCaptcha4x4();
+                        PanelReCaptcha4x4.Show();
+                        PanelReCaptcha.Show();
+                    }
+                    await IconButtonAceptReCaptcha.OnClickAsync();
+                    await Task.Delay(5000);
+                    await browser.ClickXY(819, 728);
+                }
+
+                if (!PanelReCaptcha.Visible)
+                {
+                    PanelReCaptcha.Show();
+                }
+                else
+                {
+                    PanelReCaptcha.Hide();
+                }
+                PanelReCaptcha3x3.Hide();
+                PanelReCaptcha4x4.Hide();
+                HideChecks();
+
+            }
+            catch (Exception) { throw; }
+
+            bool iframeReCaptchaHide = await browser.NodeHidden("document.querySelector(\"iframe[title = 'recaptcha challenge']\").parentNode.parentNode.style.visibility", "4.ExceptionReCaptchaHide");
+            if (iframeReCaptchaHide)
+            {
+                Task<bool> task1 = browser.NodeVisibility("document.querySelector(\"iframe[title = 'recaptcha challenge']\").parentNode.parentNode.style.visibility", "4.1.ExceptionReCaptchaOther");
+                Task<bool> task2 = browser.ElementVisible("div[data-testid=signup-women]", "4.2.ExceptionReCaptchaMoreInfo");
+
+                await Task.WhenAny(task1, task2);
+                bool task1Result = task1.Result; // or await task1
+                bool task2Result = task2.Result; // or await task2
+
+
+                //bool divSignUpWomen = await 
+                //bool iframeReCaptcha = await ;
+                //bool iframeReCaptcha = await browser.NodeVisibility("document.querySelector(\"iframe[sandbox = 'allow-forms allow-popups allow-same-origin allow-scripts allow-top-navigation allow-modals allow-popups-to-escape-sandbox']\").parentNode.parentNode.style.visibility", "ExceptionSignup");
+                if (task1Result)
+                {
+                    string urlIframe = (string)await browser.ExecuteScript("document.querySelector(\"iframe[title = 'recaptcha challenge']\").getAttribute('src')");
+                    Iframe = await browser.GetFrameByUrl(urlIframe, "4.ExceptionCaptcha");
+                    if (Iframe != null)
+                    {
+                        return await ReCaptcha();
+                    }
+                }
+                else if (task2Result)
+                {
+                    return await MoreInfo();
+                }
+                else
+                {
+                    await browser.Screenshot("4.ReCaptchaExit_" + Asatru.GetTimestamp(DateTime.Now));
+                }
+            }
+            else
+            {
+                bool paragraphTryAgain = await browser.ElementInnerTextContent("#page-wrapper > div.center-page > div > div > form > p", "try again", "ExceptionReCaptchaWrong", 10);
+                if (paragraphTryAgain)
+                {
+                    await browser.Click("#page-wrapper > div.center-page > div > div > form > button:nth-child(13)");
+
+                    return await ReCaptcha();
+
+                }
+                else
+                {
+                    //bool iframeCCNumber = await browser.ElementVisible("#stripe-form > div.checkout-form.payment-options > div > div > div.stripe-form-fields > fieldset.credit-card-info > fieldset:nth-child(1) > div.fields.cc-number-wrapper > div > div > iframe", "ExceptionRandomAddToCart");
+                    //if (iframeCCNumber)
+                    //{
+                    //    return await Last();
+                    //}
+                }
+            }
+
+            await ConsoleProgressGeneral("Cotejando sinergias interdimensionales. ¡Fallo!", 30, "fail");
+            return false;
+        }
+
+        private async Task<bool> MoreInfo()
+        {
+            try
+            {
+                if (new Random().Next(0, 2) > 0)
+                {
+                    await browser.ExecuteScript("document.querySelector('div[data-testid=signup-women]').click();");
+                }
+                else
+                {
+                    await browser.ExecuteScript("document.querySelector('div[data-testid=signup-men]').click();");
+                }
+
+                await browser.ExecuteScript("document.querySelector('div[data-testid=signup-ageselect]').click();");
+                string clickAgeOption = @"var allAgeOptions = document.querySelectorAll('div[data-testid=signup-ageoptions]');
+                    var randAgeOption = allAgeOptions[Math.floor(Math.random() * allAgeOptions.length)];
+                    randAgeOption.click();";
+                await browser.ExecuteScript(clickAgeOption);
+                await browser.ExecuteScript("document.querySelector('div[data-testid=signup-finish]').click();");
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            bool divTopMenuProfile = await browser.ElementVisible("div[data-testid=topmenu-profile]", "ExceptionMoreInfo");
+
+
+
             return false;
         }
 
@@ -2163,6 +2367,691 @@ namespace Asgard
             PanelConfirm.Hide();
         }
 
+        #region ReCaptcha
+        private void ReCaptcha3x3()
+        {
+            // Trocear una imagen en trozos más pequeños
+            const int columnas = 3;
+            const int filas = 3;
+            //
+            // El tamaño proporcional del ancho y alto
+            // correspondientes a los trozos a usar
+            int tamTrozoW = 300 / columnas;
+            int tamTrozoH = 300 / filas;
+            // El tamaño de cada trozo
+            int nW = 100;
+            int nH = 100;
+            // El rectángulo que ocupará cada nuevo trozo
+            Rectangle rectDest = new Rectangle(0, 0, nW, nH);
+            // Estas variables se usan en el bucle
+            Bitmap bmpDest;
+            Graphics g;
+            Rectangle rectOrig;
+            //
+            // Array con los pictures que hay en el formulario
+            PictureBox[] trozos = { PictureBox300, PictureBox301, PictureBox302, PictureBox303, PictureBox304, PictureBox305, PictureBox306, PictureBox307, PictureBox308 };
+            // Para contar cada columna
+            int c = 0;
+            // La posición X e Y en la imagen original
+            int pX = 0, pY = 0;
+            for (int i = 0; i < trozos.Length; i++)
+            {
+                // El trozo de la imagen original
+                rectOrig = new Rectangle(pX, pY, tamTrozoW, tamTrozoH);
+                // La imagen de destino
+                bmpDest = new Bitmap(tamTrozoW, tamTrozoW);
+                g = Graphics.FromImage(bmpDest);
+                // Obtenemos un trozo de la imagen original
+                // y lo dibujamos en la imagen de destino
+                g.DrawImage(PictureBoxOriginal.Image, rectDest, rectOrig, GraphicsUnit.Pixel);
+                // Asignamos la nueva imagen al picture correspondiente
+                trozos[i].Image = bmpDest;
+                c += 1;
+                pX += tamTrozoW;
+                // Cuando hayamos recorrido las columnas,
+                // pasamos a la siguiente fila
+                if (c >= columnas)
+                {
+                    c = 0;
+                    pX = 0;
+                    pY += tamTrozoH;
+                }
+            }
+        }
+
+        private async void PictureBox300_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha300.Show();
+            if (IconButton300.Visible)
+            {
+                IconButton300.Hide();
+                await browser.ClickXY(547, 367);
+            }
+            else
+            {
+                await browser.ClickXY(547, 367);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(1) > td:nth-child(1) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton300.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha300.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox301_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha301.Show();
+            if (IconButton301.Visible)
+            {
+                IconButton301.Hide();
+                await browser.ClickXY(677, 367);
+            }
+            else
+            {
+                await browser.ClickXY(677, 367);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(1) > td:nth-child(2) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton301.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha301.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox302_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha302.Show();
+            if (IconButton302.Visible)
+            {
+                IconButton302.Hide();
+                await browser.ClickXY(804, 367);
+            }
+            else
+            {
+                await browser.ClickXY(804, 367);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(1) > td:nth-child(3) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton302.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha302.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox303_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha303.Show();
+            if (IconButton303.Visible)
+            {
+                IconButton303.Hide();
+                await browser.ClickXY(545, 496);
+            }
+            else
+            {
+                await browser.ClickXY(545, 496);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(2) > td:nth-child(1) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton303.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha303.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox304_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha304.Show();
+            if (IconButton304.Visible)
+            {
+                IconButton304.Hide();
+                await browser.ClickXY(675, 495);
+            }
+            else
+            {
+                await browser.ClickXY(675, 495);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(2) > td:nth-child(2) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton304.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha304.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox305_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha305.Show();
+            if (IconButton305.Visible)
+            {
+                IconButton305.Hide();
+                await browser.ClickXY(805, 495);
+            }
+            else
+            {
+                await browser.ClickXY(805, 495);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(2) > td:nth-child(3) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton305.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha305.Hide();
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox306_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha306.Show();
+            if (IconButton306.Visible)
+            {
+                IconButton306.Hide();
+                await browser.ClickXY(546, 627);
+            }
+            else
+            {
+                await browser.ClickXY(546, 627);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(3) > td:nth-child(1) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton306.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha306.Hide();
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox307_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha307.Show();
+            if (IconButton307.Visible)
+            {
+                IconButton307.Hide();
+                await browser.ClickXY(677, 626);
+            }
+            else
+            {
+                await browser.ClickXY(677, 626);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(3) > td:nth-child(2) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton307.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha307.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox308_Click(object sender, EventArgs e)
+        {
+            PictureBox pictureBox = (PictureBox)sender;
+            PictureBoxLoadRecaptcha308.Show();
+            if (IconButton308.Visible)
+            {
+                IconButton308.Hide();
+                await browser.ClickXY(805, 625);
+            }
+            else
+            {
+                await browser.ClickXY(805, 625);
+                await Task.Delay(10000);
+                string sourceImage = (string)await Iframe.FExecuteScript("document.querySelector('#rc-imageselect-target > table > tbody > tr:nth-child(3) > td:nth-child(3) > div > div.rc-image-tile-wrapper > img').getAttribute('src')");
+                if (sourceImageOriginal != sourceImage)
+                {
+                    WebRequest request = WebRequest.Create(sourceImage);
+
+                    using (WebResponse response = request.GetResponse())
+                    using (Stream stream = response.GetResponseStream())
+                    {
+                        pictureBox.Image = Bitmap.FromStream(stream);
+                    }
+                }
+                else
+                {
+                    IconButton308.Show();
+                }
+            }
+            PictureBoxLoadRecaptcha308.Hide();
+
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+
+        private void ReCaptcha4x4()
+        {
+            // Trocear una imagen en trozos más pequeños
+            const int columnas = 4;
+            const int filas = 4;
+            //
+            // El tamaño proporcional del ancho y alto
+            // correspondientes a los trozos a usar
+            int tamTrozoW = 300 / columnas;
+            int tamTrozoH = 300 / filas;
+            // El tamaño de cada trozo
+            int nW = 75;
+            int nH = 75;
+            // El rectángulo que ocupará cada nuevo trozo
+            Rectangle rectDest = new Rectangle(0, 0, nW, nH);
+            // Estas variables se usan en el bucle
+            Bitmap bmpDest;
+            Graphics g;
+            Rectangle rectOrig;
+            //
+            // Array con los pictures que hay en el formulario
+            PictureBox[] trozos = { PictureBox400, PictureBox401, PictureBox402, PictureBox403, PictureBox404, PictureBox405, PictureBox406, PictureBox407, PictureBox408, PictureBox409, PictureBox410, PictureBox411, PictureBox412, PictureBox413, PictureBox414, PictureBox415 };
+            // Para contar cada columna
+            int c = 0;
+            // La posición X e Y en la imagen original
+            int pX = 0, pY = 0;
+            for (int i = 0; i < trozos.Length; i++)
+            {
+                // El trozo de la imagen original
+                rectOrig = new Rectangle(pX, pY, tamTrozoW, tamTrozoH);
+                // La imagen de destino
+                bmpDest = new Bitmap(tamTrozoW, tamTrozoW);
+                g = Graphics.FromImage(bmpDest);
+                // Obtenemos un trozo de la imagen original
+                // y lo dibujamos en la imagen de destino
+                Bitmap objBitmap = new Bitmap(PictureBoxOriginal.Image, new Size(300, 300));
+                g.DrawImage(objBitmap, rectDest, rectOrig, GraphicsUnit.Pixel);
+
+
+                // Asignamos la nueva imagen al picture correspondiente
+                trozos[i].Image = bmpDest;
+                c += 1;
+                pX += tamTrozoW;
+                // Cuando hayamos recorrido las columnas,
+                // pasamos a la siguiente fila
+                if (c >= columnas)
+                {
+                    c = 0;
+                    pX = 0;
+                    pY += tamTrozoH;
+                }
+            }
+        }
+
+
+        private async void PictureBox400_Click(object sender, EventArgs e)
+        {
+            //PictureBox pictureBox = (PictureBox)sender;
+            if (IconButton400.Visible)
+            {
+                await browser.ClickXY(529, 351);
+                IconButton400.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(529, 351);
+                IconButton400.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox401_Click(object sender, EventArgs e)
+        {
+            if (IconButton401.Visible)
+            {
+                await browser.ClickXY(629, 351);
+                IconButton401.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(629, 351);
+                IconButton401.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox402_Click(object sender, EventArgs e)
+        {
+            if (IconButton402.Visible)
+            {
+                await browser.ClickXY(724, 353);
+                IconButton402.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(724, 353);
+                IconButton402.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox403_Click(object sender, EventArgs e)
+        {
+            if (IconButton403.Visible)
+            {
+                await browser.ClickXY(821, 350);
+                IconButton403.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(821, 350);
+                IconButton403.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox404_Click(object sender, EventArgs e)
+        {
+            if (IconButton404.Visible)
+            {
+                await browser.ClickXY(530, 447);
+                IconButton404.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(530, 447);
+                IconButton404.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox405_Click(object sender, EventArgs e)
+        {
+            if (IconButton405.Visible)
+            {
+                await browser.ClickXY(627, 448);
+                IconButton405.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(627, 448);
+                IconButton405.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox406_Click(object sender, EventArgs e)
+        {
+            if (IconButton406.Visible)
+            {
+                await browser.ClickXY(724, 447);
+                IconButton406.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(724, 447);
+                IconButton406.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox407_Click(object sender, EventArgs e)
+        {
+            if (IconButton407.Visible)
+            {
+                await browser.ClickXY(819, 446);
+                IconButton407.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(819, 446);
+                IconButton407.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox408_Click(object sender, EventArgs e)
+        {
+            if (IconButton408.Visible)
+            {
+                await browser.ClickXY(530, 546);
+                IconButton408.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(530, 546);
+                IconButton408.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox409_Click(object sender, EventArgs e)
+        {
+            if (IconButton409.Visible)
+            {
+                await browser.ClickXY(628, 546);
+                IconButton409.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(628, 546);
+                IconButton409.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox410_Click(object sender, EventArgs e)
+        {
+            if (IconButton410.Visible)
+            {
+                await browser.ClickXY(722, 546);
+                IconButton410.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(722, 546);
+                IconButton410.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox411_Click(object sender, EventArgs e)
+        {
+            if (IconButton411.Visible)
+            {
+                await browser.ClickXY(822, 545);
+                IconButton411.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(822, 545);
+                IconButton411.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox412_Click(object sender, EventArgs e)
+        {
+            if (IconButton412.Visible)
+            {
+                await browser.ClickXY(530, 642);
+                IconButton412.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(530, 642);
+                IconButton412.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox413_Click(object sender, EventArgs e)
+        {
+            if (IconButton413.Visible)
+            {
+                await browser.ClickXY(625, 641);
+                IconButton413.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(625, 641);
+                IconButton413.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox414_Click(object sender, EventArgs e)
+        {
+            if (IconButton414.Visible)
+            {
+                await browser.ClickXY(725, 642);
+                IconButton414.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(725, 642);
+                IconButton414.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private async void PictureBox415_Click(object sender, EventArgs e)
+        {
+            if (IconButton415.Visible)
+            {
+                await browser.ClickXY(821, 644);
+                IconButton415.Hide();
+            }
+            else
+            {
+                await browser.ClickXY(821, 644);
+                IconButton415.Show();
+            }
+            IconButtonAceptReCaptcha.Text = (string)await Iframe.FExecuteScript("document.querySelector('#recaptcha-verify-button').textContent");
+        }
+
+        private void HideChecks()
+        {
+            IconButton300.Hide();
+            IconButton301.Hide();
+            IconButton302.Hide();
+            IconButton303.Hide();
+            IconButton304.Hide();
+            IconButton305.Hide();
+            IconButton306.Hide();
+            IconButton307.Hide();
+            IconButton308.Hide();
+
+            IconButton400.Hide();
+            IconButton401.Hide();
+            IconButton402.Hide();
+            IconButton403.Hide();
+            IconButton404.Hide();
+            IconButton405.Hide();
+            IconButton406.Hide();
+            IconButton407.Hide();
+            IconButton408.Hide();
+            IconButton409.Hide();
+            IconButton410.Hide();
+            IconButton411.Hide();
+            IconButton412.Hide();
+            IconButton413.Hide();
+            IconButton414.Hide();
+            IconButton415.Hide();
+        }
+
+        #endregion
+
         private async Task Block()
         {
             bool block = await Asatru.BlockAesir(UserId, 3, Token);
@@ -2174,7 +3063,7 @@ namespace Asgard
                 PanelBlockGate.Hide();
                 if (browser != null)
                 {
-                    await browser.Kill("www.calm.com");
+                    await browser.Kill(web);
                 }
                 this.Close();
             }

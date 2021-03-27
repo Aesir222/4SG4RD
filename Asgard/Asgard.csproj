@@ -321,6 +321,12 @@
     <Compile Include="Account.designer.cs">
       <DependentUpon>Account.cs</DependentUpon>
     </Compile>
+    <Compile Include="FriggCalm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FriggCalm.designer.cs">
+      <DependentUpon>FriggCalm.cs</DependentUpon>
+    </Compile>
     <Compile Include="IJotun.cs" />
     <Compile Include="IChecker.cs" />
     <Compile Include="IAesir.cs" />
@@ -557,6 +563,9 @@
     <Compile Include="Yggdrasil.cs" />
     <EmbeddedResource Include="Account.resx">
       <DependentUpon>Account.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FriggCalm.resx">
+      <DependentUpon>FriggCalm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Video1.resx">
       <DependentUpon>Video1.cs</DependentUpon>

@@ -44,8 +44,6 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
-            this.TextBoxInfoEmail = new System.Windows.Forms.TextBox();
-            this.label16 = new System.Windows.Forms.Label();
             this.LabelItemList = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.IconButtonStart = new FontAwesome.Sharp.IconButton();
@@ -206,8 +204,6 @@
             this.PanelSettings.Controls.Add(this.label18);
             this.PanelSettings.Controls.Add(this.label17);
             this.PanelSettings.Controls.Add(this.label15);
-            this.PanelSettings.Controls.Add(this.TextBoxInfoEmail);
-            this.PanelSettings.Controls.Add(this.label16);
             this.PanelSettings.Controls.Add(this.LabelItemList);
             this.PanelSettings.Controls.Add(this.label5);
             this.PanelSettings.Controls.Add(this.IconButtonStart);
@@ -317,7 +313,7 @@
             this.iconButton4.Location = new System.Drawing.Point(28, 424);
             this.iconButton4.Name = "iconButton4";
             this.iconButton4.Size = new System.Drawing.Size(200, 30);
-            this.iconButton4.TabIndex = 148;
+            this.iconButton4.TabIndex = 20;
             this.iconButton4.Text = "LIMPIAR";
             this.iconButton4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.iconButton4.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -373,7 +369,7 @@
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.ForeColor = System.Drawing.Color.White;
-            this.label18.Location = new System.Drawing.Point(206, 185);
+            this.label18.Location = new System.Drawing.Point(21, 179);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(80, 17);
             this.label18.TabIndex = 143;
@@ -385,7 +381,7 @@
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.White;
-            this.label17.Location = new System.Drawing.Point(213, 41);
+            this.label17.Location = new System.Drawing.Point(22, 37);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(61, 17);
             this.label17.TabIndex = 142;
@@ -402,33 +398,6 @@
             this.label15.Size = new System.Drawing.Size(67, 13);
             this.label15.TabIndex = 141;
             this.label15.Text = "Direccion 2.";
-            // 
-            // TextBoxInfoEmail
-            // 
-            this.TextBoxInfoEmail.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.TextBoxInfoEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(80)))), ((int)(((byte)(94)))), ((int)(((byte)(129)))));
-            this.TextBoxInfoEmail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TextBoxInfoEmail.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TextBoxInfoEmail.ForeColor = System.Drawing.Color.White;
-            this.TextBoxInfoEmail.Location = new System.Drawing.Point(116, 339);
-            this.TextBoxInfoEmail.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
-            this.TextBoxInfoEmail.MaximumSize = new System.Drawing.Size(250, 21);
-            this.TextBoxInfoEmail.MinimumSize = new System.Drawing.Size(25, 21);
-            this.TextBoxInfoEmail.Name = "TextBoxInfoEmail";
-            this.TextBoxInfoEmail.Size = new System.Drawing.Size(111, 22);
-            this.TextBoxInfoEmail.TabIndex = 140;
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.ForeColor = System.Drawing.Color.Silver;
-            this.label16.Location = new System.Drawing.Point(110, 324);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(45, 13);
-            this.label16.TabIndex = 139;
-            this.label16.Text = "Correo.";
-            this.label16.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
             // LabelItemList
             // 
@@ -469,7 +438,7 @@
             this.IconButtonStart.Location = new System.Drawing.Point(265, 424);
             this.IconButtonStart.Name = "IconButtonStart";
             this.IconButtonStart.Size = new System.Drawing.Size(200, 30);
-            this.IconButtonStart.TabIndex = 136;
+            this.IconButtonStart.TabIndex = 17;
             this.IconButtonStart.Text = "INCIAR";
             this.IconButtonStart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonStart.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -492,7 +461,7 @@
             this.IconButtonItemLoad.Location = new System.Drawing.Point(196, 145);
             this.IconButtonItemLoad.Name = "IconButtonItemLoad";
             this.IconButtonItemLoad.Size = new System.Drawing.Size(30, 30);
-            this.IconButtonItemLoad.TabIndex = 135;
+            this.IconButtonItemLoad.TabIndex = 4;
             this.IconButtonItemLoad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonItemLoad.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.IconButtonItemLoad.UseVisualStyleBackColor = false;
@@ -514,7 +483,7 @@
             this.IconButtonInfoLoad.Location = new System.Drawing.Point(197, 374);
             this.IconButtonInfoLoad.Name = "IconButtonInfoLoad";
             this.IconButtonInfoLoad.Size = new System.Drawing.Size(30, 30);
-            this.IconButtonInfoLoad.TabIndex = 104;
+            this.IconButtonInfoLoad.TabIndex = 14;
             this.IconButtonInfoLoad.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonInfoLoad.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.IconButtonInfoLoad.UseVisualStyleBackColor = false;
@@ -527,13 +496,13 @@
             this.TextBoxInfoPhone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.TextBoxInfoPhone.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextBoxInfoPhone.ForeColor = System.Drawing.Color.White;
-            this.TextBoxInfoPhone.Location = new System.Drawing.Point(28, 379);
+            this.TextBoxInfoPhone.Location = new System.Drawing.Point(136, 339);
             this.TextBoxInfoPhone.Margin = new System.Windows.Forms.Padding(3, 6, 3, 3);
             this.TextBoxInfoPhone.MaximumSize = new System.Drawing.Size(250, 21);
             this.TextBoxInfoPhone.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxInfoPhone.Name = "TextBoxInfoPhone";
             this.TextBoxInfoPhone.Size = new System.Drawing.Size(89, 22);
-            this.TextBoxInfoPhone.TabIndex = 133;
+            this.TextBoxInfoPhone.TabIndex = 13;
             // 
             // TextBoxInfoZip
             // 
@@ -547,8 +516,8 @@
             this.TextBoxInfoZip.MaximumSize = new System.Drawing.Size(250, 21);
             this.TextBoxInfoZip.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxInfoZip.Name = "TextBoxInfoZip";
-            this.TextBoxInfoZip.Size = new System.Drawing.Size(69, 22);
-            this.TextBoxInfoZip.TabIndex = 132;
+            this.TextBoxInfoZip.Size = new System.Drawing.Size(74, 22);
+            this.TextBoxInfoZip.TabIndex = 12;
             // 
             // TextBoxInfoCity
             // 
@@ -562,20 +531,19 @@
             this.TextBoxInfoCity.MaximumSize = new System.Drawing.Size(250, 21);
             this.TextBoxInfoCity.MinimumSize = new System.Drawing.Size(24, 21);
             this.TextBoxInfoCity.Name = "TextBoxInfoCity";
-            this.TextBoxInfoCity.ShortcutsEnabled = false;
             this.TextBoxInfoCity.Size = new System.Drawing.Size(90, 22);
-            this.TextBoxInfoCity.TabIndex = 131;
+            this.TextBoxInfoCity.TabIndex = 10;
             // 
             // label14
             // 
             this.label14.AutoSize = true;
             this.label14.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label14.ForeColor = System.Drawing.Color.Silver;
-            this.label14.Location = new System.Drawing.Point(22, 364);
+            this.label14.Location = new System.Drawing.Point(130, 324);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(52, 13);
+            this.label14.Size = new System.Drawing.Size(55, 13);
             this.label14.TabIndex = 130;
-            this.label14.Text = "Telefono";
+            this.label14.Text = "Telefono.";
             // 
             // TextBoxInfoAddress2
             // 
@@ -590,7 +558,7 @@
             this.TextBoxInfoAddress2.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxInfoAddress2.Name = "TextBoxInfoAddress2";
             this.TextBoxInfoAddress2.Size = new System.Drawing.Size(69, 22);
-            this.TextBoxInfoAddress2.TabIndex = 129;
+            this.TextBoxInfoAddress2.TabIndex = 9;
             // 
             // label13
             // 
@@ -616,7 +584,7 @@
             this.TextBoxInfoAddress1.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxInfoAddress1.Name = "TextBoxInfoAddress1";
             this.TextBoxInfoAddress1.Size = new System.Drawing.Size(110, 22);
-            this.TextBoxInfoAddress1.TabIndex = 127;
+            this.TextBoxInfoAddress1.TabIndex = 8;
             // 
             // label8
             // 
@@ -642,7 +610,7 @@
             this.TextBoxInfoLastName.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxInfoLastName.Name = "TextBoxInfoLastName";
             this.TextBoxInfoLastName.Size = new System.Drawing.Size(90, 22);
-            this.TextBoxInfoLastName.TabIndex = 124;
+            this.TextBoxInfoLastName.TabIndex = 7;
             // 
             // TextBoxInfo
             // 
@@ -656,7 +624,7 @@
             this.TextBoxInfo.Name = "TextBoxInfo";
             this.TextBoxInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextBoxInfo.Size = new System.Drawing.Size(200, 80);
-            this.TextBoxInfo.TabIndex = 123;
+            this.TextBoxInfo.TabIndex = 15;
             this.TextBoxInfo.WordWrap = false;
             this.TextBoxInfo.TextChanged += new System.EventHandler(this.TextBoxInfo_TextChanged);
             // 
@@ -667,9 +635,9 @@
             this.label7.ForeColor = System.Drawing.Color.Silver;
             this.label7.Location = new System.Drawing.Point(130, 284);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(42, 13);
+            this.label7.Size = new System.Drawing.Size(45, 13);
             this.label7.TabIndex = 120;
-            this.label7.Text = "Estado";
+            this.label7.Text = "Estado.";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // TextBoxCC
@@ -684,7 +652,7 @@
             this.TextBoxCC.Name = "TextBoxCC";
             this.TextBoxCC.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextBoxCC.Size = new System.Drawing.Size(200, 80);
-            this.TextBoxCC.TabIndex = 117;
+            this.TextBoxCC.TabIndex = 16;
             this.TextBoxCC.WordWrap = false;
             this.TextBoxCC.TextChanged += new System.EventHandler(this.TextBoxCC_TextChanged);
             // 
@@ -760,7 +728,7 @@
             this.ComboBoxInfoState.Location = new System.Drawing.Point(136, 300);
             this.ComboBoxInfoState.Name = "ComboBoxInfoState";
             this.ComboBoxInfoState.Size = new System.Drawing.Size(90, 21);
-            this.ComboBoxInfoState.TabIndex = 119;
+            this.ComboBoxInfoState.TabIndex = 11;
             // 
             // label10
             // 
@@ -810,7 +778,7 @@
             this.TextBoxInfoName.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxInfoName.Name = "TextBoxInfoName";
             this.TextBoxInfoName.Size = new System.Drawing.Size(90, 22);
-            this.TextBoxInfoName.TabIndex = 111;
+            this.TextBoxInfoName.TabIndex = 6;
             // 
             // ComboBoxItemSize
             // 
@@ -855,7 +823,7 @@
             this.TextBoxItems.Name = "TextBoxItems";
             this.TextBoxItems.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextBoxItems.Size = new System.Drawing.Size(200, 80);
-            this.TextBoxItems.TabIndex = 93;
+            this.TextBoxItems.TabIndex = 5;
             this.TextBoxItems.WordWrap = false;
             this.TextBoxItems.TextChanged += new System.EventHandler(this.TextBoxItems_TextChanged);
             // 
@@ -928,7 +896,7 @@
             this.TextBoxItemQuantity.MinimumSize = new System.Drawing.Size(25, 21);
             this.TextBoxItemQuantity.Name = "TextBoxItemQuantity";
             this.TextBoxItemQuantity.Size = new System.Drawing.Size(25, 22);
-            this.TextBoxItemQuantity.TabIndex = 5;
+            this.TextBoxItemQuantity.TabIndex = 3;
             this.TextBoxItemQuantity.Text = "1";
             this.TextBoxItemQuantity.TextChanged += new System.EventHandler(this.TextBoxQuatity_TextChanged);
             this.TextBoxItemQuantity.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxQuatity_KeyUp);
@@ -1122,7 +1090,7 @@
             this.IconButtonStop.Location = new System.Drawing.Point(21, 190);
             this.IconButtonStop.Name = "IconButtonStop";
             this.IconButtonStop.Size = new System.Drawing.Size(200, 30);
-            this.IconButtonStop.TabIndex = 102;
+            this.IconButtonStop.TabIndex = 19;
             this.IconButtonStop.Text = "DETENER";
             this.IconButtonStop.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonStop.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -1141,7 +1109,7 @@
             this.TextBoxValhalla.Name = "TextBoxValhalla";
             this.TextBoxValhalla.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.TextBoxValhalla.Size = new System.Drawing.Size(200, 135);
-            this.TextBoxValhalla.TabIndex = 101;
+            this.TextBoxValhalla.TabIndex = 18;
             this.TextBoxValhalla.WordWrap = false;
             this.TextBoxValhalla.TextChanged += new System.EventHandler(this.TextBoxValhalla_TextChanged);
             this.TextBoxValhalla.KeyDown += new System.Windows.Forms.KeyEventHandler(this.TextBoxValhalla_KeyDown);
@@ -1166,7 +1134,7 @@
             this.PanelConfirm.Controls.Add(this.IconButtonConfirm);
             this.PanelConfirm.Controls.Add(this.PanelConfirmFooter);
             this.PanelConfirm.Controls.Add(this.PanelConfirmHeader);
-            this.PanelConfirm.Location = new System.Drawing.Point(244, 174);
+            this.PanelConfirm.Location = new System.Drawing.Point(244, 183);
             this.PanelConfirm.Name = "PanelConfirm";
             this.PanelConfirm.Size = new System.Drawing.Size(243, 151);
             this.PanelConfirm.TabIndex = 128;
@@ -1237,6 +1205,7 @@
             this.IconButtonConfirm.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.IconButtonConfirm.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.IconButtonConfirm.UseVisualStyleBackColor = false;
+            this.IconButtonConfirm.Click += new System.EventHandler(this.IconButtonConfirm_Click);
             // 
             // PanelConfirmFooter
             // 
@@ -1495,19 +1464,18 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(59)))), ((int)(((byte)(104)))));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.ClientSize = new System.Drawing.Size(730, 499);
-            this.Controls.Add(this.PanelMain);
+            this.Controls.Add(this.PanelTitleYmir);
             this.Controls.Add(this.PanelConfirm);
+            this.Controls.Add(this.PanelMain);
             this.Controls.Add(this.PanelBlockGate);
             this.Controls.Add(this.PanelSettings);
-            this.Controls.Add(this.PanelValhalla);
             this.Controls.Add(this.PanelConsole);
-            this.Controls.Add(this.PanelTitleYmir);
+            this.Controls.Add(this.PanelValhalla);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Tahoma", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ForeColor = System.Drawing.Color.Silver;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Ymir";
-            this.Opacity = 0.5D;
             this.Text = "Ymir";
             this.Load += new System.EventHandler(this.Ymir_Load);
             this.PanelTitleYmir.ResumeLayout(false);
@@ -1597,8 +1565,6 @@
         private System.Windows.Forms.TextBox TextBoxInfoPhone;
         private System.Windows.Forms.TextBox TextBoxInfoZip;
         private System.Windows.Forms.TextBox TextBoxInfoCity;
-        private System.Windows.Forms.TextBox TextBoxInfoEmail;
-        private System.Windows.Forms.Label label16;
         private System.Windows.Forms.Label LabelItemList;
         private System.Windows.Forms.Label label5;
         private FontAwesome.Sharp.IconButton IconButtonStart;

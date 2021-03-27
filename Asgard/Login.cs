@@ -161,8 +161,8 @@ namespace Asgard
             /*
              * TODO: comentar!
              */
-            //TextBoxUsernameOrEmail.Text = "crango.cero";
-            //TextBoxPassword.Text = "Eli.Chris1915";
+            TextBoxUsernameOrEmail.Text = "crango.cero";
+            TextBoxPassword.Text = "Eli.Chris1915";
         }
 
         private void TextBoxUser_TextChanged(object sender, EventArgs e)

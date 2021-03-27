@@ -1912,6 +1912,7 @@ namespace Asgard
             bool iframeReCaptcha = await browser.NodeVisibility("document.querySelector(\"iframe[title = 'recaptcha challenge']\").parentNode.parentNode.style.visibility", "ExceptionSignup");
             if (iframeReCaptcha)
             {
+                //body > div:nth-child(27) > div:nth-child(2) > iframe
                 string urlIframe = (string)await browser.ExecuteScript("document.querySelector('body > div:nth-child(35) > div:nth-child(2) > iframe').getAttribute('src')");
                 Iframe = await browser.GetFrameByUrl(urlIframe, "Exception", 1);
                 if (Iframe != null)
@@ -2696,7 +2697,7 @@ namespace Asgard
             }
         }
 
-        #endregion
+        
         private async void PictureBox400_Click(object sender, EventArgs e)
         {
             //PictureBox pictureBox = (PictureBox)sender;
@@ -2968,6 +2969,7 @@ namespace Asgard
             IconButton415.Hide();
         }
 
+        #endregion
         private async Task Block()
         {
             bool block = await Asatru.BlockAesir(UserId, 3, Token);
